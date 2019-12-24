@@ -15,7 +15,17 @@ class CreateCommentsTable extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('message');
+            $table->integer('user_id')->unsigned();
+            $table->integer('wish_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')
+                ->onUpdate('restrict')
+                ->onDelete('restrict');
+            $table->foreign('wish_id')->references('id')->on('wishes')
+                ->onUpdate('restrict')
+                ->onDelete('restrict');
         });
     }
 
@@ -26,6 +36,10 @@ class CreateCommentsTable extends Migration
      */
     public function down()
     {
+        Schema::table('comments', function (Blueprint $table) {
+            $table->dropForeign('comments_user_id_foreign');
+            $table->dropForeign('comments_wish_id_foreign');
+        });
         Schema::dropIfExists('comments');
     }
 }
