@@ -17,7 +17,7 @@ $wish_types = array(
 );
 
 $wish_priorities = array(
-
+    'top' => 'Important'
 );
 
 define('visibilities', $visibilities);
