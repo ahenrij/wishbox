@@ -47,6 +47,7 @@ ul {
   padding: 0;
 }
 
+/*
 .btn {
   font-size: 1.1rem;
   padding: 15px 25px;
@@ -62,6 +63,7 @@ ul {
 	background-color: #669999;
 	border: none;
 }
+*/
 
 /* end Overrides */
 
@@ -159,7 +161,7 @@ ul {
   color: #98999a;
   width: 300px;
   height: 100px;
-  border: 1px solid #98999a;
+  border: 1px solid #007bff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -182,12 +184,12 @@ ul {
 }
 
 .navbar-expand-lg .navbar-nav .nav-link {
-  width: 101px;
-  height: 52px;
+  min-width: 85px;
+  height: 48px;
   border: 1px solid transparent;
   text-align: center;
-  margin-left: 25px;
-  margin-right: 25px;
+  margin-left: 5px;
+  margin-right: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -635,6 +637,7 @@ figure.effect-bubba:hover p {
 	width: 100%;
 	padding:40px;
 }
+/*
 .form-group { margin-bottom: 35px; }
 .form-group-2 { margin-bottom: 65px; }
 
@@ -644,18 +647,19 @@ figure.effect-bubba:hover p {
 	height: auto;
 	color: #669999;
 }
-.form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+.form-control::placeholder { !* Chrome, Firefox, Opera, Safari 10.1+ *!
   color: #669999;
-  opacity: 1; /* Firefox */
+  opacity: 1; !* Firefox *!
 }
 
-.form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
+.form-control:-ms-input-placeholder { !* Internet Explorer 10-11 *!
   color: #669999;
 }
 
-.form-control::-ms-input-placeholder { /* Microsoft Edge */
+.form-control::-ms-input-placeholder { !* Microsoft Edge *!
   color: #669999;
 }
+*/
 
 .tm-select {
 	-webkit-appearance: none;
@@ -795,7 +799,7 @@ figure.effect-bubba:hover p {
 
 /* Checkbox */
 
-[type="checkbox"]:not(:checked), 
+/*[type="checkbox"]:not(:checked),
 [type="checkbox"]:checked {
     position: absolute;
     opacity: 0;
@@ -933,7 +937,7 @@ figure.effect-bubba:hover p {
     border: 2px solid #26a69a;
     background-color: #26a69a;
     z-index: 0;
-}
+}*/
 
 /* end Checkbox */
 
@@ -947,14 +951,14 @@ textarea.form-control {
 	justify-content: space-between;	
 }
 
-.btn-outline {
+/*.btn-outline {
 	border: 1px solid #98999A;
 	color: #669999;
   cursor: pointer;
 	padding: 12px 35px;
 	width: 140px;
 	margin-left: 20px;
-}
+}*/
 
 #file_name_label { width: calc(100% - 160px); }
 
@@ -962,10 +966,10 @@ textarea.form-control {
   .file-upload-container { flex-direction: column; }
   #file_name_label { width: 100%; }
 
-  .btn-outline {
+  /*.btn-outline {
     margin-left: 0;
     margin-top: 20px;
-  }
+  }*/
 }
 
 #file_name_label::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -981,9 +985,9 @@ textarea.form-control {
   color: #669999;
 }
 
-.tm-btn-submit {
+/*.tm-btn-submit {
 	font-size: 1.2rem;
 	padding: 12px 40px;
-}
+}*/
 
 /* end Contact */

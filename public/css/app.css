@@ -1,0 +1,28 @@
+@font-face {
+  font-family: 'Product Sans Thin';
+  src: url('../fonts/product-sans-thin.ttf');
+}
+
+@font-face {
+  font-family: 'Product Sans Light';
+  src: url('../fonts/product-sans-light.ttf');
+}
+
+@font-face {
+  font-family: 'Century Gothic';
+  src: url('../fonts/century-gothic.ttf');
+}
+
+
+* {
+  font-family: "Product Sans";
+  font-size: 17px;
+}
+
+input {
+  padding: 5px !important;
+}
+
+body {
+  padding-top: 50px !important;
+}

@@ -4,17 +4,17 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
+            <div class="uk-card uk-card-default uk-card-body">
+                <div class="uk-card-title">Bienvenue</div>
 
-                <div class="card-body">
+                <div>
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
                     @endif
 
-                    You are logged in!
+                    Content de vous (re)voir <b class="text-primary">{{ Auth::user()->name }}</b> !
                 </div>
             </div>
         </div>

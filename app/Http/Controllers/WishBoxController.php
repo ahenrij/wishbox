@@ -14,7 +14,7 @@ class WishBoxController extends Controller
      */
     public function index()
     {
-        //
+        return view('wishbox.index');
     }
 
     /**
@@ -81,5 +81,9 @@ class WishBoxController extends Controller
     public function destroy(WishBox $wishBox)
     {
         //
+    }
+
+    public function giftbox() {
+        return view('wishbox.giftbox');
     }
 }

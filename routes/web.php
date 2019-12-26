@@ -18,3 +18,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/about', 'HomeController@about')->name('about');
+Route::get('/profile', 'UserController@profile')->name('profile');
+Route::get('/giftbox', 'WishBoxController@giftbox')->name('giftbox');
+
+Route::resource('/wishbox', 'WishBoxController');
+Route::resource('/wish', 'WishController');
+Route::resource('/category', 'CategoryController');
+Route::resource('/comment', 'CommentController');
