@@ -15,8 +15,13 @@
 
 
 * {
-  font-family: "Product Sans";
+  font-family: "Product Sans Light";
   font-size: 17px;
+}
+
+body {
+  height: 100vh;
+  background-color: #fefefe;
 }
 
 input {
