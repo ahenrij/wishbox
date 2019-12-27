@@ -20,11 +20,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/css/uikit.min.css"/>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600"/>
-    <link rel="stylesheet" href="{{ ('css/all.min.css') }}"/>
+    <link rel="stylesheet" href="{{ URL::to('/'). ('/css/all.min.css') }}"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ ('css/templatemo-style.css') }}"/>
-    <link rel="stylesheet" href="{{ ('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ URL::to('/'). ('/css/templatemo-style.css') }}"/>
+    <link rel="stylesheet" href="{{ URL::to('/'). ('/css/app.css') }}" rel="stylesheet">
 </head>
 <body>
 <div class="container-fluid">
@@ -51,9 +51,7 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav" style="min-width: 300px !important;">
-                        <ul class="navbar-nav ml-auto mr-0">
-                            @include('layouts.nav')
-                        </ul>
+                        @include('layouts.nav')
                     </div>
                 </nav>
             </div>
@@ -63,12 +61,12 @@
         @yield('content')
     </main>
 </div>
-<script src="{{ ('js/jquery.min.js') }}"></script>
-<script src="{{ ('js/parallax.min.js') }}"></script>
+<script src="{{ URL::to('/'). ('/js/jquery.min.js') }}"></script>
+<script src="{{ URL::to('/'). ('/js/parallax.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
         crossorigin="anonymous"></script>
-<script src="{{ ('js/bootstrap.min.js') }}"></script>
+<script src="{{ URL::to('/'). ('/js/bootstrap.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/js/uikit.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/js/uikit-icons.min.js"></script>
 </body>

@@ -343,8 +343,8 @@ ul.tm-list-plus li:before {
 .tm-copyright-link { color: #5f6061; }
 
 .tm-page-footer {
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 /* end Copyright and Page Footer */

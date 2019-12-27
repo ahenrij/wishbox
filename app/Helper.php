@@ -6,14 +6,21 @@
  * Time: 19:25
  */
 
+define('VISIBILITY_PRIVATE', 'private');
+define('VISIBILITY_PUBLIC', 'public');
+define('VISIBILITY_PROTECTED', 'protected');
+
 $visibilities = array(
-    'private' => 'Moi uniquement',
-    'public' => 'Tout le monde',
-    'protected' => 'Mes amis'
+    VISIBILITY_PRIVATE => 'Moi uniquement',
+    VISIBILITY_PUBLIC => 'Tout le monde',
+    VISIBILITY_PROTECTED => 'Mes amis'
 );
 
+define('TYPE_WISH', 'wish');
+define('TYPE_GIFT', 'gift');
+
 $wish_types = array(
-    'gift', 'wish'
+    TYPE_GIFT, TYPE_WISH
 );
 
 $wish_priorities = array(

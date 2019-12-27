@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Wish;
 use App\WishBox;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class WishBoxController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,9 @@ class WishBoxController extends Controller
      */
     public function index()
     {
-        return view('wishbox.index');
+        $wish_boxes = WishBox::where('user_id', Auth::user()->id)->where('type', TYPE_WISH)->get();
+//        var_dump($wish_boxes);
+        return view('wishbox.index', compact('wish_boxes'));
     }
 
     /**
@@ -41,12 +49,15 @@ class WishBoxController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\WishBox  $wishBox
+     * @param id (of the WishBox)
      * @return \Illuminate\Http\Response
      */
-    public function show(WishBox $wishBox)
+    public function show($id)
     {
-        //
+        $wish_box = WishBox::where('id', $id)->first();
+        $wishes = Wish::where('wish_box_id', $id)->get();
+//        var_dump($wish_box);die();
+        return view('wishbox.show', compact('wish_box', 'wishes'));
     }
 
     /**
