@@ -13,7 +13,7 @@ class GiftBoxController extends Controller
      */
     public function index()
     {
-        //
+        return view('wishbox.giftbox');
     }
 
     /**

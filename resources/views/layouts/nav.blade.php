@@ -40,11 +40,11 @@
         <div class="tm-nav-link-highlight"></div>
         <a class="nav-link" href="{{ route('wishbox.index') }}">Je souhaite</a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item {{ (routeBaseName() == 'giftbox') ? 'active' : '' }}">
         <div class="tm-nav-link-highlight"></div>
-        <a class="nav-link" href="{{ route('giftbox') }}">Je donne !</a>
+        <a class="nav-link" href="{{ route('giftbox.index') }}">Je donne !</a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item {{ (routeBaseName() == 'about') ? 'active' : '' }}">
         <div class="tm-nav-link-highlight"></div>
         <a class="nav-link" href="{{ route('about') }}">A propos</a>
     </li>

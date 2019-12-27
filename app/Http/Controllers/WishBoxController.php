@@ -82,8 +82,4 @@ class WishBoxController extends Controller
     {
         //
     }
-
-    public function giftbox() {
-        return view('wishbox.giftbox');
-    }
 }

@@ -25,5 +25,5 @@ define('wish_types', $wish_types);
 define('wish_priorities', $wish_priorities);
 
 function routeBaseName() {
-    return Route::currentRouteName();
+    return explode('.', Route::currentRouteName())[0];
 }
