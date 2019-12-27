@@ -11,8 +11,8 @@
 </li>
 @else
     <li class="nav-item">
-        <div style="margin-right: 35px; cursor: pointer">
-            <span class="uk-position-center-left" uk-icon="icon: search"></span>
+        <div class="text-center" style="margin-right: 35px; padding-top: 10px; cursor: pointer">
+            <span uk-icon="icon: search"></span>
         </div>
         <div style="min-width: 300px" class="uk-navbar-dropdown"
              uk-drop="mode: click; pos:bottom-left; cls-drop: uk-navbar-dropdown;">
@@ -49,7 +49,7 @@
         <a class="nav-link" href="{{ route('about') }}">A propos</a>
     </li>
     <li class="nav-item" style="padding-top: 5px; margin-left: 5px; cursor: pointer">
-        <div>
+        <div class="text-center">
             <img src="{{ 'img/avatar.png' }}" class="" width="38px" height="38px" alt="">
             <span uk-icon="icon: chevron-down"></span>
         </div>
