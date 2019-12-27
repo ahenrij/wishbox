@@ -17,51 +17,70 @@
 {{--<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">--}}
 
 <!-- Styles -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/css/uikit.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/css/uikit.min.css"/>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600"/>
     <link rel="stylesheet" href="{{ ('css/all.min.css') }}"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ ('css/templatemo-style.css') }}"/>
     <link rel="stylesheet" href="{{ ('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="row tm-brand-row">
-            <div class="col-lg-4 col-10">
-                <div class="tm-brand-container">
-                    <div class="tm-brand-texts">
-                        <h1 class="text-primary tm-brand-name" onclick="window.location.href='{{ url('/') }}'" style="font-family: 'Century Gothic'; font-weight: 600; cursor: pointer">{{ config('app.name', 'WishBox') }}</h1>
-                    </div>
+<div class="container-fluid">
+    <div class="row tm-brand-row">
+        <div class="col-lg-4 col-10">
+            <div class="tm-brand-container">
+                <div class="tm-brand-texts">
+                    <h1 class="text-primary tm-brand-name" onclick="window.location.href='{{ url('/') }}'"
+                        style="font-family: 'Century Gothic'; font-weight: 600; cursor: pointer">{{ config('app.name', 'WishBox') }}</h1>
                 </div>
             </div>
-            <div class="col-lg-8 col-2 tm-nav-col">
-                <div class="tm-nav">
-                    <nav class="navbar navbar-expand-lg navbar-light tm-navbar">
-                        <button
-                                class="navbar-toggler"
-                                type="button"
-                                data-toggle="collapse"
-                                data-target="#navbarNav"
-                                aria-controls="navbarNav"
-                                aria-expanded="false"
-                                aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarNav" style="min-width: 300px !important;">
-                            <ul class="navbar-nav ml-auto mr-0">
-                                @guest
-                                <li class="nav-item active">
-                                    <div class="tm-nav-link-highlight"></div>
-                                    <a class="nav-link" href="{{ url('login') }}"
-                                    >Connexion <span class="sr-only">(current)</span></a
-                                    >
-                                </li>
+        </div>
+        <div class="col-lg-8 col-2 tm-nav-col">
+            <div class="tm-nav">
+                <nav class="navbar navbar-expand-lg navbar-light tm-navbar">
+                    <button
+                            class="navbar-toggler"
+                            type="button"
+                            data-toggle="collapse"
+                            data-target="#navbarNav"
+                            aria-controls="navbarNav"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav" style="min-width: 300px !important;">
+                        <ul class="navbar-nav ml-auto mr-0">
+                            @guest
+                            <li class="nav-item active">
+                                <div class="tm-nav-link-highlight"></div>
+                                <a class="nav-link" href="{{ url('login') }}"
+                                >Connexion <span class="sr-only">(current)</span></a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <div class="tm-nav-link-highlight"></div>
+                                <a class="nav-link" href="{{ url('register') }}">Inscription</a>
+                            </li>
+                            @else
                                 <li class="nav-item">
-                                    <div class="tm-nav-link-highlight"></div>
-                                    <a class="nav-link" href="{{ url('register') }}">Inscription</a>
+                                    <div style="margin-right: 35px; cursor: pointer">
+                                        <span class="uk-position-center-left" uk-icon="icon: search"></span>
+                                    </div>
+                                    <div style="min-width: 300px" class="uk-navbar-dropdown" uk-drop="mode: click; pos:bottom-left; cls-drop: uk-navbar-dropdown;">
+                                        <div class="uk-grid-small uk-flex-middle" uk-grid>
+                                            <div class="uk-width-expand">
+                                                <form class="uk-search uk-search-navbar uk-width-1-1">
+                                                    <input class="uk-search-input" type="search" placeholder="Search..." autofocus>
+                                                </form>
+                                            </div>
+                                            <div class="uk-width-auto">
+                                                <a class="uk-navbar-dropdown-close" href="#" uk-close></a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </li>
-                                @else
                                 <li class="nav-item active">
                                     <div class="tm-nav-link-highlight"></div>
                                     <a class="nav-link" href="{{ route('home') }}">Accueil <span class="sr-only">(current)</span></a
@@ -83,22 +102,44 @@
                                     <div class="tm-nav-link-highlight"></div>
                                     <a class="nav-link" href="{{ route('about') }}">A propos</a>
                                 </li>
-                                @endif
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
+                                <li class="nav-item" style="padding-top: 5px; margin-left: 5px; cursor: pointer">
+                                    <div>
+                                        <img src="{{ 'img/avatar.png' }}" class="" width="38px" height="38px" alt="">
+                                        <span uk-icon="icon: chevron-down"></span>
+                                    </div>
+                                    <div uk-dropdown>
+                                        <ul class="uk-nav uk-dropdown-nav">
+                                            <li class="">{{ Auth::user()->first_name . ' ' . Auth::user()->name }}</li>
+                                            <li class="uk-active">
+                                                <small>{{ Auth::user()->email }}</small>
+                                            </li>
+                                            <br>
+                                            <li class="uk-nav-divider"></li>
+                                            <br>
+                                            <li><a href="{{ url('logout') }}" class="btn btn-danger text-white">Déconnexion</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+
+                            @endif
+                        </ul>
+                    </div>
+                </nav>
             </div>
         </div>
-        <main class="py-4">
-            @yield('content')
-        </main>
     </div>
+    <main class="py-4">
+        @yield('content')
+    </main>
+</div>
 <script src="{{ ('js/jquery.min.js') }}"></script>
 <script src="{{ ('js/parallax.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
         crossorigin="anonymous"></script>
 <script src="{{ ('js/bootstrap.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/js/uikit.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/js/uikit-icons.min.js"></script>
 </body>
 </html>
