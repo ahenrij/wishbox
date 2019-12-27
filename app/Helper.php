@@ -23,3 +23,7 @@ $wish_priorities = array(
 define('visibilities', $visibilities);
 define('wish_types', $wish_types);
 define('wish_priorities', $wish_priorities);
+
+function routeBaseName() {
+    return Route::currentRouteName();
+}
