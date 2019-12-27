@@ -1,11 +1,9 @@
 @guest
-<li class="nav-item active">
+<li class="nav-item {{ (routeBaseName() == 'login') ? 'active' : '' }}">
     <div class="tm-nav-link-highlight"></div>
-    <a class="nav-link" href="{{ url('login') }}"
-    >Connexion <span class="sr-only">(current)</span></a
-    >
+    <a class="nav-link" href="{{ url('login') }}">Connexion</a>
 </li>
-<li class="nav-item">
+<li class="nav-item {{ (routeBaseName() == 'register') ? 'active' : '' }}">
     <div class="tm-nav-link-highlight"></div>
     <a class="nav-link" href="{{ url('register') }}">Inscription</a>
 </li>
