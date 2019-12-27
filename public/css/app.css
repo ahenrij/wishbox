@@ -15,7 +15,7 @@
 
 
 * {
-  font-family: "Product Sans";
+  font-family: "Product Sans Light";
   font-size: 17px;
 }
 
@@ -25,4 +25,14 @@ input {
 
 body {
   padding-top: 50px !important;
+}
+
+.titleHome
+{
+  text-align: center;
+}
+
+.goTo
+{
+  text-align: right;
 }
