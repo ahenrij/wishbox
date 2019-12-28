@@ -17,6 +17,7 @@
 {{--<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">--}}
 
 <!-- Styles -->
+    {{--This is causing problem to display the parallax on the home page--}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/css/uikit.min.css"/>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600"/>
@@ -69,5 +70,8 @@
 <script src="{{ URL::to('/'). ('/js/bootstrap.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/js/uikit.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/js/uikit-icons.min.js"></script>
+
+    @yield('homepageScripts')
+
 </body>
 </html>

@@ -14,6 +14,10 @@ return [
     */
 
     'name' => env('APP_NAME', 'WishBox'),
+    'visibility_only_me' => "Moi uniquement",
+    'visibility_everyone' => "Tout le monde",
+    'visibility_my_friends' => "Mes amis",
+    'label_is_gift' => "gift",
 
     /*
     |--------------------------------------------------------------------------
