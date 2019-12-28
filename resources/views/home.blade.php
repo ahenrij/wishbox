@@ -49,7 +49,7 @@
 
 {{--GIFTS--}}
 <div class="text-center" id="gifts">
-    <h3>Les souhaits publiés</h3>
+    <h3>Les dons publiés</h3>
     <a href="#wishes ">Aller aux souhaits <i class="fa fa-arrow-alt-circle-up"></i></a>
 </div>
 <section class="row tm-pt-4">
