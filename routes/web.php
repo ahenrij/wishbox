@@ -28,3 +28,6 @@ Route::resource('/giftbox', 'GiftBoxController');
 Route::resource('/wish', 'WishController');
 Route::resource('/category', 'CategoryController');
 Route::resource('/comment', 'CommentController');
+
+Route::get('/login', 'LoginController@index')->name('login');
+Route::post('/connexion', 'LoginController@connexion')->name('connexion');

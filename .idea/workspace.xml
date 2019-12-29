@@ -141,17 +141,17 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Http/Controllers" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path" value="node" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\gurva\Documents\GitHub\wishbox\resources\views" />
       <recent name="C:\Users\gurva\Documents\GitHub\wishbox\app\Http\Controllers" />
       <recent name="C:\wamp64\www\wishbox\public\img" />
       <recent name="C:\wamp64\www\wishbox\resources\views\wishboxes" />
       <recent name="C:\wamp64\www\wishbox\public\fonts" />
-      <recent name="C:\wamp64\www\wishbox\public\js" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\wamp64\www\wishbox\public" />
@@ -199,7 +199,7 @@
       <workItem from="1577298983180" duration="3913000" />
       <workItem from="1577373112697" duration="25125000" />
       <workItem from="1577531201490" duration="545000" />
-      <workItem from="1577624558013" duration="5115000" />
+      <workItem from="1577624558013" duration="8662000" />
     </task>
     <servers />
   </component>
