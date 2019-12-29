@@ -18,13 +18,17 @@
   font-size: 17px;
 }
 
+html {
+  background: transparent !important;
+}
+
 body {
   height: 100vh;
   background-color: #fefefe;
 }
 
 input {
-  padding: 5px !important;
+  padding: 6px !important;
 }
 
 body {

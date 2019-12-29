@@ -6,6 +6,15 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class WishBoxCreateRequest extends FormRequest
 {
+    protected static $rules = [
+        'title' => 'required|min:5',
+    ];
+
+    public function __construct()
+    {
+        self::$rules['deadline'] = 'after:' . date('Y-m-d');
+    }
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -13,7 +22,7 @@ class WishBoxCreateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +32,6 @@ class WishBoxCreateRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        return self::$rules;
     }
 }

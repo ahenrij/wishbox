@@ -20,7 +20,8 @@ define('TYPE_WISH', 'wish');
 define('TYPE_GIFT', 'gift');
 
 $wish_types = array(
-    TYPE_GIFT, TYPE_WISH
+    TYPE_GIFT => 'Cadeau',
+    TYPE_WISH => 'Souhait'
 );
 
 $wish_priorities = array(

@@ -4,10 +4,14 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-3">
-
+                <a href="{{ route('wishbox.create') }}" class="btn btn-primary pl-5 pr-5">
+                    <span uk-icon="icon: plus; ratio: .7" class="pr-2"></span>
+                    {{ __('Ajouter une boîte') }}
+                </a>
             </div>
+            <br><br>
             <div class="col-md-9">
-                <h3>{{ __('Mes listes de souhaits') }}</h3>
+                <h3>{{ __('Mes boîtes à souhaits') }}</h3>
 
                 <br>
                 <div class="uk-grid-match uk-child-width-1-3@s" uk-grid>

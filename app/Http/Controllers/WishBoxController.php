@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\WishBoxCreateRequest;
 use App\Wish;
 use App\WishBox;
 use Illuminate\Http\Request;
@@ -32,7 +33,7 @@ class WishBoxController extends Controller
      */
     public function create()
     {
-        //
+        return view('wishbox.create');
     }
 
     /**
@@ -41,9 +42,11 @@ class WishBoxController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(WishBoxCreateRequest $request)
     {
-        //
+        $inputs = $request->all();
+        var_dump($inputs);
+        die();
     }
 
     /**
