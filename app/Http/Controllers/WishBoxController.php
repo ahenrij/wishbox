@@ -14,6 +14,7 @@ class WishBoxController extends Controller
     {
         $this->middleware('auth');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -39,7 +40,7 @@ class WishBoxController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(WishBoxCreateRequest $request)
@@ -77,7 +78,7 @@ class WishBoxController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\WishBox  $wishBox
+     * @param  \App\WishBox $wishBox
      * @return \Illuminate\Http\Response
      */
     public function edit(WishBox $wishBox)
@@ -88,8 +89,8 @@ class WishBoxController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\WishBox  $wishBox
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\WishBox $wishBox
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, WishBox $wishBox)
@@ -100,11 +101,14 @@ class WishBoxController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\WishBox  $wishBox
+     * @param  \App\WishBox $wishBox
      * @return \Illuminate\Http\Response
      */
-    public function destroy(WishBox $wishBox)
+    public function destroy($id)
     {
-        //
+        $wishbox = WishBox::where('id', $id)->first();
+        $wishbox->delete();
+
+        return redirect()->back();
     }
 }

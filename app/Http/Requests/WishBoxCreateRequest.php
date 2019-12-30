@@ -12,6 +12,7 @@ class WishBoxCreateRequest extends FormRequest
 
     public function __construct()
     {
+        parent::__construct();
         self::$rules['deadline'] = 'after:' . date('Y-m-d');
     }
 

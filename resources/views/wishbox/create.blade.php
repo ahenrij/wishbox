@@ -16,9 +16,9 @@
                 <form method="post" action="{{ route('wishbox.store') }}">
                     @csrf
 
-                    @if(isset($error))
+                    {{--@if(isset($error))
                         <div class="alert alert-danger">{{ $error }}</div>
-                    @endif
+                    @endif--}}
 
                     <div class="form-row">
                         <div class="form-group col-md-8">
@@ -27,7 +27,7 @@
                                     <div class="input-group-text"><span uk-icon="icon: bookmark"></span></div>
                                 </div>
                                 <input type="text" class="form-control @error('title') is-invalid @enderror" id="title"
-                                       name="title" placeholder="Titre de la boîte">
+                                       name="title" placeholder="Titre de la boîte" onkeyup="updateTitle()" value="{{ old('title') }}">
                                 @error('title')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -42,7 +42,8 @@
                                 </div>
                                 <select name="type" id="type" class="form-control">
                                     @foreach(wish_types as $key => $wish_type)
-                                        <option value="{{ $key }}" @if($key == TYPE_WISH) selected @endif> {{ $wish_type }}</option>
+                                        <option value="{{ $key }}"
+                                                @if($key == TYPE_WISH) selected @endif> {{ $wish_type }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -55,8 +56,8 @@
                                     <div class="input-group-text"><span uk-icon="icon: calendar"></span></div>
                                 </div>
                                 <input type="date" title="Date butoir"
-                                       class="form-control @error('title') is-invalid @enderror" id="deadline"
-                                       name="deadline"
+                                       class="form-control @error('deadline') is-invalid @enderror" id="deadline"
+                                       name="deadline"  value="{{ old('deadline') }}"
                                        placeholder="Date butoir">
                                 @error('deadline')
                                 <span class="invalid-feedback" role="alert">
@@ -72,7 +73,8 @@
                                 </div>
                                 <select name="visibility" id="visibility" class="form-control">
                                     @foreach(visibilities as $key => $visibility)
-                                        <option value="{{ $key }}" @if($key == VISIBILITY_PUBLIC) selected @endif> {{ $visibility }}</option>
+                                        <option value="{{ $key }}"
+                                                @if($key == VISIBILITY_PUBLIC) selected @endif> {{ $visibility }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -83,4 +85,17 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script type="text/javascript">
+        function updateTitle() {
+          var title = $('#title').val();
+          if (title == '') {
+            $('#create_box_title').html('Nouvelle boîte');
+          } else {
+            $('#create_box_title').html(title);
+          }
+        }
+    </script>
 @endsection

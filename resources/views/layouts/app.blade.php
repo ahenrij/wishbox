@@ -9,13 +9,6 @@
 
     <title>{{ config('app.name', 'WishBox') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ ('js/app.js') }}" defer></script>
-
-    <!-- Fonts -->
-{{--<link rel="dns-prefetch" href="//fonts.gstatic.com">--}}
-{{--<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">--}}
-
 <!-- Styles -->
     {{--This is causing problem to display the parallax on the home page--}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/css/uikit.min.css"/>
