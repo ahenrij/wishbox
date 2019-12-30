@@ -108,3 +108,15 @@ body {
 .invalid-feedback > strong {
   font-size: 12px !important;
 }
+
+.circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 17px;
+  color: #fff;
+  line-height: 40px;
+  text-align: center;
+  margin-top: -17px;
+  margin-right: -17px;
+}

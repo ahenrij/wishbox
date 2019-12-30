@@ -11,6 +11,6 @@ class WishBoxesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\WishBox::class, 50)->create();
+        factory(\App\WishBox::class, 500)->create();
     }
 }

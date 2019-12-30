@@ -6,8 +6,8 @@ use App\Http\Requests\WishBoxCreateRequest;
 use App\Http\Requests\WishBoxUpdateRequest;
 use App\Wish;
 use App\WishBox;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class WishBoxController extends Controller
 {
@@ -23,9 +23,15 @@ class WishBoxController extends Controller
      */
     public function index()
     {
-        $wish_boxes = WishBox::where('user_id', Auth::user()->id)->where('type', TYPE_WISH)->get();
-//        var_dump($wish_boxes);
-        return view('wishbox.index', compact('wish_boxes'));
+        $wishboxes = DB::table('wish_boxes')
+            ->join('wishes', 'wishes.wish_box_id', '=', 'wish_boxes.id')
+            ->select(DB::raw('count(wishes.id) as total, wish_boxes.*'))
+            ->where('wish_boxes.user_id', '=', Auth::user()->id)
+            ->where('type', '=', TYPE_WISH)
+            ->groupBy('wish_boxes.id')
+            ->paginate(6);
+//        var_dump($wishboxes);
+        return view('wishbox.index', compact('wishboxes'));
     }
 
     /**
@@ -70,10 +76,10 @@ class WishBoxController extends Controller
      */
     public function show($id)
     {
-        $wish_box = WishBox::where('id', $id)->first();
+        $wishbox = WishBox::where('id', $id)->first();
         $wishes = Wish::where('wish_box_id', $id)->get();
-//        var_dump($wish_box);die();
-        return view('wishbox.show', compact('wish_box', 'wishes'));
+
+        return view('wishbox.show', compact('wishbox', 'wishes'));
     }
 
     /**

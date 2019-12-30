@@ -42,7 +42,7 @@
                 </ul>
             </div>
             <div class="col-md-9">
-                <h3>{{ $wish_box->title }}</h3>
+                <h3>{{ $wishbox->title }}</h3>
 
                 <br>
                 <div class="uk-child-width-1-3@s" uk-grid>

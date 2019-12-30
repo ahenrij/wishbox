@@ -18,7 +18,7 @@ class CreateWishBoxesTable extends Migration
             $table->string('title');
             $table->string('deadline');
             $table->enum('visibility', array_keys(visibilities));
-            $table->enum('type', wish_types);
+            $table->enum('type', array_keys(wish_types));
             $table->integer('user_id')->unsigned()->comment('wish box\'s owner');
             $table->timestamps();
 
