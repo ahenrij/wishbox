@@ -34,6 +34,20 @@ class WishBoxController extends Controller
         return view('wishbox.index', compact('wishboxes'));
     }
 
+    public function usersWishboxes()
+    {
+        $wishboxes = DB::table('wish_boxes')
+            ->join('wishes', 'wishes.wish_box_id', '=', 'wish_boxes.id')
+            ->join('users', 'wish_boxes.user_id', '=', 'users.id')
+            ->select(DB::raw('count(wishes.id) as total, wish_boxes.*'), 'users.username as user')
+            ->where('wish_boxes.user_id', '!=', Auth::user()->id)
+            ->where('type', '=', TYPE_WISH)
+            ->where('wish_boxes.visibility', '=', VISIBILITY_PUBLIC)
+            ->groupBy('wish_boxes.id')
+            ->paginate(6);
+        return view('wishbox.users_boxes', compact('wishboxes'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -71,15 +85,17 @@ class WishBoxController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param id (of the WishBox)
+     * @param $id (of the WishBox),
+     *        $forOwner
+     *          Boolean : Is it a show for the owner or for another user ?
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, $forOwner = true)
     {
         $wishbox = WishBox::where('id', $id)->first();
         $wishes = Wish::where('wish_box_id', $id)->get();
 
-        return view('wishbox.show', compact('wishbox', 'wishes'));
+        return view('wishbox.show', compact('wishbox', 'wishes', 'forOwner'));
     }
 
     /**

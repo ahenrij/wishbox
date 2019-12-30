@@ -14,6 +14,11 @@ define('VISIBILITY_PROTECTED', 'protected');
 define('N_WISHES', 5000);
 define('N_WISHBOXES', 500);
 
+// wish_statuses
+define('WISH_JUST_CREATED', 0);
+define('WISH_ON_THE_WAY', 2);
+define('WISH_RECEIVED', 3);
+
 $visibilities = array(
     VISIBILITY_PRIVATE => 'Moi uniquement',
     VISIBILITY_PUBLIC => 'Tout le monde',
