@@ -2,14 +2,14 @@
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center uk-grid-match">
             <div class="col-md-3">
                 <div class="uk-card uk-card-default uk-card-body">
                     <div class="uk-card-title text-center" id="usernameBox">{{ Auth::user()->username }}</div>
                     <br>
                     <div>
                         {{--TODO changer les choses pour afficher la bonne image (condition du if et contenu éventuellement)--}}
-                        <img src="@if(Auth::user()->profile != null){{ Auth::user()->profile }}@else{{  'img/avatar.png' }}@endif">
+                        <img alt="Profil" src="@if(Auth::user()->profile != null){{ Auth::user()->profile }}@else{{  'img/avatar.png' }}@endif">
                     </div>
                 </div>
             </div>
@@ -24,7 +24,7 @@
             </div>
         </div>
 
-        <div class="uk-card uk-card-default uk-card-body mt-2">
+        <div class="uk-card uk-card-default uk-card-body mt-4">
             <div class="uk-card-title">Mes préférences</div>
                 <h5 class="mt-2">Thème général du site</h5>
                 <form name="preference-form">
@@ -72,7 +72,7 @@
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-primary btn-submit mt-2"><i class="fa fa-thumbs-up"></i> Appliquer</button>
+                    <button class="btn btn-primary btn-submit mt-2"><i class="fa fa-thumbs-up"></i>Appliquer</button>
                 </form>
         </div>
     </div>

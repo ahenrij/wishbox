@@ -32,7 +32,7 @@ input {
 }
 
 body {
-    padding-top: 50px !important;
+  padding-top: 50px !important;
 }
 
 .invalid-feedback > strong {
@@ -102,4 +102,21 @@ body {
 .theme3-color4
 {
     background-color: royalblue;
+}
+
+
+.invalid-feedback > strong {
+  font-size: 12px !important;
+}
+
+.circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 17px;
+  color: #fff;
+  line-height: 40px;
+  text-align: center;
+  margin-top: -17px;
+  margin-right: -17px;
 }
