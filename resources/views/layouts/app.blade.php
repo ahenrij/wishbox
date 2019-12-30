@@ -63,7 +63,21 @@
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/js/uikit.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/js/uikit-icons.min.js"></script>
 
-    @yield('homepageScripts')
+{{--Charger thème--}}
+<script src="{{ URL::to('/'). ('/js/theme_options.js') }}"></script>
+
+@if (Cookie::get('theme-preference') != null)
+
+    <script type="text/javascript">
+        var html = document.getElementsByTagName('html')[0];
+        // Get options corresponding to cookie value and pass to function
+        applyTheme(themeOptions["{!! Cookie::get('theme-preference') !!}"], html);
+    </script>
+
+    {{ Cookie::get('theme-preference')  }}
+@endif
+@yield('additionalPageScripts')
+
 
 </body>
 </html>
