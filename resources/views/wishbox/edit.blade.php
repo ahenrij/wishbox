@@ -11,7 +11,7 @@
                 <br><br>
             </div>
             <div class="col-md-9">
-                <h3 id="create_box_title">{{ __('Modifier boîte') }}</h3>
+                <h3 id="create_box_title">{{ __('Modifier la boîte') }}</h3>
                 <br>
                 <form method="post" action="{{ route('wishbox.update', $wishbox->id) }}">
                     @csrf
@@ -43,7 +43,7 @@
                                 <select name="type" id="type" class="form-control">
                                     @foreach(wish_types as $key => $wish_type)
                                         <option value="{{ $key }}"
-                                                @if($key == TYPE_WISH) selected @endif> {{ $wish_type }}</option>
+                                                @if($key == $wishbox->type) selected @endif> {{ $wish_type }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -57,7 +57,7 @@
                                 </div>
                                 <input type="date" title="Date butoir"
                                        class="form-control @error('deadline') is-invalid @enderror" id="deadline"
-                                       name="deadline"  value="{{ old('deadline') }}"
+                                       name="deadline"  value="{{ empty(old('deadline')) ? $wishbox->deadline : old('deadline') }}"
                                        placeholder="Date butoir">
                                 @error('deadline')
                                 <span class="invalid-feedback" role="alert">
@@ -74,7 +74,7 @@
                                 <select name="visibility" id="visibility" class="form-control">
                                     @foreach(visibilities as $key => $visibility)
                                         <option value="{{ $key }}"
-                                                @if($key == VISIBILITY_PUBLIC) selected @endif> {{ $visibility }}</option>
+                                                @if($key == $wishbox->visibility) selected @endif> {{ $visibility }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -92,7 +92,7 @@
       function updateTitle() {
         var title = $('#title').val();
         if (title == '') {
-          $('#create_box_title').html('Nouvelle boîte');
+          $('#create_box_title').html('Modifier la boîte');
         } else {
           $('#create_box_title').html(title);
         }

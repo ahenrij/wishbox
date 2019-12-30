@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\WishBoxCreateRequest;
+use App\Http\Requests\WishBoxUpdateRequest;
 use App\Wish;
 use App\WishBox;
 use Illuminate\Http\Request;
@@ -94,9 +95,21 @@ class WishBoxController extends Controller
      * @param  \App\WishBox $wishBox
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, WishBox $wishBox)
+    public function update(WishBoxUpdateRequest $request, $id)
     {
-        //
+        $inputs = $request->all();
+        $wishbox = WishBox::where('id', $id)->first();
+
+        $wishbox->title = $inputs['title'];
+        $wishbox->deadline = $inputs['deadline'];
+        $wishbox->visibility = $inputs['visibility'];
+        $wishbox->type = $inputs['type'];
+
+        if ($wishbox->save()) {
+            return redirect()->route('wishbox.index');
+        } else {
+            return redirect()->back()->withError('Une erreur est survenue lors de l\'enregistrement');
+        }
     }
 
     /**
