@@ -5,7 +5,7 @@
         <div class="row justify-content-center uk-grid-match">
             <div class="col-md-3">
                 <div class="uk-card uk-card-default uk-card-body">
-                    <div class="uk-card-title text-center">{{ '@'.Auth::user()->username }}</div>
+                    <div class="uk-card-title text-center" id="usernameBox">{{ Auth::user()->username }}</div>
                     <br>
                     <div>
                         {{--TODO changer les choses pour afficher la bonne image (condition du if et contenu éventuellement)--}}
@@ -19,9 +19,7 @@
                     <br>
                     {{--Include profile info or edit form (var passed from controller)--}}
                     @include($template)
-                    <div class="mt-2">
-                        <a href="#"><button class="btn btn-primary"><i class="fa fa-edit"></i> Modifier</button></a>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -82,6 +80,15 @@
 
 @section('additionalPageScripts')
     <script type="text/javascript">
+
+        function updatePseudo() {
+            var username = $('#username').val();
+            if (username != '') {
+                $('#usernameBox').html(username);
+            }
+        }
+
+        // AJAX
 
         $.ajaxSetup({
             headers: {

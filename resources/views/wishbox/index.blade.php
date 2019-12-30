@@ -4,10 +4,18 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-3">
-                <a href="{{ route('wishbox.create') }}" class="btn btn-primary pl-5 pr-5">
-                    <span uk-icon="icon: plus; ratio: .7" class="pr-2"></span>
-                    {{ __('Ajouter une boîte') }}
-                </a>
+                <div class="col-md-6">
+                    <a href="{{ route('wishbox.create') }}" class="btn btn-primary pl-5 pr-5">
+                        <span uk-icon="icon: plus; ratio: .7" class="pr-2"></span>
+                        {{ __('Ajouter une boîte') }}
+                    </a>
+                </div>
+                <div class="col-md-6 mt-3">
+                    <a href="{{ route('wishbox.otherWishboxes') }}" class="btn btn-secondary pl-3 pr-4">
+                        <span uk-icon="icon: happy; ratio: .7" class="pr-2"></span>
+                        {{ __('Boîtes des autres utilisateurs') }}
+                    </a>
+                </div>
             </div>
             <br><br>
             <div class="col-md-9">

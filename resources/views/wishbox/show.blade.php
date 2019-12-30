@@ -18,11 +18,15 @@
             </div>
             <div class="col-md-9">
                 <h3>{{ $wishbox->title }}</h3>
-
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 <br>
                 <div  id="tmGallery" class="tm-gallery uk-child-width-1-3@s" uk-grid>
                     @foreach($wishes as $wish)
-                        <div class="tm-gallery-item category-{{ $wish->category_id }}">
+                        <div class="tm-gallery-item category-{{ $wish->category_id }} {{ "status".$wish->status }}">
                             <figure class="effect-bubba" style="width: 100%;">
 
                                 <img src="{{ URL::to('/'). '/img/default_wish_image.png' }}" alt="{{ $wish->link }}"
@@ -31,7 +35,8 @@
                                 <figcaption>
                                     <h2>Fresh <span>Bubba</span></h2>
                                     <p>Bubba likes to appear out of thin air.</p>
-                                    <a href="#">View more</a>
+                                    {{--TODO remove link Little "hack for the moment just to have a link for each wish. This link will be on the show page of a wish--}}
+                                    <a href="{{ route('wish.offer', $wish->id) }}">View more</a>
                                 </figcaption>
                             </figure>
                         </div>

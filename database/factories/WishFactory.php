@@ -11,6 +11,7 @@ $factory->define(Wish::class, function (Faker $faker) {
         'link' => $faker->url,
         'filename' => $faker->imageUrl(),
         'priority' => array_keys(wish_priorities)[rand(0, count(array_keys(wish_priorities))-1)],
+        'status' => rand(0, 2),
         'user_id' => rand(1, 10),
         'wish_box_id' => rand(1, N_WISHBOXES),
         'category_id' => rand(1, 10),
