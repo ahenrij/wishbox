@@ -29,6 +29,9 @@ Route::get('/wishbox/{wish}/offer', 'WishController@offer')->name('wish.offer');
 //Route::get('/wishbox/{user}/email-giver', 'WishController@sendMail')->name('wish.sendMail');
 
 
+Route::post('/connexion', 'LoginController@login')->name('login');
+Route::post('/register', 'RegisterController@register')->name('register');
+
 Route::resource('/wishbox', 'WishBoxController');
 Route::resource('/giftbox', 'GiftBoxController');
 Route::resource('/wish', 'WishController');
