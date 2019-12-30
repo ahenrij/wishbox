@@ -510,6 +510,8 @@ ul.tm-list-plus li:before {
 .tm-gallery-item {
   width: 29%;
   margin: 2%;
+  border: 1px solid #eee8d5 !important;
+  padding-left: 0px !important;
 }
 
 .filters-button-group {
