@@ -715,7 +715,7 @@
       <workItem from="1577661765499" duration="10090000" />
       <workItem from="1577707136435" duration="425000" />
       <workItem from="1577708145676" duration="201000" />
-      <workItem from="1577712775212" duration="2057000" />
+      <workItem from="1577712775212" duration="2093000" />
     </task>
     <task id="LOCAL-00001" summary="wishbox created">
       <created>1577665851171</created>
@@ -752,11 +752,18 @@
       <option name="project" value="LOCAL" />
       <updated>1577671894976</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="css &amp; bugs fixed">
+      <created>1577714874808</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1577714874808</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60676000" />
+    <option name="totallyTimeSpent" value="60712000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="3" width="1920" height="1036" extended-state="0" />
@@ -796,7 +803,8 @@
     <MESSAGE value="wishbox creation and deletion done" />
     <MESSAGE value="readme updated" />
     <MESSAGE value="wishboxes updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="wishboxes updated" />
+    <MESSAGE value="css &amp; bugs fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="css &amp; bugs fixed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
