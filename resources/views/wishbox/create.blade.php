@@ -11,17 +11,28 @@
                 <br><br>
             </div>
             <div class="col-md-9">
-                <h3>{{ __('Nouvelle boîte') }}</h3>
+                <h3 id="create_box_title">{{ __('Nouvelle boîte') }}</h3>
                 <br>
                 <form method="post" action="{{ route('wishbox.store') }}">
                     @csrf
+
+                    @if(isset($error))
+                        <div class="alert alert-danger">{{ $error }}</div>
+                    @endif
+
                     <div class="form-row">
                         <div class="form-group col-md-8">
                             <div class="input-group mb-2">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text"><span uk-icon="icon: bookmark"></span></div>
                                 </div>
-                                <input type="text" class="form-control" id="title" name="title" placeholder="Titre de la boîte">
+                                <input type="text" class="form-control @error('title') is-invalid @enderror" id="title"
+                                       name="title" placeholder="Titre de la boîte">
+                                @error('title')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="form-group col-md-4">
@@ -31,7 +42,7 @@
                                 </div>
                                 <select name="type" id="type" class="form-control">
                                     @foreach(wish_types as $key => $wish_type)
-                                        <option value="{{ $key }}"> {{ $wish_type }}</option>
+                                        <option value="{{ $key }}" @if($key == TYPE_WISH) selected @endif> {{ $wish_type }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -43,8 +54,15 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text"><span uk-icon="icon: calendar"></span></div>
                                 </div>
-                                <input type="date" title="Date butoir" class="form-control" id="deadline" name="deadline"
+                                <input type="date" title="Date butoir"
+                                       class="form-control @error('title') is-invalid @enderror" id="deadline"
+                                       name="deadline"
                                        placeholder="Date butoir">
+                                @error('deadline')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="form-group col-md-6">
@@ -54,7 +72,7 @@
                                 </div>
                                 <select name="visibility" id="visibility" class="form-control">
                                     @foreach(visibilities as $key => $visibility)
-                                        <option value="{{ $key }}"> {{ $visibility }}</option>
+                                        <option value="{{ $key }}" @if($key == VISIBILITY_PUBLIC) selected @endif> {{ $visibility }}</option>
                                     @endforeach
                                 </select>
                             </div>

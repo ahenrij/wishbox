@@ -34,3 +34,7 @@ input {
 body {
   padding-top: 50px !important;
 }
+
+.invalid-feedback > strong {
+  font-size: 12px !important;
+}

@@ -45,8 +45,19 @@ class WishBoxController extends Controller
     public function store(WishBoxCreateRequest $request)
     {
         $inputs = $request->all();
-        var_dump($inputs);
-        die();
+
+        $wishbox = new WishBox();
+        $wishbox->title = $inputs['title'];
+        $wishbox->deadline = $inputs['deadline'];
+        $wishbox->visibility = $inputs['visibility'];
+        $wishbox->type = $inputs['type'];
+        $wishbox->user_id = Auth::user()->id;
+
+        if ($wishbox->save()) {
+            return redirect()->route('wishbox.show', $wishbox->id);
+        } else {
+            return redirect()->back()->withError('Une erreur est survenue lors de l\'enregistrement');
+        }
     }
 
     /**
