@@ -81,9 +81,10 @@ class WishBoxController extends Controller
      * @param  \App\WishBox $wishBox
      * @return \Illuminate\Http\Response
      */
-    public function edit(WishBox $wishBox)
+    public function edit($id)
     {
-        //
+        $wishbox = WishBox::where('id', $id)->first();
+        return view('wishbox.edit', compact('wishbox'));
     }
 
     /**
