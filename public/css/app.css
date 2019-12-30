@@ -1,21 +1,21 @@
 @font-face {
-  font-family: 'Product Sans Thin';
-  src: url('../fonts/product-sans-thin.ttf');
+    font-family: 'Product Sans Thin';
+    src: url('../fonts/product-sans-thin.ttf');
 }
 
 @font-face {
-  font-family: 'Product Sans Light';
-  src: url('../fonts/product-sans-light.ttf');
+    font-family: 'Product Sans Light';
+    src: url('../fonts/product-sans-light.ttf');
 }
 
 @font-face {
-  font-family: 'Century Gothic';
-  src: url('../fonts/century-gothic.ttf');
+    font-family: 'Century Gothic';
+    src: url('../fonts/century-gothic.ttf');
 }
 
 * {
-  font-family: "Product Sans Light";
-  font-size: 17px;
+    font-family: "Product Sans Light";
+    font-size: 17px;
 }
 
 html {
@@ -23,8 +23,8 @@ html {
 }
 
 body {
-  height: 100vh;
-  background-color: #fefefe;
+    height: 100vh;
+    background-color: #fefefe;
 }
 
 input {
@@ -32,8 +32,74 @@ input {
 }
 
 body {
-  padding-top: 50px !important;
+    padding-top: 50px !important;
 }
+
+.profile-info
+{
+    margin-top: 10px;
+}
+
+/*THEME CHOOSING*/
+.theme-demo
+{
+    width: 75px;
+    height: 40px;
+    border: 1px solid black;
+}
+
+/*THEME 1*/
+.theme1-color1
+{
+    background-color: antiquewhite;
+}
+.theme1-color2
+{
+    background-color: yellow;
+}
+.theme1-color3
+{
+    background-color: green;
+}
+.theme1-color4
+{
+    background-color: blue;
+}
+/*THEME 2*/
+.theme2-color1
+{
+    background-color: navajowhite;
+}
+.theme2-color2
+{
+    background-color: darkcyan;
+}
+.theme2-color3
+{
+    background-color: darkgray;
+}
+.theme2-color4
+{
+    background-color: peachpuff;
+}
+/*THEME 3*/
+.theme3-color1
+{
+    background-color: gold;
+}
+.theme3-color2
+{
+    background-color: azure;
+}
+.theme3-color3
+{
+    background-color: red;
+}
+.theme3-color4
+{
+    background-color: royalblue;
+}
+
 
 .invalid-feedback > strong {
   font-size: 12px !important;

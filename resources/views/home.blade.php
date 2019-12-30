@@ -76,7 +76,7 @@
 {{--</div>--}}
 
 @endsection
-@section('scripts')
+@section('additionalPageScripts')
     <script src="{{ ('js/imagesloaded.pkgd.min.js') }}"></script>
     <script src="{{ ('js/isotope.pkgd.min.js') }}"></script>
 
