@@ -74,9 +74,10 @@
         applyTheme(themeOptions["{!! Cookie::get('theme-preference') !!}"], html);
     </script>
 
-{{ Cookie::get('theme-preference')  }}
+    {{ Cookie::get('theme-preference')  }}
 @endif
-    @yield('additionalPageScripts')
+@yield('additionalPageScripts')
+
 
 </body>
 </html>

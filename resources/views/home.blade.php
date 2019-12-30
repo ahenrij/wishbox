@@ -9,7 +9,7 @@
                     class="tm-welcome-parallax tm-center-child"
                     data-parallax="scroll"
                     data-image-src="img/home/banner.jpg"
-                    data-image-src="img/blooming-bg.jpg"
+                    {{--data-image-src="img/blooming-bg.jpg"--}}
             >
                 <div class="tm-bg-black-transparent tm-parallax-overlay">
                     <h2>WishBox</h2>
