@@ -17,7 +17,7 @@
             <label class="mb-1" for="name">Nom</label>
             <div class="input-group mb-2">
                 <div class="input-group-prepend">
-                    <div class="input-group-text"><span uk-icon="icon: pencil"></span></div>
+                    <div class="input-group-text"><span uk-icon="icon: bookmark"></span></div>
                 </div>
                 <input required type="text" class="form-control @error('name') is-invalid @enderror" id="name"
                        name="name" placeholder="Votre nom" value="{{ empty(old('name')) ? $user->name : old('name') }}">
@@ -32,7 +32,7 @@
             <label class="mb-1" for="first_name">Prénom</label>
             <div class="input-group mb-2">
                 <div class="input-group-prepend">
-                    <div class="input-group-text"><span uk-icon="icon: pencil"></span></div>
+                    <div class="input-group-text"><span uk-icon="icon: bookmark"></span></div>
                 </div>
                 <input required type="text" class="form-control @error('first_name') is-invalid @enderror" id="first_name"
                        name="first_name" placeholder="Votre prénom" value="{{ empty(old('first_name')) ? $user->first_name : old('first_name') }}">
@@ -96,7 +96,7 @@
             <label class="mb-1" for="address">Adresse</label>
             <div class="input-group mb-2">
                 <div class="input-group-prepend">
-                    <div class="input-group-text"><span uk-icon="icon: mail"></span></div>
+                    <div class="input-group-text"><span uk-icon="icon: location"></span></div>
                 </div>
                 <input required type="text" class="form-control @error('address') is-invalid @enderror" id="address"
                        name="address" placeholder="Votre adresse" value="{{ empty(old('address')) ? $user->address : old('address') }}">
@@ -113,7 +113,7 @@
             <label class="mb-1" for="password">Mot de passe</label>
             <div class="input-group mb-2">
                 <div class="input-group-prepend">
-                    <div class="input-group-text"><span uk-icon="icon: mail"></span></div>
+                    <div class="input-group-text"><span uk-icon="icon: lock"></span></div>
                 </div>
                 <input type="password" class="form-control @error('password') is-invalid @enderror" id="password"
                        name="password" placeholder="Votre mot de passe" value="{{ empty(old('password')) ? "" : old('password') }}">
@@ -128,7 +128,7 @@
             <label class="mb-1" for="password_confirmation">Confirmation du mot de passe</label>
             <div class="input-group mb-2">
                 <div class="input-group-prepend">
-                    <div class="input-group-text"><span uk-icon="icon: phone"></span></div>
+                    <div class="input-group-text"><span uk-icon="icon: lock"></span></div>
                 </div>
                 <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" id="password_confirmation"
                        name="password_confirmation" placeholder="Répéter le mot de passe" value="{{ empty(old('password_confirmation')) ? "" : old('password_confirmation') }}">
@@ -140,5 +140,9 @@
             </div>
         </div>
     </div>
+    <button class="btn btn-outline-secondary pl-1 pr-3" onclick="javascript:history.back()">
+        <span uk-icon="icon: chevron-left; ratio: .7" class="pr-2"></span>
+        Retour
+    </button>
     <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Enregistrer</button>
 </form>
