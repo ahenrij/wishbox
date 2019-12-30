@@ -28,3 +28,7 @@ Route::resource('/giftbox', 'GiftBoxController');
 Route::resource('/wish', 'WishController');
 Route::resource('/category', 'CategoryController');
 Route::resource('/comment', 'CommentController');
+
+Route::post('/selectTheme', 'UserController@selectTheme')->name('selectTheme');
+Route::get('users/edit',  'UserController@edit')->name('users.edit');
+Route::patch('users/{user}/update',  'UserController@update')->name('users.update');
