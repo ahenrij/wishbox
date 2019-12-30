@@ -32,8 +32,8 @@ class HomeController extends Controller
                     ->join('wish_boxes', 'wish_boxes.id', '=', 'wishes.wish_box_id' )
                     ->join('categories', 'categories.id', '=', 'wishes.category_id')
                     ->select('wish_boxes.title as wishBoxTitle', 'wish_boxes.deadline', 'wishes.description', 'wishes.link', 'wishes.filename', 'categories.title as category')
-                    ->where('wish_boxes.type', '!=',  config('app.label_is_gift'))
-                    ->where('wish_boxes.visibility', '=', config('app.visibility_everyone'))
+//                    ->where('wish_boxes.type', '!=',  config('app.label_is_gift'))
+//                    ->where('wish_boxes.visibility', '=', config('app.visibility_everyone'))
                     ->paginate(2, '[*]', 'wishes')
 //                    ->get()
         ;
