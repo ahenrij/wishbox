@@ -34,3 +34,7 @@
         </div>
     </div>
 </div>
+
+<div class="mt-2">
+    <a href="{{ route('users.edit', Auth::user()) }}"><button class="btn btn-primary"><i class="fa fa-edit"></i> Modifier</button></a>
+</div>
