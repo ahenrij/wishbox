@@ -146,16 +146,16 @@
     <property name="nodejs_interpreter_path" value="node" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\wamp64\www\wishbox\public" />
-      <recent name="C:\wamp64\www\wishbox\resources" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\gurva\Documents\GitHub\wishbox\app\Http\Controllers" />
       <recent name="C:\Users\gurva\Documents\GitHub\wishbox\resources\views" />
       <recent name="C:\wamp64\www\wishbox\public\img" />
       <recent name="C:\wamp64\www\wishbox\resources\views\wishboxes" />
       <recent name="C:\wamp64\www\wishbox\public\fonts" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\wishbox\public" />
+      <recent name="C:\wamp64\www\wishbox\resources" />
     </key>
   </component>
   <component name="RunManager">
