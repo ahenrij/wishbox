@@ -63,7 +63,7 @@
     </div>
 
     <div class="uk-inline w-100 uk-margin-large" style="background: #2d2d2d !important;" uk-grid>
-        <button class="uk-button uk-button-primary uk-position-center">Commencer maintenant</button>
+        <button class="uk-button uk-button-primary uk-position-center" onclick="window.location='{{ url("/register") }}'">Commencer maintenant</button>
     </div>
 
 @endsection
