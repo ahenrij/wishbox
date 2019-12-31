@@ -32,7 +32,9 @@ class WishBoxController extends Controller
             ->groupBy('wish_boxes.id')
             ->paginate(6);
 
-        return view('wishbox.index', compact('wishboxes'));
+        $isOwner = true;
+
+        return view('wishbox.index', compact('wishboxes', 'isOwner'));
     }
 
     public function usersWishboxes()
@@ -46,7 +48,10 @@ class WishBoxController extends Controller
             ->where('wish_boxes.visibility', '=', VISIBILITY_PUBLIC)
             ->groupBy('wish_boxes.id')
             ->paginate(6);
-        return view('wishbox.users_boxes', compact('wishboxes'));
+
+        $isOwner = false;
+
+        return view('wishbox.index', compact('wishboxes', 'isOwner'));
     }
 
     /**

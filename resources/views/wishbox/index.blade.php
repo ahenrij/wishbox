@@ -10,17 +10,29 @@
                         {{ __('Ajouter une boîte') }}
                     </a>
                 </div>
-                <div class="col-md-6 mt-3">
-                    <a href="{{ route('wishbox.otherWishboxes') }}" class="btn btn-secondary pl-3 pr-4">
-                        <span uk-icon="icon: happy; ratio: .7" class="pr-2"></span>
-                        {{ __('Boîtes des autres utilisateurs') }}
-                    </a>
-                </div>
+                @if(!$isOwner)
+                    <div class="col-md-6 mt-3">
+                        <a href="{{ route('wishbox.index') }}" class="btn btn-secondary pl-5 pr-5">
+                            <span uk-icon="icon: chevron-left; ratio: .7" class="pr-2"></span>{{ __('Mes boîtes') }}
+                        </a>
+                    </div>
+                @else
+                    <div class="col-md-6 mt-3">
+                        <a href="{{ route('wishbox.otherWishboxes') }}" class="btn btn-secondary pl-3 pr-4">
+                            <span uk-icon="icon: happy; ratio: .7" class="pr-2"></span>
+                            {{ __('Boîtes des autres utilisateurs') }}
+                        </a>
+                    </div>
+                @endif
             </div>
             <br><br>
             <div class="col-md-9">
-                <h3>{{ __('Mes boîtes à souhaits') }}</h3>
-
+                <h3>{{ __(($isOwner) ? 'Mes boîtes à souhaits' : 'Les boîtes à souhaits') }}</h3>
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
                 <br>
                 @if($wishboxes->isNotEmpty())
                     <div class="uk-grid-match uk-child-width-1-3@s" uk-grid>
@@ -28,7 +40,7 @@
                             <div>
                                 <div class="uk-card uk-card-default uk-card-body uk-inline">
 
-                                    <div class="circle uk-background-primary uk-position-top-right uk-text-bold">
+                                    <div class="circle  uk-position-top-right uk-text-bold">
                                         {{ $wishbox->total }}
                                     </div>
 
