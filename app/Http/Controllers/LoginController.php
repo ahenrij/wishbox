@@ -13,7 +13,7 @@ class LoginController extends Controller {
         $password = $_POST['password']; //récupération du mot de passe du formulaire HTML
 
         $userPassword = User::select('password')
-            ->where('email', $email)
+            ->where('email', '=', $email)
             ->first();
 
         if (password_verify($password, $userPassword)) {
