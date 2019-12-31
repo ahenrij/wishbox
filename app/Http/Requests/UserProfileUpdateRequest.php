@@ -12,6 +12,7 @@ class UserProfileUpdateRequest extends FormRequest
         'first_name' => 'required|min:6',
         'address' => 'required|min:6',
         'phone_number' => 'required',
+
     ];
 
     public function __construct()
@@ -37,9 +38,8 @@ class UserProfileUpdateRequest extends FormRequest
     public function rules()
     {
         $id = $this->segment(2);
-//        var_dump(request()->get('password'));
-//        die();
         // Conditionnal rules
+
         if(request()->has('password') &&
             !empty(request()->get('password')) && request()->get('password') != Auth::user()->password)
         {
@@ -54,6 +54,12 @@ class UserProfileUpdateRequest extends FormRequest
 
         if(request()->has('username') && request()->get('username') != Auth::user()->username) {
             self::$rules['username'] = 'required|min:6|unique:users';
+        }
+
+        if(request()->hasFile('profile'))
+        {
+//            dd(request()->file('profile'));
+            self::$rules['profile'] = 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
         }
 
         return self::$rules;

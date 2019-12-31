@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+@section('additionalPageStylesheets')
+{{--    If this is edit form, load css for file upload field--}}
+    @if (isset($user))
+        <link href="{{ URL::to('/'). ('/css/file_uploader.css') }}" rel="stylesheet">
+    @endif
+@endsection
+
 @section('content')
     <div class="container">
         <div class="row justify-content-center uk-grid-match">
@@ -9,13 +16,25 @@
                     <br>
                     <div>
                         {{--TODO changer les choses pour afficher la bonne image (condition du if et contenu éventuellement)--}}
-                        <img alt="Profil" src="@if(Auth::user()->profile != null){{ Auth::user()->profile }}@else{{  'img/avatar.png' }}@endif">
+                        <img class="file-image" id="profile-pic" alt="Photo de profil" src="@if(Auth::user()->profile != null){{ 'storage/'.Auth::user()->profile }}@else{{  'img/avatar.png' }}@endif">
+{{--                        <img class="file-image" id="profile-pic" alt="Photo de profil" src="@if(Auth::user()->profile != null){{ Storage::url(PROFILE_UPLOAD_FOLDER.'/'.Auth::user()->profile) }}@else{{  'img/avatar.png' }}@endif">--}}
                     </div>
                 </div>
             </div>
             <div class="col-md-9">
                 <div class="uk-card uk-card-default uk-card-body">
                     <div class="uk-card-title">Mes informations</div>
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
                     <br>
                     {{--Include profile info or edit form (var passed from controller)--}}
                     @include($template)
@@ -121,6 +140,28 @@
 
         });
 
+        // File uploader
+
+        // Set image preview to old image first
+        var src = $('#profile-pic').attr('src');
+        $('#image-preview').attr('src', src);
+
+        function readURL(input) {
+
+            el = '.file-image';
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $(el).attr('src', e.target.result);
+                    $(el).attr('alt', 'Aperçu');
+                };
+
+                reader.readAsDataURL(input.files[0]);
+                // $('#file-image').removeClass('hidden');
+                $('#start').hide();
+            }
+        }
     </script>
 @endsection
 

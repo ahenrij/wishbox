@@ -18,6 +18,9 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ URL::to('/'). ('/css/templatemo-style.css') }}"/>
     <link rel="stylesheet" href="{{ URL::to('/'). ('/css/app.css') }}" rel="stylesheet">
+
+    @yield('additionalPageStylesheets')
+
 </head>
 <body>
 <div class="container-fluid">

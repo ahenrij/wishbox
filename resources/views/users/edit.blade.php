@@ -1,14 +1,14 @@
 <h3>Modifier le profil</h3>
-{{--@if ($errors->any())--}}
-{{--    <div class="alert alert-danger">--}}
-{{--        <ul>--}}
-{{--            @foreach ($errors->all() as $error)--}}
-{{--                <li>{{ $error }}</li>--}}
-{{--            @endforeach--}}
-{{--        </ul>--}}
-{{--    </div>--}}
-{{--@endif--}}
-<form method="post" action="{{route('users.update', $user)}}">
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+<form method="post" action="{{route('users.update', $user)}}" enctype="multipart/form-data">
     @csrf
     @method('patch')
 
@@ -140,9 +140,29 @@
             </div>
         </div>
     </div>
-    <button class="btn btn-outline-secondary pl-1 pr-3" onclick="javascript:history.back()">
+    <div class="form-row uploader mb-2">
+        <input id="file-upload" type="file" name="profile" accept="image/*" onchange="readURL(this);">
+        <label for="file-upload" class="@error('profile') is-invalid @enderror" id="file-drag">
+            <img class="file-image img-fluid mb-3" style="width: 150px" id="image-preview" src="#" alt="Aperçu">
+            <div id="start" >
+                <i class="fa fa-download" aria-hidden="true"></i>
+                <div>Selectionner un fichier ou glisser déposer</div>
+                <div id="notimage" class="hidden">Choisir photo de profil</div>
+                <span id="file-upload-btn" class="btn btn-primary">Choisir photo de profil</span>
+                <br>
+
+            </div>
+            @error('profile')
+            <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+            @enderror
+        </label>
+    </div>
+
+    <button class="btn btn-outline-secondary pl-1 pr-3 mt-3" onclick="javascript:history.back()">
         <span uk-icon="icon: chevron-left; ratio: .7" class="pr-2"></span>
         Retour
     </button>
-    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Enregistrer</button>
+    <button type="submit" class="btn btn-primary mt-3"><i class="fa fa-save"></i> Enregistrer</button>
 </form>

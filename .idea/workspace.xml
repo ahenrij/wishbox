@@ -2,24 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b9cf30b-34d3-4bbf-a1d2-ea1fe88ac2f2" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Mail/EmailWishReceiver.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/emails/wish_giver.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/emails/wish_receiver.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/layouts/emails_layout.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/wishbox/users_boxes.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/file_uploader.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/WishBoxController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/WishBoxController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/WishController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/WishController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/WishFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/WishFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_12_23_181021_create_wishes_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_12_23_181021_create_wishes_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/templatemo-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/templatemo-style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/templatemo-style.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/templatemo-style.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sass/templatemo-style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/sass/templatemo-style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/wishbox/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/wishbox/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/wishbox/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/wishbox/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/UserProfileUpdateRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/UserProfileUpdateRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/emails_layout.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/emails_layout.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/users/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/users/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/profile.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,11 +65,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="ProjectFrameBounds">
-    <option name="y" value="3" />
-    <option name="width" value="1920" />
-    <option name="height" value="1036" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
@@ -205,13 +192,13 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="413" y="120" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1577739918410" />
-    <state x="492" y="282" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1577717567276">
+    <state x="492" y="282" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1577789851398">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="492" y="282" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1577717567276" />
-    <state x="339" y="164" key="run.anything.popup" timestamp="1577742634730">
+    <state x="492" y="282" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1577789851398" />
+    <state x="339" y="164" key="run.anything.popup" timestamp="1577788289100">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="164" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1577742634730" />
+    <state x="339" y="164" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1577788289100" />
   </component>
 </project>
