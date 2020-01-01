@@ -28,13 +28,13 @@
     <div class="col-12 tm-page-cols-container">
         <div class="tm-page-col-left">
             @if (count($categories) > 0 && (count($wishes) > 0))
-                @include('displayCategories', ['categories' => $categories])
+                @include('home.display_categories', ['categories' => $categories])
             @endif
 
         </div>
         <div class="tm-page-col-right">
 {{--            @if (count($wishes) > 0)--}}
-                @include('showGiftsOfWishes', ['elements' => $wishes])
+                @include('home.show_gifts_or_wishes', ['elements' => $wishes])
             {{--@else--}}
                 {{--<h4 class="text-center">Aucun souhait pour le moment.</h4>--}}
             {{--@endif--}}
@@ -56,13 +56,13 @@
     <div class="col-12 tm-page-cols-container">
         <div class="tm-page-col-left">
             @if (count($categories) > 0 && count($gifts) > 0)
-                @include('displayCategories', ['categories' => $categories])
+                @include('home.display_categories', ['categories' => $categories])
             @endif
 
         </div>
         <div class="tm-page-col-right">
 {{--            @if (count($gifts) > 0)--}}
-                @include('showGiftsOfWishes', ['elements' => $gifts])
+                @include('home.show_gifts_or_wishes', ['elements' => $gifts])
             {{--@else--}}
                 {{--<h4 class="text-center">Aucun don pour le moment.</h4>--}}
             {{--@endif--}}
