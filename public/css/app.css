@@ -119,4 +119,5 @@ body {
   text-align: center;
   margin-top: -17px;
   margin-right: -17px;
+  background: var(--primary-color) !important;
 }

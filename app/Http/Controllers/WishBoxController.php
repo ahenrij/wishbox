@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Http\Requests\WishBoxCreateRequest;
 use App\Http\Requests\WishBoxUpdateRequest;
 use App\Wish;
@@ -30,8 +31,10 @@ class WishBoxController extends Controller
             ->where('type', '=', TYPE_WISH)
             ->groupBy('wish_boxes.id')
             ->paginate(6);
-//        var_dump($wishboxes);
-        return view('wishbox.index', compact('wishboxes'));
+
+        $isOwner = true;
+
+        return view('wishbox.index', compact('wishboxes', 'isOwner'));
     }
 
     public function usersWishboxes()
@@ -45,7 +48,10 @@ class WishBoxController extends Controller
             ->where('wish_boxes.visibility', '=', VISIBILITY_PUBLIC)
             ->groupBy('wish_boxes.id')
             ->paginate(6);
-        return view('wishbox.users_boxes', compact('wishboxes'));
+
+        $isOwner = false;
+
+        return view('wishbox.index', compact('wishboxes', 'isOwner'));
     }
 
     /**
@@ -93,9 +99,14 @@ class WishBoxController extends Controller
     public function show($id, $forOwner = true)
     {
         $wishbox = WishBox::where('id', $id)->first();
-        $wishes = Wish::where('wish_box_id', $id)->get();
+        $wishes = Wish::where('wish_box_id', $id)->paginate(6);
+        $categories = array();
 
-        return view('wishbox.show', compact('wishbox', 'wishes', 'forOwner'));
+        foreach ($wishes->unique('category_id') as $wish) {
+            $categories[] = Category::where('id', $wish->category_id)->first();
+        }
+
+        return view('wishbox.show', compact('wishbox', 'wishes', 'categories', 'forOwner'));
     }
 
     /**
