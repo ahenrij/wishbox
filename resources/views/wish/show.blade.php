@@ -11,11 +11,33 @@
                 <br><br>
             </div>
             <div class="col-md-9">
-                <h3 id="create_box_title">{{ $wish->title }}</h3>
+                <h3 id="create_box_title">{{ $wish->wishBox->title . ' - ' . $wish->title }}</h3>
                 <br>
 
                 <div class="uk-card uk-card-default uk-card-body">
 
+                    <div uk-grid>
+                        <div class="uk-width-1-3@s">
+                            <img src="{{ $wish->filename }}" width="350" height="350" alt="">
+                        </div>
+                        <div class="uk-width-expand@s">
+                            <label for="" class="title uk-text-bold">Description</label>
+                            <p>{{ $wish->description }}</p>
+
+                            <label for="" class="title uk-text-bold">Priorité</label>
+                            <p>{{ strtoupper($wish->priority) }}</p>
+
+                            <a class="btn btn-primary pr-5 pl-5" href="{{ $wish->link }}" target="_blank"
+                               rel="noopener">Consulter le lien</a>
+                            @if (Auth::user()->id != $wish->wishBox->user_id)
+                                <a class="btn btn-outline-success pr-3 pl-3">Offrir</a>
+                            @else
+                                <a class="btn btn-outline-secondary pr-3 pl-3"
+                                   href="{{ route('wish.edit', $wish->id) }}">Modifier</a>
+                                <a class="btn btn-outline-danger " href="{{ $wish->link }}">Supprimer</a>
+                            @endif
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

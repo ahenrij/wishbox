@@ -37,7 +37,8 @@ $wish_types = array(
 );
 
 $wish_priorities = array(
-    'top' => 'Important'
+    'top' => 'Important',
+    'middle' => 'Moyenne'
 );
 
 define('visibilities', $visibilities);
@@ -47,6 +48,7 @@ define('wish_priorities', $wish_priorities);
 define('PROFILE_INFO_TEMPLATE', 'users.profile_infos');
 define('PROFILE_EDIT_FORM', 'users.edit');
 
-function routeBaseName() {
+function routeBaseName()
+{
     return explode('.', Route::currentRouteName())[0];
 }

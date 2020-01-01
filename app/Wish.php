@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Wish extends Model
 {
     //
-    public function wishbox() {
+    public function wishBox() {
         return $this->belongsTo(WishBox::class);
     }
 

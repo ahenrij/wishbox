@@ -121,3 +121,7 @@ body {
   margin-right: -17px;
   background: var(--primary-color) !important;
 }
+
+.btn-outline-success:hover {
+  color: white !important;
+}

@@ -19,7 +19,7 @@ class CreateWishesTable extends Migration
             $table->text('description');
             $table->string('link');
             $table->string('filename');
-            $table->enum('priority', wish_priorities);
+            $table->enum('priority', array_keys(wish_priorities));
             $table->integer('status')->unsigned()->comment('0 : just created ; 1 => Someone proposed to give ; 2 => gift is received');
             $table->integer('user_id')->unsigned()->comment('giver or receiver')->nullable();
             $table->integer('wish_box_id')->unsigned();
