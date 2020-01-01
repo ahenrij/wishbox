@@ -16,7 +16,7 @@
                     <br>
                     <div>
                         {{--TODO changer les choses pour afficher la bonne image (condition du if et contenu éventuellement)--}}
-                        <img class="file-image" id="profile-pic" alt="Photo de profil" src="@if(Auth::user()->profile != null){{ 'storage/'.Auth::user()->profile }}@else{{  'img/avatar.png' }}@endif">
+                        <img class="file-image" id="profile-pic" alt="Photo de profil" src="@if(Auth::user()->profile != null){{ '/storage/'.Auth::user()->profile }}@else{{  'img/avatar.png' }}@endif">
 {{--                        <img class="file-image" id="profile-pic" alt="Photo de profil" src="@if(Auth::user()->profile != null){{ Storage::url(PROFILE_UPLOAD_FOLDER.'/'.Auth::user()->profile) }}@else{{  'img/avatar.png' }}@endif">--}}
                     </div>
                 </div>
