@@ -29,7 +29,7 @@ class WishController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -49,9 +49,10 @@ class WishController extends Controller
      * @param  \App\Wish  $wish
      * @return \Illuminate\Http\Response
      */
-    public function show(Wish $wish)
+    public function show($id)
     {
-        //
+        $wish = Wish::where('id', $id)->first();
+        return view('wish.show', compact('wish'));
     }
 
     /**

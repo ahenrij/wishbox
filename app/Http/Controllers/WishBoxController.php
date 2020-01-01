@@ -99,7 +99,7 @@ class WishBoxController extends Controller
     public function show($id, $forOwner = true)
     {
         $wishbox = WishBox::where('id', $id)->first();
-        $wishes = Wish::where('wish_box_id', $id)->paginate(6);
+        $wishes = Wish::where('wish_box_id', $id)->paginate(8);
         $categories = array();
 
         foreach ($wishes->unique('category_id') as $wish) {
