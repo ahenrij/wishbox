@@ -89,7 +89,7 @@ class UserController extends Controller
 
 //        dd($inputs['profile']->getClientOriginalName());
 
-        if($inputs['profile'] != null)
+        if(isset($inputs['profile']))
         {
             // A file is uploaded
 //            $fileName = Str::random(); // length = 16 by default
