@@ -34,7 +34,18 @@
                             @else
                                 <a class="btn btn-outline-secondary pr-3 pl-3"
                                    href="{{ route('wish.edit', $wish->id) }}">Modifier</a>
-                                <a class="btn btn-outline-danger " href="{{ $wish->link }}">Supprimer</a>
+
+                                <a href="#" class="btn btn-outline-danger"
+                                   onclick="$('#del_wish_{{ $wish->id }}').click()">{{ __('Supprimer') }}</a>
+
+                                <form method="post"
+                                      action="{{ route('wish.destroy', $wish->id) }}">
+                                    @method('delete')
+                                    @csrf
+                                    <input type="submit" id="del_wish_{{ $wish->id }}"
+                                           style="display: none"
+                                           onclick="return confirm('Vous souhaitez vraiment supprimer ce souhait ?')"/>
+                                </form>
                             @endif
                         </div>
                     </div>

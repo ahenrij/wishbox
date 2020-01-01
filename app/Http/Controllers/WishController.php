@@ -84,9 +84,13 @@ class WishController extends Controller
      * @param  \App\Wish  $wish
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Wish $wish)
+    public function destroy($id)
     {
-        //
+        $wish = Wish::where('id', $id)->first();
+        $wishBoxId = $wish->wish_box_id;
+        $wish->delete();
+
+        return redirect()->route('wishbox.show', $wishBoxId);
     }
 
     public function offer(Wish $wish)
