@@ -10,6 +10,8 @@
     <title>{{ config('app.name', 'WishBox') }}</title>
 </head>
 <body>
+    <h1>WishBox</h1>
+    <small>Il suffit de demander...</small>
     @yield('content')
     <p>L'équipe WishBox</p>
 </body>

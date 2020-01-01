@@ -19,6 +19,9 @@ define('WISH_JUST_CREATED', 0);
 define('WISH_ON_THE_WAY', 2);
 define('WISH_RECEIVED', 3);
 
+// Files
+define('PROFILE_UPLOAD_FOLDER', 'img/profile_pictures');
+
 $visibilities = array(
     VISIBILITY_PRIVATE => 'Moi uniquement',
     VISIBILITY_PUBLIC => 'Tout le monde',
