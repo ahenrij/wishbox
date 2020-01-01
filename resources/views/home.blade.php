@@ -28,7 +28,7 @@
     <div class="col-12 tm-page-cols-container">
         <div class="tm-page-col-left">
             @if (count($categories) > 0 && (count($wishes) > 0))
-                @include('displayCategories', ['categories' => $categories])
+                @include('categories.side', ['categories' => $categories])
             @endif
 
         </div>
@@ -56,7 +56,7 @@
     <div class="col-12 tm-page-cols-container">
         <div class="tm-page-col-left">
             @if (count($categories) > 0 && count($gifts) > 0)
-                @include('displayCategories', ['categories' => $categories])
+                @include('categories.side', ['categories' => $categories])
             @endif
 
         </div>

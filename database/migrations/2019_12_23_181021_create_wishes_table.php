@@ -29,7 +29,7 @@ class CreateWishesTable extends Migration
                 ->onUpdate('restrict')
                 ->onDelete('restrict');
 
-            $table->foreign('wish_box_id')->references('id')->on('wishes')
+            $table->foreign('wish_box_id')->references('id')->on('wish_boxes')
                 ->onUpdate('restrict')
                 ->onDelete('restrict');
 
