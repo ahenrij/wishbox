@@ -17,8 +17,9 @@
                  uk-drop="mode: click; pos:bottom-left; cls-drop: uk-navbar-dropdown;">
                 <div class="uk-grid-small uk-flex-middle" uk-grid>
                     <div class="uk-width-expand">
-                        <form class="uk-search uk-search-navbar uk-width-1-1">
-                            <input class="uk-search-input" type="search" placeholder="Search..." autofocus>
+                        <form class="uk-search uk-search-navbar uk-width-1-1" method="POST" action=" {{ route('search') }}">
+                            @csrf
+                            <input class="uk-search-input" name="search" type="search" minlength="1" placeholder="Search..." autofocus>
                         </form>
                     </div>
                     <div class="uk-width-auto">

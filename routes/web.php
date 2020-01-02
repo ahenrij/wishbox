@@ -19,6 +19,8 @@ Auth::routes();
 
 Route::get('/', 'WelcomeController@index')->name('welcome');
 
+Route::post('/users', 'SearchController@index')->name('search');
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/profile', 'UserController@profile')->name('profile');
