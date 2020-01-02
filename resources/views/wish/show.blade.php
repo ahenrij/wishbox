@@ -18,14 +18,14 @@
 
                     <div uk-grid>
                         <div class="uk-width-1-3@s">
-                            <img src="{{ $wish->filename }}" width="350" height="350" alt="">
+                            <img src="{{ asset('img/wishes/'.$wish->filename) }}" width="350" height="350" alt="">
                         </div>
                         <div class="uk-width-expand@s">
                             <label for="" class="title uk-text-bold">Description</label>
                             <p>{{ $wish->description }}</p>
 
                             <label for="" class="title uk-text-bold">Priorité</label>
-                            <p>{{ strtoupper($wish->priority) }}</p>
+                            <p>{{ strtoupper(wish_priorities[$wish->priority]) }}</p>
 
                             <a class="btn btn-primary pr-5 pl-5" href="{{ $wish->link }}" target="_blank"
                                rel="noopener"><span uk-icon="icon: world; ratio:.7" class="pr-1" style="padding-top: -25px !important;"></span>Consulter le lien</a>

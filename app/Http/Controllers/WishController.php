@@ -8,10 +8,10 @@ use App\Http\Requests\WishUpdateRequest;
 use App\User;
 use App\Wish;
 use App\WishBox;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Intervention\Image\Facades\Image;
 
 class WishController extends Controller
 {
@@ -36,7 +36,7 @@ class WishController extends Controller
         $categories = Category::pluck('title', 'id');
 
         if ($wishBox) {
-            return view('wish.create', compact( 'categories', 'wishBox'));
+            return view('wish.create', compact('categories', 'wishBox'));
         } else {
             return redirect()->back();
         }
@@ -50,7 +50,27 @@ class WishController extends Controller
      */
     public function store(WishCreateRequest $request)
     {
-        //
+        $link = $request->input('link');
+        if (!empty($link) && !filter_var($link, FILTER_VALIDATE_URL)) {
+
+            return back()->withInput()->withError('L\'URL que vous avez renseigné est invalide');
+        }
+
+        $filename = '';
+        if ($request->hasFile('filename')) {
+            $image = $request->file('filename');
+            $filename = 'wish_' . time() . '.' . $image->getClientOriginalExtension();
+            $path = public_path('img/wishes/' . $filename);
+            Image::make($image->getRealPath())->resize(350, 350)->save($path);
+        }
+
+        $inputs = array_merge($request->all(), compact('filename'));
+        $wish = new Wish();
+        if ($this->storeWish($wish, $inputs)) {
+            return redirect()->route('wishbox.show', $wish->wish_box_id);
+        } else {
+            return redirect()->back()->withError('Une erreur est survenue lors de l\'enregistrement du souhait');
+        }
     }
 
     /**
@@ -163,5 +183,20 @@ class WishController extends Controller
             //$user->email
             Mail::to('kelvardusud@gmail.com')->send(new \App\Mail\EmailWishReceiver(Auth::user()));
         }
+    }
+
+    private function storeWish($wish, $inputs)
+    {
+
+        $wish->title = $inputs['title'];
+        $wish->description = $inputs['description'];
+        $wish->link = $inputs['link'];
+        if (isset($inputs['filename'])) $wish->filename = $inputs['filename'];
+        $wish->priority = $inputs['priority'];
+        $wish->status = isset($inputs['status']) ? $inputs['status'] : 0;
+        $wish->wish_box_id = $inputs['wish_box_id'];
+        $wish->category_id = $inputs['category_id'];
+
+        return $wish->save();
     }
 }

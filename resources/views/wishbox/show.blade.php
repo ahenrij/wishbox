@@ -9,11 +9,12 @@
                     {{ __('Retour') }}
                 </button>
                 <br><br>
-                <button class="btn btn-primary pl-5 pr-5" onclick="location.href='{{ route('wish.create') }}'">
-                    <span uk-icon="icon: plus; ratio: .7" class="pr-2"></span>
-                    {{ __('Ajouter un souhait') }}
-                </button>
-
+                @if (Auth::user()->id == $wishbox->user_id)
+                    <button class="btn btn-primary pl-5 pr-5" onclick="location.href='{{ route('wish.create') }}'">
+                        <span uk-icon="icon: plus; ratio: .7" class="pr-2"></span>
+                        {{ __('Ajouter un souhait') }}
+                    </button>
+                @endif
                 <br><br>
                 @include('categories.side', compact('categories'))
             </div>

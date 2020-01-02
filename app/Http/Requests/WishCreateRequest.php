@@ -13,7 +13,7 @@ class WishCreateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,11 @@ class WishCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => 'required|string|min:3|max:200',
+            'description' => 'required|string|min:5|max:500',
+//            'filename' => 'file',
+            'wish_box_id' => 'required|exists:wish_boxes,id',
+            'category_id' => 'required|exists:categories,id',
         ];
     }
 }

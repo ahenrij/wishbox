@@ -10,7 +10,7 @@ $factory->define(Wish::class, function (Faker $faker) {
         'title' => $faker->safeColorName,
         'description' => $faker->text(),
         'link' => $faker->url,
-        'filename' => $faker->imageUrl(),
+        'filename' => '',
         'priority' => array_keys(wish_priorities)[rand(0, count(array_keys(wish_priorities))-1)],
         'status' => rand(0, 2),
         'user_id' => array(null, rand(1, 10))[rand(0,1)],

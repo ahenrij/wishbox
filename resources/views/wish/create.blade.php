@@ -15,11 +15,11 @@
                 <br><br>
 
                 <div class="uk-card uk-card-default uk-card-body">
-                    <form method="post" action="{{ route('wish.store') }}">
+                    <form method="post" action="{{ route('wish.store') }}" enctype="multipart/form-data">
                         @csrf
 
-                        @if(isset($error))
-                            <div class="alert alert-danger">{{ $error }}</div>
+                        @if(session()->has('error'))
+                            <div class="alert alert-danger">{{ session('error') }}</div>
                         @endif
 
                         <div class="form-row">
@@ -107,7 +107,7 @@
                                     </div>
                                     <textarea class="form-control @error('description') is-invalid @enderror"
                                               id="description"
-                                              name="description" value="{{ old('description') }}"></textarea>
+                                              name="description">{{ old('description') }}</textarea>
                                     @error('description')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
