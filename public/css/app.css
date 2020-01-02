@@ -125,3 +125,8 @@ body {
 .btn-outline-success:hover {
   color: white !important;
 }
+
+.image {
+  border: 1px solid #bdbdbd;
+  border-radius: 5px;
+}

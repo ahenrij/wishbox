@@ -18,7 +18,7 @@
 
                     <div uk-grid>
                         <div class="uk-width-1-3@s">
-                            <img src="{{ asset('img/wishes/'.$wish->filename) }}" width="350" height="350" alt="">
+                            <img class="image" src="{{ asset(empty($wish->filename) ? 'img/default_wish_image.png' : 'img/wishes/'.$wish->filename) }}" width="350" height="350" alt="">
                         </div>
                         <div class="uk-width-expand@s">
                             <label for="" class="title uk-text-bold">Description</label>

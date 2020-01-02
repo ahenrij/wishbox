@@ -108,7 +108,33 @@ class WishController extends Controller
      */
     public function update(WishUpdateRequest $request, $id)
     {
-        //
+        $wish = Wish::where('id', $id)->first();
+
+        $link = $request->input('link');
+        if (!empty($link) && !filter_var($link, FILTER_VALIDATE_URL)) {
+
+            return back()->withInput()->withError('L\'URL que vous avez renseigné est invalide');
+        }
+
+        $filename = $wish->filename;
+        if ($request->hasFile('filename')) {
+            $image = $request->file('filename');
+            $filename = 'wish_' . time() . '.' . $image->getClientOriginalExtension();
+            $path = public_path('img/wishes/' . $filename);
+            Image::make($image->getRealPath())->resize(350, 350)->save($path);
+
+//            Delete old image
+            /*if (file_exists(public_path('img/wishes/'.$wish->filename))) {
+                @unlink(public_path('img/wishes/'.$wish->filename));
+            }*/
+        }
+
+        $inputs = array_merge($request->all(), compact('filename'));
+        if ($this->storeWish($wish, $inputs)) {
+            return redirect()->route('wishbox.show', $wish->wish_box_id);
+        } else {
+            return redirect()->back()->withError('Une erreur est survenue lors de la modification du souhait');
+        }
     }
 
     /**
