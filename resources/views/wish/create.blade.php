@@ -11,8 +11,8 @@
                 <br><br>
             </div>
             <div class="col-md-9">
-                <h3 id="create_box_title">{{ $wishBox->title . ' - '. __('Nouveau souhait') }}</h3>
-                <br>
+                <span class="uk-card-title">{{ $wishBox->title . ' - ' }} <span class="uk-card-title" id="create_wish_title">{{ __('Nouveau souhait') }}</span></span>
+                <br><br>
 
                 <div class="uk-card uk-card-default uk-card-body">
                     <form method="post" action="{{ route('wish.store') }}">
@@ -140,8 +140,18 @@
           reader.readAsDataURL(input.files[0]);
         }
       }
+
       $("#filename").change(function () {
         readURL(this);
       });
+
+      function updateTitle() {
+        var title = $('#title').val();
+        if (title == '') {
+          $('#create_wish_title').html('Nouveau souhait');
+        } else {
+          $('#create_wish_title').html(title);
+        }
+      }
     </script>
 @endsection
