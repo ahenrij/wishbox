@@ -97,7 +97,7 @@
     </div>
 @endsection
 
-@section('scripts')
+@section('additionalPageScripts')
     <script type="text/javascript">
       function updateTitle() {
         var title = $('#title').val();

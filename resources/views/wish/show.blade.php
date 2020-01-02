@@ -28,7 +28,7 @@
                             <p>{{ strtoupper($wish->priority) }}</p>
 
                             <a class="btn btn-primary pr-5 pl-5" href="{{ $wish->link }}" target="_blank"
-                               rel="noopener">Consulter le lien</a>
+                               rel="noopener"><span uk-icon="icon: world; ratio:.7" class="pr-1" style="padding-top: -25px !important;"></span>Consulter le lien</a>
                             @if (Auth::user()->id != $wish->wishBox->user_id)
                                 <a class="btn btn-outline-success pr-3 pl-3">Offrir</a>
                             @else

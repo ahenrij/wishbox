@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\User;
 use App\Wish;
 use App\WishBox;
@@ -29,7 +30,9 @@ class WishController extends Controller
      */
     public function create()
     {
-
+        $wishBox = WishBox::where('id', session(WISH_BOX_ID))->first();
+        $categories = Category::pluck('title', 'id');
+        return view('wish.create', compact('wishBoxId', 'categories', 'wishBox'));
     }
 
     /**

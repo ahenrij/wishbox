@@ -48,6 +48,8 @@ define('wish_priorities', $wish_priorities);
 define('PROFILE_INFO_TEMPLATE', 'users.profile_infos');
 define('PROFILE_EDIT_FORM', 'users.edit');
 
+define('WISH_BOX_ID', 'wish_box_id');
+
 function routeBaseName()
 {
     return explode('.', Route::currentRouteName())[0];

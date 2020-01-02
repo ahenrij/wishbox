@@ -105,6 +105,7 @@ class WishBoxController extends Controller
         foreach ($wishes->unique('category_id') as $wish) {
             $categories[] = Category::where('id', $wish->category_id)->first();
         }
+        session([WISH_BOX_ID => $wishbox->id]);
 
         return view('wishbox.show', compact('wishbox', 'wishes', 'categories', 'forOwner'));
     }
