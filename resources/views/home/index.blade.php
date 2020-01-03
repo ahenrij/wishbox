@@ -68,8 +68,8 @@
                 {{--@endif--}}
 
                 <span id="paginate-gifts">
-                {{ $gifts->links() }}
-            </span>
+                    {{ $gifts->links() }}
+                </span>
             </div>
         </div>
     </section>
@@ -83,22 +83,11 @@
     <script>
       // Edit pagination links to get scroll after page reload by adding an anchor
       // Wishes
-      var $links = $('#paginate-wishes li a');
-
-      var href = '';
-      $links.each(function () {
-        href = $(this).attr('href');
-        $(this).attr('href', href + '#wishes');
-      });
+      appendAnchorLinkData("paginate-wishes", "wishes");
 
       // Gifts
-      $links = $('#paginate-gifts li a');
+      appendAnchorLinkData("paginate-gifts", "gifts");
 
-      href = '';
-      $links.each(function () {
-        href = $(this).attr('href');
-        $(this).attr('href', href + '#gifts');
-      });
       //--
       $(function () {
           /* Isotope Gallery */

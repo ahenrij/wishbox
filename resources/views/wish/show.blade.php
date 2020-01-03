@@ -15,6 +15,14 @@
                     <h5>@ {{ $wish->wishBox->user->username }}</h5>
                 @endif
                 <h3 id="create_box_title">{{ $wish->wishBox->title . ' - ' . $wish->title }}</h3>
+                @if($wish->wishBox->type == TYPE_GIFT)
+                    <a href="#comments-area ">Voir les commentaires <i class="fa fa-arrow-alt-circle-down"></i></a>
+                @endif
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 <br>
 
                 <div class="uk-card uk-card-default uk-card-body">
@@ -38,7 +46,8 @@
                             @if (Auth::user()->id != $wish->wishBox->user_id)
                                 @if($wish->wishBox->type == TYPE_WISH)
                                     @if($wish->user_id == null)
-                                        <a class="btn btn-outline-success pr-5 pl-5">Offrir</a>
+                                        <a href="{{ route('wish.offer.wish', $wish->id) }}" class="btn btn-outline-success pr-5 pl-5"
+                                           onclick="return confirm('Voulez-vous poursuivre et offrir ce cadeau ?')">Offrir</a>
                                     @else
                                         <div class="uk-inline pt-2 pb-2 pl-5 pr-5 alert alert-success">Ce souhait est
                                             déjà
@@ -55,8 +64,6 @@
                                                     href="{{ route('user.show', $wish->user_id) }}">{{ $wish->user()->firstname . ' ' . $wish->user()->name }}</a>
                                         </div>
                                     @endif
-                                @else
-                                    <p>Les commentaires !</p>
                                 @endif
                                 <div class="mt-3">
                                     <a class="btn btn-outline-secondary pr-3 pl-3"
@@ -80,23 +87,92 @@
 
                     {{--Comments for obtain gift--}}
                     @if (Auth::user()->id != $wish->wishBox->user_id && $wish->wishBox->type == TYPE_GIFT)
+                        <form name="obtainGift" action="{{ route('gift.get', $wish->id) }}">
                         <br>
-                        <label for="comment">Message</label>
+                        <label for="message">Message (max. 2500 caractères)</label>
                         <div class="row">
                             <div class="col-md-8">
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="col-md-4">
-                                <a href="" class="w-100 btn btn-outline-secondary">Obtenir</a>
+{{--                                TODO retirer le texte--}}
+                                <textarea id="message" name="message" class="form-control">Je veux ! Je veux ! Je veux ! Je veux ! Je veux ! Je veux ! Je veux ! Je veux ! Je veux ! Je veux ! Je veux ! Je veux ! Je veux ! Je veux ! Je veux ! Je veux !</textarea>
                             </div>
                         </div>
+                        <button class="btn btn-outline-secondary mt-2"><a href="" class="w-100 ">Obtenir</a></button>
+                        </form>
                     @endif
                 </div>
+
+                @if($wish->wishBox->type == TYPE_GIFT)
+                    <div class="uk-card uk-card-default uk-card-body mt-4" id="comments-area">
+                        <h4 class="text-center">Les intérêts manifestés</h4>
+                        @if ($comments != null && count($comments) > 0)
+                            @foreach($comments as $comment)
+                                <div class="row comment-box mt-1 p-2 mb-1" id="comments-area">
+                                    <div class="" id="comment-{{ $comment->id }}">
+                                        <div class="col-md-4">
+                                            <div class="row">
+                                                <p>
+                                                    <a href="{{ route('user.show', $comment->user_id) }}">{{ $comment->username }}</a>
+                                                </p>
+                                            </div>
+                                            <div class="row">
+                                                <img src="{{ $comment->profile }}" alt="Profil" class="rounded-circle"
+                                                     width="150" height="150">
+                                            </div>
+                                            <div class="row">
+                                                <a href="{{ route('wish.offer.gift',[$wish->id, $comment->user_id]) }}"
+                                                   onclick="return confirm('Voulez-vous poursuivre et offrir votre cadeau à cet utilisateur ?')"
+                                                   class="col-md-12 mt-1 pr-4">
+                                                    <button class="btn btn-primary"><i class="fa fa-heart"></i> Offrir</button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        {{ $comment->message }}
+                                    </div>
+                                </div>
+                            @endforeach
+                                <span id="paginate-comments">
+                                    {{ $comments->links() }}
+                                </span>
+                        @else
+                            <p class="text-center">Aucune manifestation d'intérêt pour le moment. Vous pouvez partager le lien vers votre
+                                cadeau sur vos réseaux sociaux pour qu'il ait plus de visibilité.
+                                <br>
+                                <button onclick='copyToClipboard("{{ route("wish.show", $wish->id) }}")' class="btn btn-primary"><i class="fa fa-copy"></i> Copier le lien dans le presse papier</button>
+                            </p>
+                        @endif
+                    </div>
+                @endif
             </div>
         </div>
     </div>
 @endsection
 
-@section('scripts')
+@section('additionalPageScripts')
+    <script>
+        // Add id to url generated to scroll after page changing (pagination) -- function in app.js
+        appendAnchorLinkData("paginate-comments", "comments");
 
+        function copyToClipboard(str) {
+            const el = document.createElement('textarea');  // Create a <textarea> element
+            el.value = str;                                 // Set its value to the string that you want copied
+            el.setAttribute('readonly', '');                // Make it readonly to be tamper-proof
+            el.style.position = 'absolute';
+            el.style.left = '-9999px';                      // Move outside the screen to make it invisible
+            document.body.appendChild(el);                  // Append the <textarea> element to the HTML document
+            const selected =
+                document.getSelection().rangeCount > 0        // Check if there is any content selected previously
+                    ? document.getSelection().getRangeAt(0)     // Store selection if found
+                    : false;                                    // Mark as false to know no selection existed before
+            el.select();                                    // Select the <textarea> content
+            document.execCommand('copy');                   // Copy - only works as a result of a user action (e.g. click events)
+            document.body.removeChild(el);                  // Remove the <textarea> element
+            if (selected) {                                 // If a selection existed before copying
+                document.getSelection().removeAllRanges();    // Unselect everything on the HTML document
+                document.getSelection().addRange(selected);   // Restore the original selection
+            }
+            UIkit.notification("<span uk-icon='icon: check'></span> Lien copié dans le presse papier");
+        };
+    </script>
 @endsection

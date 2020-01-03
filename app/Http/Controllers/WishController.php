@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Comment;
+use App\Http\Requests\CommentCreateRequest;
 use App\Http\Requests\WishCreateRequest;
 use App\Http\Requests\WishUpdateRequest;
 use App\User;
@@ -82,7 +84,22 @@ class WishController extends Controller
     public function show($id)
     {
         $wish = Wish::where('id', $id)->first();
-        return view('wish.show', compact('wish'));
+
+        // Si c'est un gift, récupérer les commentaires (les intérêts manifestés)
+        $wishBox = WishBox::where('id', $wish->wish_box_id)->first();
+
+        $comments = null;
+        if($wishBox != null && $wishBox->type == TYPE_GIFT)
+        {
+            $comments = DB::table('comments')
+                ->join('wishes', 'wishes.id', '=', 'comments.wish_id' )
+                ->join('users', 'users.id', '=', 'wishes.user_id')
+                ->select('comments.id', 'comments.message', 'comments.date', 'users.id as user_id', 'users.username', 'users.profile')
+                ->paginate(5, '[*]', 'comments')
+                ;
+        }
+
+        return view('wish.show', compact('wish', 'comments'));
     }
 
     /**
@@ -152,7 +169,37 @@ class WishController extends Controller
         return redirect()->route('wishbox.show', $wishBoxId);
     }
 
-    public function offer(Wish $wish)
+    public function offerWish(Wish $wish)
+    {
+        $wishBox = $this->offer($wish, Auth::user()->id, "Vous ne pouvez pas offrir ce cadeau à vous même.", WISH_RECEIVED);
+
+        if ($wishBox != null) {
+            // Send mail to both giver and receiver
+            $userReceiver = User::where('id', $wishBox->user_id)->first();
+
+            // to giver
+            $this->sendMail(Auth::user(), $wish->id, "Votre don a été enregistré !", true);
+
+            // to receiver
+            $this->sendMail($userReceiver, $wish->id, "Vous avez demandé ! La communauté vous l'offre !", false);
+
+            return redirect()->route('wishbox.others')->with('success', 'Votre don a été enregistré avec succès. Un mail de confirmation contenant des informations supplémentaires vous a été envoyé à ' . Auth::user()->email);
+        } else {
+            return redirect()->back()->withError('Une erreur est survenue lors de l\'enregistrement');
+        }
+    }
+
+    /**
+     * Fonction auxilliaire pour offrir (cadeau ou souhait). Fait les opérations communes
+     * aux deux fonctionnalités et renvoie
+     *         le wishBox correspondant au wish en question (utile pour les traitements suivants
+     * dans les deux fonctions appelantes) si tout se passe bien
+     *          null sinon
+     *
+     * @param Wish $wish
+     * @return \Illuminate\Http\RedirectResponse|int
+     */
+    public function offer(Wish $wish, $user_id, $errorIfSame = "Erreur dans le don.", $status = WISH_ON_THE_WAY)
     {
         // If current user is the owner or status == 2 || 3, return
         if ($wish->status == WISH_ON_THE_WAY || $wish->status == WISH_RECEIVED) {
@@ -161,30 +208,92 @@ class WishController extends Controller
 
         $wishBox = WishBox::where('id', $wish->wish_box_id)->first();
         if ($wishBox->user_id == Auth::user()->id) {
-            return redirect()->back()->with('error', 'Vous ne pouvez pas offrir un cadeau dont vous êtes le demandeur.');
+            return redirect()->back()->with('error', $errorIfSame);
         }
 
         // Processing
-        // Set offerer of the wish in the table
+        // Set offerer or receiver of the wish in the table
         $offered = DB::table('wishes')
+            ->where('id', $wish->id)
+            ->update([
+                'user_id' => $user_id,
+                'status' => $status
+            ]);
+
+        return $offered ? $wishBox : null;
+    }
+
+    public function offerGift(Wish $wish, $user_id)
+    {
+//        dd($user_id);
+
+        $wishBox = $this->offer($wish, $user_id, "Vous ne pouvez pas offrir ce cadeau à vous même.", WISH_RECEIVED);
+
+        if ($wishBox != null) {
+            // Send mail to both giver and receiver
+            $userReceiver = User::where('id', $user_id)->first();
+
+            // to giver
+            $this->sendMail(Auth::user(), $wish->id, "Votre plus belle action de cette journée : avoir fait un don !", true, false);
+
+            // to receiver
+            $subject = "Vous avez demandé ! " . Auth::user()->username. " vous l\'offre !";
+            $this->sendMail($userReceiver, $wish->id, $subject, false);
+
+            return redirect()->route('wishbox.others')->with('success', 'Votre don a été enregistré avec succès. Un mail de confirmation contenant des informations supplémentaires vous a été envoyé à ' . Auth::user()->email);
+        } else {
+            return redirect()->back()->withError('Une erreur est survenue lors de l\'enregistrement');
+        }
+    }
+
+
+    public function obtainGift(CommentCreateRequest $request, $wishId)
+    {
+        $inputs = $request->all();
+
+        $wish = Wish::where('id', $wishId)->first();
+
+        // If current user is the owner or status == 2 || 3, return
+        if ($wish->status == WISH_ON_THE_WAY || $wish->status == WISH_RECEIVED) {
+            return redirect()->back()->with('error', 'Cadeau déjà offert.');
+        }
+
+        $wishBox = WishBox::where('id', $wish->wish_box_id)->first();
+        if ($wishBox->user_id == Auth::user()->id) {
+            return redirect()->back()->with('error', 'Vous ne pouvez pas recevoir un cadeau dont vous êtes le donneur.');
+        }
+
+        // Processing
+        // Set receiver of the gift in the table
+
+//        TODO mettre dans methode "je donne" quand il attribue le cadeau à qqun finalement
+        /*$offered = DB::table('wishes')
             ->where('id', $wish->id)
             ->update([
                 'user_id' => Auth::user()->id,
                 'status' => WISH_ON_THE_WAY
-            ]);
+            ]);*/
 
-        if ($offered) {
+        // Save comment
+        $comment = new Comment();
+        $comment->message = $inputs['message'];
+        $comment->date = date('Y-m-d H:i:s');
+        $comment->user_id = Auth::user()->id;
+        $comment->wish_id = $wishId;
+
+        if ($comment->save()) {
+
             // Send mail to both giver and receiver
-            $userReceiver = User::where('id', $wishBox->user_id)->first();
+            $userGiver = User::where('id', $wishBox->user_id)->first();
             // to giver
-            $this->sendMail($userReceiver);
+            $this->sendMail($userGiver, $wishId, "Nouvel intérêt pour votre don !", true, false);
 
             // to receiver
-            $this->sendMail($userReceiver, $isGiver = false);
+            $this->sendMail(Auth::user(), $wishId, "Votre demande pour recevoir un cadeau publié.", false, false);
 
-            return redirect()->route('wishbox.otherWishboxes')->with('success', 'Votre don a été enregistré avec succès. Un mail de confirmation contenant des informations supplémentaires vous a été envoyé à ' . Auth::user()->email);
+            return redirect()->route('giftbox.others')->with('success', 'Votre demande a été enregistrée avec succès. Un mail de confirmation contenant des informations supplémentaires vous a été envoyé à ' . Auth::user()->email);
         } else {
-            return redirect()->back()->withError('Une erreur est survenue lors de l\'enregistrement');
+            return redirect()->back()->with('error', 'Une erreur est survenue lors de l\'enregistrement');
         }
     }
 
@@ -194,21 +303,29 @@ class WishController extends Controller
      *          The receiver of the gift
      * @param bool $isGiver
      *          Is it a mail for the giver or the receiver ?
+     * @param bool $isWish
+     *          Is it a mail about a wish made by a user or a gift ?
      *
-     * The authenticated user is the one giving
+     * The authenticated user is the one giving (if $aboutAWish == true)
      */
-    public function sendMail(User $user, $isGiver = true)
+    public function sendMail(User $user, $elementId, $subject, $isGiver = true, $aboutAWish = true)
     {
-        // if isGiver, $user contains
-        if ($isGiver) {
-            // Send to giver
-            // TODO put correct emails
-            //Auth::user()->email
-            Mail::to('kelvardusud@gmail.com')->send(new \App\Mail\EmailWishGiver($user));
-        } else {
-            //$user->email
-            Mail::to('kelvardusud@gmail.com')->send(new \App\Mail\EmailWishReceiver(Auth::user()));
-        }
+        // if isGiver
+        $type = $aboutAWish ? "wish" : "gift";
+
+        Mail::to('kelvardusud@gmail.com')->send(new \App\Mail\SendEmail($user, $elementId, $type, $subject));
+//
+//        if ($isGiver) {
+//            // Send to giver
+//            // TODO put correct emails
+//            //Auth::user()->email
+//
+//            Mail::to('kelvardusud@gmail.com')->send(new \App\Mail\SendEmail($user, $elementId, $type, $subject));
+//        } else {
+//            //$user->email
+//            Mail::to('kelvardusud@gmail.com')->send(new \App\Mail\EmailReceiver($user, $elementId, $type, $subject));
+//        }
+
     }
 
     private function storeWish($wish, $inputs)

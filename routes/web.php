@@ -27,10 +27,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/profile', 'UserController@profile')->name('profile');
 
+Route::get('/giftbox/get/{wish}', 'WishController@obtainGift')->name('gift.get');
+Route::get('/giftbox/offer/{wish}/{user_id}', 'WishController@offerGift')->name('wish.offer.gift');
+
 Route::get('/wishbox/published', 'WishBoxController@others')->name('wishbox.others');
 Route::get('/giftbox/published', 'WishBoxController@others')->name('giftbox.others');
 
-Route::get('/wishbox/{wish}/offer', 'WishController@offer')->name('wish.offer');
+Route::get('/wishbox/offer/{wish}', 'WishController@offerWish')->name('wish.offer.wish');
 //Route::get('/wishbox/{user}/email-giver', 'WishController@sendMail')->name('wish.sendMail');
 
 Route::get('/user/{id}', 'UserController@show')->name('user.show');
