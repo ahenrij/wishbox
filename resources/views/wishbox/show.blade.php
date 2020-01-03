@@ -12,13 +12,17 @@
                 @if (Auth::user()->id == $wishbox->user_id)
                     <button class="btn btn-primary pl-5 pr-5" onclick="location.href='{{ route('wish.create') }}'">
                         <span uk-icon="icon: plus; ratio: .7" class="pr-2"></span>
-                        {{ __('Ajouter un souhait') }}
+                        {{ __('Ajouter un '.wish_types[$type]) }}
                     </button>
                 @endif
                 <br><br>
                 @include('categories.side', compact('categories'))
             </div>
             <div class="col-md-9">
+                @if (!$isOwner)
+                    <h5>@ {{ $wishbox->user->username }}</h5>
+                @endif
+
                 <h3>{{ $wishbox->title }}</h3>
                 @if (session('error'))
                     <div class="alert alert-danger">

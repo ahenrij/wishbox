@@ -23,13 +23,16 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/profile', 'UserController@profile')->name('profile');
 
-Route::get('/wishbox/published', 'WishBoxController@usersWishboxes')->name('wishbox.otherWishboxes');
+Route::get('/wishbox/published', 'WishBoxController@others')->name('wishbox.others');
+Route::get('/giftbox/published', 'WishBoxController@others')->name('giftbox.others');
 
 Route::get('/wishbox/{wish}/offer', 'WishController@offer')->name('wish.offer');
 //Route::get('/wishbox/{user}/email-giver', 'WishController@sendMail')->name('wish.sendMail');
 
+Route::get('/user/{id}', 'UserController@show')->name('user.show');
+
+Route::resource('/giftbox', 'WishBoxController');
 Route::resource('/wishbox', 'WishBoxController');
-Route::resource('/giftbox', 'GiftBoxController');
 Route::resource('/wish', 'WishController');
 Route::resource('/category', 'CategoryController');
 Route::resource('/comment', 'CommentController');

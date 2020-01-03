@@ -20,6 +20,11 @@ class UserController extends Controller
         ]);
     }
 
+    function show($id) {
+        $user  = User::where('id', $id)->first();
+        return view('users.show', compact('user'));
+    }
+
     function selectTheme(Request $request)
     {
         $input = $request->all();

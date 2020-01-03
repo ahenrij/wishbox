@@ -14,4 +14,8 @@ class Wish extends Model
     public function category() {
         return $this->belongsTo(Category::class);
     }
+
+    public function user() {
+        return User::where('id', $this->attributes['user_id'])->first();
+    }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class GiftBoxController extends Controller
 {
@@ -13,7 +15,10 @@ class GiftBoxController extends Controller
      */
     public function index()
     {
-        return view('wishbox.giftbox');
+        $type = TYPE_GIFT;
+        $wishboxes = getWishBoxes($type, 6);
+        $isOwner = true;
+        return view('wishbox.index', compact('wishboxes', 'isOwner', 'type'));
     }
 
     /**
@@ -23,7 +28,7 @@ class GiftBoxController extends Controller
      */
     public function create()
     {
-        //
+        return view('wishbox.create');
     }
 
     /**
@@ -34,7 +39,7 @@ class GiftBoxController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //the wishbox's one is used
     }
 
     /**

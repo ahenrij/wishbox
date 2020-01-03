@@ -128,7 +128,7 @@
 @section('additionalPageScripts')
     <script type="text/javascript">
       function readURL(input) {
-        console.log("file changed", input);
+//        console.log("file changed", input);
 
         if (input.files && input.files[0]) {
           var reader = new FileReader();

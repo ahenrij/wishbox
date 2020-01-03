@@ -5,20 +5,20 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="col-md-6">
-                    <a href="{{ route('wishbox.create') }}" class="btn btn-primary pl-5 pr-5">
+                    <a href="{{ route($type.'box.create') }}" class="btn btn-primary pl-5 pr-5">
                         <span uk-icon="icon: plus; ratio: .7" class="pr-2"></span>
                         {{ __('Ajouter une boîte') }}
                     </a>
                 </div>
                 @if(!$isOwner)
                     <div class="col-md-6 mt-3">
-                        <a href="{{ route('wishbox.index') }}" class="btn btn-secondary pl-5 pr-5">
+                        <a href="{{ route($type.'box.index') }}" class="btn btn-secondary pl-5 pr-5">
                             <span uk-icon="icon: chevron-left; ratio: .7" class="pr-2"></span>{{ __('Mes boîtes') }}
                         </a>
                     </div>
                 @else
                     <div class="col-md-6 mt-3">
-                        <a href="{{ route('wishbox.otherWishboxes') }}" class="btn btn-secondary pl-3 pr-4">
+                        <a href="{{ route($type.'box.others') }}" class="btn btn-secondary pl-3 pr-4">
                             <span uk-icon="icon: happy; ratio: .7" class="pr-2"></span>
                             {{ __('Boîtes des autres utilisateurs') }}
                         </a>
@@ -27,7 +27,7 @@
             </div>
             <br><br>
             <div class="col-md-9">
-                <h3>{{ __(($isOwner) ? 'Mes boîtes à souhaits' : 'Les boîtes à souhaits') }}</h3>
+                <h3>{{ __((($isOwner) ? 'Mes boîtes à ' : 'Les boîtes à ') . strtolower(wish_types[$type]) . (($type == TYPE_WISH) ? 's' : 'x')) }}</h3>
                 @if (session('success'))
                     <div class="alert alert-success">
                         {{ session('success') }}
@@ -45,32 +45,35 @@
                                     </div>
 
                                     {{--Options for owner--}}
-                                    <div class="uk-position-top-right m-4">
-                                        <span uk-icon="icon: more-vertical" style="cursor: pointer"></span>
-                                        <div style="padding-top: 10px; padding-bottom: 10px !important;" uk-dropdown>
-                                            <ul class="uk-nav uk-dropdown-nav">
-                                                <li>
-                                                    <a href="{{ route('wishbox.edit', $wishbox->id) }}">{{ __('Modifier') }}</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"
-                                                       onclick="$('#del_wishbox_{{ $wishbox->id }}').click()">{{ __('Supprimer') }}</a>
-                                                </li>
-                                                <form method="post"
-                                                      action="{{ route('wishbox.destroy', $wishbox->id) }}">
-                                                    @method('delete')
-                                                    @csrf
-                                                    <input type="submit" id="del_wishbox_{{ $wishbox->id }}"
-                                                           style="display: none"
-                                                           onclick="return confirm('Vous souhaitez vraiment supprimer cette boîte ?')"/>
-                                                </form>
-                                            </ul>
+                                    @if($isOwner)
+                                        <div class="uk-position-top-right m-4">
+                                            <span uk-icon="icon: more-vertical" style="cursor: pointer"></span>
+                                            <div style="padding-top: 10px; padding-bottom: 10px !important;"
+                                                 uk-dropdown>
+                                                <ul class="uk-nav uk-dropdown-nav">
+                                                    <li>
+                                                        <a href="{{ route($type.'box.edit', $wishbox->id) }}">{{ __('Modifier') }}</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#"
+                                                           onclick="$('#del_wishbox_{{ $wishbox->id }}').click()">{{ __('Supprimer') }}</a>
+                                                    </li>
+                                                    <form method="post"
+                                                          action="{{ route($type.'box.destroy', $wishbox->id) }}">
+                                                        @method('delete')
+                                                        @csrf
+                                                        <input type="submit" id="del_wishbox_{{ $wishbox->id }}"
+                                                               style="display: none"
+                                                               onclick="return confirm('Vous souhaitez vraiment supprimer cette boîte ?')"/>
+                                                    </form>
+                                                </ul>
+                                            </div>
                                         </div>
-                                    </div>
+                                    @endif
 
                                     {{--Go to box content--}}
                                     <div class="uk-position-bottom-right m-4">
-                                        <a href="{{ route('wishbox.show', $wishbox->id) }}"><span
+                                        <a href="{{ route($type.'box.show', $wishbox->id) }}"><span
                                                     uk-icon="icon: chevron-right"></span></a>
                                     </div>
 
@@ -81,14 +84,19 @@
                                         <small style="padding-left: 2px; font-size: 13px">{{ date_format(date_create($wishbox->deadline), 'd-m-Y') }}</small>
                                     </div>
                                     <div>
-                                        @if($wishbox->visibility == VISIBILITY_PRIVATE)
-                                            <span uk-icon="icon: lock; ratio:.6"></span>
-                                        @elseif ($wishbox->visibility == VISIBILITY_PUBLIC)
-                                            <span uk-icon="icon: world; ratio:.6"></span>
+                                        @if($isOwner)
+                                            @if($wishbox->visibility == VISIBILITY_PRIVATE)
+                                                <span uk-icon="icon: lock; ratio:.6"></span>
+                                            @elseif ($wishbox->visibility == VISIBILITY_PUBLIC)
+                                                <span uk-icon="icon: world; ratio:.6"></span>
+                                            @else
+                                                <span uk-icon="icon: users; ratio:.6"></span>
+                                            @endif
+                                            <small style="padding-left: 2px; font-size: 13px">{{ visibilities[$wishbox->visibility] }}</small>
                                         @else
-                                            <span uk-icon="icon: users; ratio:.6"></span>
+                                            <span uk-icon="icon: user; ratio:.6"></span>
+                                            <small style="padding-left: 2px; font-size: 13px">@ {{ $wishbox->username }}</small>
                                         @endif
-                                        <small style="padding-left: 2px; font-size: 13px">{{ visibilities[$wishbox->visibility] }}</small>
                                     </div>
                                 </div>
                             </div>

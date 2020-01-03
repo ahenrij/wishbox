@@ -14,7 +14,7 @@
                 <h3 id="create_box_title">{{ __('Modifier la boîte') }}</h3>
                 <br>
                 <div class="uk-card uk-card-default uk-card-body">
-                    <form method="post" action="{{ route('wishbox.update', $wishbox->id) }}">
+                    <form method="post" action="{{ route($type.'box.update', $wishbox->id) }}">
                         @csrf
                         @method('put')
                         @if(isset($error))

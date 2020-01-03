@@ -54,3 +54,17 @@ function routeBaseName()
 {
     return explode('.', Route::currentRouteName())[0];
 }
+
+function getWishBoxes($user_id, $type, $perPage) {
+    return \Illuminate\Support\Facades\DB::table('wish_boxes')
+        ->join('wishes', 'wishes.wish_box_id', '=', 'wish_boxes.id')
+        ->select(DB::raw('count(wishes.id) as total, wish_boxes.*'))
+        ->where('wish_boxes.user_id', '=', $user_id)
+        ->where('type', '=', $type)
+        ->groupBy('wish_boxes.id')
+        ->paginate($perPage);
+}
+
+function typeOfWish($id) {
+    return \App\Wish::where('id', $id)->first()->wishBox->type;
+}
