@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\User;
 
 class SearchController extends Controller
@@ -20,6 +21,18 @@ class SearchController extends Controller
             ->select('name', 'first_name', 'username', 'email')
             ->get();
 
-        return view('searchProfil', [ "users" => $users, "research" => $research]);
+        return view('searchProfile', [ "users" => $users, "research" => $research]);
+    }
+
+    /**
+     *
+     */
+    public function profile() {
+        $userEmail = $_POST["email"];
+
+        $user= User::where('email', '=', $userEmail)
+                    ->first();
+
+        return view('otherProfile', ["user" => $user]);
     }
 }

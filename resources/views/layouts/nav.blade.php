@@ -19,7 +19,7 @@
                     <div class="uk-width-expand">
                         <form class="uk-search uk-search-navbar uk-width-1-1" method="POST" action=" {{ route('search') }}">
                             @csrf
-                            <input class="uk-search-input" name="search" type="search" minlength="1" placeholder="Search..." autofocus>
+                            <input class="uk-search-input" name="search" type="search" minlength="3" placeholder="Search..." autofocus>
                         </form>
                     </div>
                     <div class="uk-width-auto">

@@ -173,16 +173,16 @@
     <property name="nodejs_interpreter_path" value="node" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\wamp64\www\wishbox\public" />
-      <recent name="C:\wamp64\www\wishbox\resources" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\gurva\Documents\GitHub\wishbox\resources\views" />
       <recent name="C:\Users\gurva\Documents\GitHub\wishbox\app\Http\Controllers" />
       <recent name="C:\wamp64\www\wishbox\public\img" />
       <recent name="C:\wamp64\www\wishbox\resources\views\wishboxes" />
       <recent name="C:\wamp64\www\wishbox\public\fonts" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\wishbox\public" />
+      <recent name="C:\wamp64\www\wishbox\resources" />
     </key>
   </component>
   <component name="RunManager">
@@ -234,6 +234,7 @@
       <workItem from="1577985171489" duration="2000" />
       <workItem from="1577994861363" duration="1003000" />
       <workItem from="1578000988843" duration="2086000" />
+      <workItem from="1578053068373" duration="4546000" />
     </task>
     <task id="LOCAL-00001" summary="wishbox created">
       <created>1577665851171</created>
@@ -330,10 +331,14 @@
     <option name="LAST_COMMIT_MESSAGE" value="css theme1 fixed" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="656" y="365" key="com.intellij.ide.util.TipDialog" timestamp="1578000988179">
+    <state x="656" y="365" key="com.intellij.ide.util.TipDialog" timestamp="1578053086585">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="656" y="365" key="com.intellij.ide.util.TipDialog/-1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1578000988179" />
+    <state x="656" y="365" key="com.intellij.ide.util.TipDialog/-1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1578053086585" />
     <state x="656" y="365" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1577896841957" />
+    <state x="616" y="250" key="run.anything.popup" timestamp="1578055518988">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="616" y="250" key="run.anything.popup/-1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1578055518988" />
   </component>
 </project>
