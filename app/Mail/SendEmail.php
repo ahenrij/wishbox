@@ -15,7 +15,6 @@ class SendEmail extends Mailable
     private $giver;
     private $elementId;
     public $subject;
-    private $type;
     private $template;
 
 
@@ -24,12 +23,11 @@ class SendEmail extends Mailable
      *
      * @return void
      */
-    public function __construct(User $giver, $elementId, $type, $subject, $template)
+    public function __construct(User $giver, $elementId, $subject, $template)
     {
         // User giving the gift
         $this->giver = $giver;
         $this->elementId = $elementId;
-        $this->type = $type;
         $this->subject = $subject;
         $this->template = $template;
     }

@@ -178,10 +178,10 @@ class WishController extends Controller
             $userReceiver = User::where('id', $wishBox->user_id)->first();
 
             // to giver
-            $this->sendMail(Auth::user(), $wish->id, "Votre don a été enregistré !", true);
+            $this->sendMail(Auth::user(), $wish->id, "Vous allez exaucer un souhait !", "emails.wish.giver");
 
             // to receiver
-            $this->sendMail($userReceiver, $wish->id, "Vous avez demandé ! La communauté vous l'offre !", false);
+            $this->sendMail($userReceiver, $wish->id, "Votre souhait va être exaucé !", "emails.wish.receiver");
 
             return redirect()->route('wishbox.others')->with('success', 'Votre don a été enregistré avec succès. Un mail de confirmation contenant des informations supplémentaires vous a été envoyé à ' . Auth::user()->email);
         } else {
@@ -234,11 +234,11 @@ class WishController extends Controller
             $userReceiver = User::where('id', $user_id)->first();
 
             // to giver
-            $this->sendMail(Auth::user(), $wish->id, "Votre plus belle action de cette journée : avoir fait un don !", true, false);
+            $this->sendMail(Auth::user(), $wish->id, "Votre plus belle action de cette journée : avoir fait un don !", "emails.gift.giver");
 
             // to receiver
-            $subject = "Vous avez demandé ! " . Auth::user()->username. " vous l\'offre !";
-            $this->sendMail($userReceiver, $wish->id, $subject, false);
+            $subject = "Vous avez demandé ! " . Auth::user()->username. " vous l'offre !";
+            $this->sendMail($userReceiver, $wish->id, $subject, "emails.gift.receiver");
 
             return redirect()->route('wishbox.others')->with('success', 'Votre don a été enregistré avec succès. Un mail de confirmation contenant des informations supplémentaires vous a été envoyé à ' . Auth::user()->email);
         } else {
@@ -247,6 +247,14 @@ class WishController extends Controller
     }
 
 
+    /**
+     * Un utilisateur souhaite recevoir un cadeau publié par un autre utilisateur.
+     * Il a renseigné un commentaire à envoyer avec sa demande.
+     *
+     * @param CommentCreateRequest $request
+     * @param $wishId
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function obtainGift(CommentCreateRequest $request, $wishId)
     {
         $inputs = $request->all();
@@ -264,16 +272,6 @@ class WishController extends Controller
         }
 
         // Processing
-        // Set receiver of the gift in the table
-
-//        TODO mettre dans methode "je donne" quand il attribue le cadeau à qqun finalement
-        /*$offered = DB::table('wishes')
-            ->where('id', $wish->id)
-            ->update([
-                'user_id' => Auth::user()->id,
-                'status' => WISH_ON_THE_WAY
-            ]);*/
-
         // Save comment
         $comment = new Comment();
         $comment->message = $inputs['message'];
@@ -286,10 +284,10 @@ class WishController extends Controller
             // Send mail to both giver and receiver
             $userGiver = User::where('id', $wishBox->user_id)->first();
             // to giver
-            $this->sendMail($userGiver, $wishId, "Nouvel intérêt pour votre don !", true, false);
+            $this->sendMail($userGiver, $wishId, "Nouvel intérêt pour votre don !", "emails.gift.giver");
 
             // to receiver
-            $this->sendMail(Auth::user(), $wishId, "Votre demande pour recevoir un cadeau publié.", false, false);
+            $this->sendMail(Auth::user(), $wishId, "Votre demande pour recevoir un cadeau publié.", "emails.gift.receiver");
 
             return redirect()->route('giftbox.others')->with('success', 'Votre demande a été enregistrée avec succès. Un mail de confirmation contenant des informations supplémentaires vous a été envoyé à ' . Auth::user()->email);
         } else {
@@ -308,12 +306,10 @@ class WishController extends Controller
      *
      * The authenticated user is the one giving (if $aboutAWish == true)
      */
-    public function sendMail(User $user, $elementId, $subject, $isGiver = true, $aboutAWish = true)
+    public function sendMail(User $user, $elementId, $subject, $template)
     {
-        // if isGiver
-        $type = $aboutAWish ? "wish" : "gift";
 
-        Mail::to('kelvardusud@gmail.com')->send(new \App\Mail\SendEmail($user, $elementId, $type, $subject));
+        Mail::to('kelvardusud@gmail.com')->send(new \App\Mail\SendEmail($user, $elementId, $subject, $template));
 //
 //        if ($isGiver) {
 //            // Send to giver

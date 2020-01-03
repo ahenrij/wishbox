@@ -2,26 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b9cf30b-34d3-4bbf-a1d2-ea1fe88ac2f2" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Requests/CommentCreateRequest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Mail/SendEmail.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/emails/gift_giver.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/emails/gift_receiver.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/WishController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/WishController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Mail/EmailWishGiver.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Mail/EmailGiver.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Mail/EmailWishReceiver.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Mail/EmailReceiver.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_12_23_181119_create_comments_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_12_23_181119_create_comments_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/templatemo-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/templatemo-style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/templatemo-style.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/templatemo-style.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sass/templatemo-style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/sass/templatemo-style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/emails/wish_giver.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/emails/wish_giver.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/emails/wish_receiver.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/emails/wish_receiver.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/wish/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/wish/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Mail/SendEmail.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Mail/SendEmail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/emails/gift_giver.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/emails/gift_receiver.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/emails/wish_giver.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/emails/wish_receiver.blade.php" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
