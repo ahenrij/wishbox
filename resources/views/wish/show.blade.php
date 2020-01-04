@@ -60,7 +60,7 @@
                                 @endif
                                 <div class="mt-3">
                                     <a class="btn btn-outline-secondary pr-3 pl-3"
-                                       href="{{ route('wish.edit', $wish->id) }}">Modifier</a>
+                                       href="{{ route($type.'.edit', $wish->id) }}">Modifier</a>
 
                                     <a href="#" class="btn btn-outline-danger"
                                        onclick="$('#del_wish_{{ $wish->id }}').click()">{{ __('Supprimer') }}</a>

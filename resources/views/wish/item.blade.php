@@ -1,4 +1,4 @@
-<div class="tm-gallery-item category-{{ $wish->category_id }}" onclick="location.href='{{ route('wish.show', $wish->id) }}'">
+<div class="tm-gallery-item category-{{ $wish->category_id }}" onclick="location.href='{{ route($type.'.show', $wish->id) }}'">
     <figure class="effect-bubba">
         <img src="{{ asset(empty($wish->filename) ? 'img/default_wish_image.png' : 'img/wishes/'.$wish->filename) }}" alt="{{ $wish->filename }}" class="img-fluid"/>
         <figcaption>

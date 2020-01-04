@@ -11,7 +11,7 @@
                 <br><br>
             </div>
             <div class="col-md-9">
-                <span class="uk-card-title">{{ $wishBox->title . ' - ' }} <span class="uk-card-title" id="create_wish_title">{{ __('Nouveau souhait') }}</span></span>
+                <span class="uk-card-title">{{ $wishBox->title . ' - ' }} <span class="uk-card-title" id="create_wish_title">{{ __('Nouveau '.strtolower(wish_types[$type])) }}</span></span>
                 <br><br>
 
                 <div class="uk-card uk-card-default uk-card-body">
@@ -40,7 +40,7 @@
                                         </div>
                                         <input type="text" class="form-control @error('title') is-invalid @enderror"
                                                id="title"
-                                               name="title" placeholder="Titre du souhait" onkeyup="updateTitle()"
+                                               name="title" placeholder="Titre du {{ strtolower(wish_types[$type]) }}" onkeyup="updateTitle()"
                                                value="{{ old('title') }}">
                                         @error('title')
                                         <span class="invalid-feedback" role="alert">
@@ -148,7 +148,7 @@
       function updateTitle() {
         var title = $('#title').val();
         if (title == '') {
-          $('#create_wish_title').html('Nouveau souhait');
+          $('#create_wish_title').html('Nouveau {{ strtolower(wish_types[$type]) }}');
         } else {
           $('#create_wish_title').html(title);
         }

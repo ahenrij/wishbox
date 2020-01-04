@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Http\Requests\UserProfileUpdateRequest;
 use App\User;
 use Illuminate\Http\Request;
@@ -15,8 +16,10 @@ class UserController extends Controller
     //
 
     function profile() {
+        $categories = Category::all();
         return view('users.profile', [
-            "template" => PROFILE_INFO_TEMPLATE
+            "template" => PROFILE_INFO_TEMPLATE,
+            'categories' => $categories
         ]);
     }
 

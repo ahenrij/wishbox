@@ -32,11 +32,12 @@ class WishController extends Controller
      */
     public function create()
     {
+        $type = $this->type();
         $wishBox = WishBox::where('id', session(WISH_BOX_ID))->first();
         $categories = Category::pluck('title', 'id');
 
         if ($wishBox) {
-            return view('wish.create', compact('categories', 'wishBox'));
+            return view('wish.create', compact('categories', 'wishBox', 'type'));
         } else {
             return redirect()->back();
         }
@@ -50,6 +51,7 @@ class WishController extends Controller
      */
     public function store(WishCreateRequest $request)
     {
+        $type = $this->type();
         $link = $request->input('link');
         if (!empty($link) && !filter_var($link, FILTER_VALIDATE_URL)) {
 
@@ -67,7 +69,7 @@ class WishController extends Controller
         $inputs = array_merge($request->all(), compact('filename'));
         $wish = new Wish();
         if ($this->storeWish($wish, $inputs)) {
-            return redirect()->route('wishbox.show', $wish->wish_box_id);
+            return redirect()->route($type.'box.show', $wish->wish_box_id);
         } else {
             return redirect()->back()->withError('Une erreur est survenue lors de l\'enregistrement du souhait');
         }
@@ -81,8 +83,9 @@ class WishController extends Controller
      */
     public function show($id)
     {
+        $type = $this->type();
         $wish = Wish::where('id', $id)->first();
-        return view('wish.show', compact('wish'));
+        return view('wish.show', compact('wish', 'type'));
     }
 
     /**
@@ -93,10 +96,11 @@ class WishController extends Controller
      */
     public function edit($id)
     {
+        $type = $this->type();
         $wish = Wish::where('id', $id)->first();
         $categories = Category::pluck('title', 'id');
 
-        return view('wish.edit', compact('wish', 'categories'));
+        return view('wish.edit', compact('wish', 'categories', 'type'));
     }
 
     /**
@@ -108,6 +112,7 @@ class WishController extends Controller
      */
     public function update(WishUpdateRequest $request, $id)
     {
+        $type = $this->type();
         $wish = Wish::where('id', $id)->first();
 
         $link = $request->input('link');
@@ -131,7 +136,7 @@ class WishController extends Controller
 
         $inputs = array_merge($request->all(), compact('filename'));
         if ($this->storeWish($wish, $inputs)) {
-            return redirect()->route('wishbox.show', $wish->wish_box_id);
+            return redirect()->route($type.'box.show', $wish->wish_box_id);
         } else {
             return redirect()->back()->withError('Une erreur est survenue lors de la modification du souhait');
         }
@@ -145,11 +150,12 @@ class WishController extends Controller
      */
     public function destroy($id)
     {
+        $type = $this->type();
         $wish = Wish::where('id', $id)->first();
         $wishBoxId = $wish->wish_box_id;
         $wish->delete();
 
-        return redirect()->route('wishbox.show', $wishBoxId);
+        return redirect()->route($type.'box.show', $wishBoxId);
     }
 
     public function offer(Wish $wish)
@@ -182,7 +188,7 @@ class WishController extends Controller
             // to receiver
             $this->sendMail($userReceiver, $isGiver = false);
 
-            return redirect()->route('wishbox.otherWishboxes')->with('success', 'Votre don a été enregistré avec succès. Un mail de confirmation contenant des informations supplémentaires vous a été envoyé à ' . Auth::user()->email);
+            return redirect()->route('wishbox.others')->with('success', 'Votre don a été enregistré avec succès. Un mail de confirmation contenant des informations supplémentaires vous a été envoyé à ' . Auth::user()->email);
         } else {
             return redirect()->back()->withError('Une erreur est survenue lors de l\'enregistrement');
         }
@@ -224,5 +230,9 @@ class WishController extends Controller
         $wish->category_id = $inputs['category_id'];
 
         return $wish->save();
+    }
+
+    private function type() {
+        return (routeBaseName() == 'wish') ? TYPE_WISH : TYPE_GIFT;
     }
 }

@@ -36,11 +36,11 @@
             <a class="nav-link" href="{{ route('profile') }}">Profil</a>
         </li>
 
-        <li class="nav-item {{ (routeBaseName() == 'wishbox' || (routeBaseName() == 'wish' && typeOfWish(Route::current()->parameters()['wish']) == TYPE_WISH)) ? 'active' : '' }}">
+        <li class="nav-item {{ (routeBaseName() == 'wishbox' || (routeBaseName() == 'wish' && isset(Route::current()->parameters()['wish']) && typeOfWish(Route::current()->parameters()['wish']) == TYPE_WISH)) ? 'active' : '' }}">
             <div class="tm-nav-link-highlight"></div>
             <a class="nav-link" href="{{ route('wishbox.index') }}">Je souhaite</a>
         </li>
-        <li class="nav-item {{ (routeBaseName() == 'giftbox' || (routeBaseName() == 'wish' && typeOfWish(Route::current()->parameters()['wish']) == TYPE_GIFT)) ? 'active' : '' }}">
+        <li class="nav-item {{ (routeBaseName() == 'giftbox' || (routeBaseName() == 'wish' && isset(Route::current()->parameters()['wish']) && typeOfWish(Route::current()->parameters()['wish']) == TYPE_GIFT)) ? 'active' : '' }}">
             <div class="tm-nav-link-highlight"></div>
             <a class="nav-link" href="{{ route('giftbox.index') }}">Je donne !</a>
         </li>

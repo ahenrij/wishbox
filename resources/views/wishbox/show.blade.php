@@ -10,7 +10,7 @@
                 </button>
                 <br><br>
                 @if (Auth::user()->id == $wishbox->user_id)
-                    <button class="btn btn-primary pl-5 pr-5" onclick="location.href='{{ route('wish.create') }}'">
+                    <button class="btn btn-primary pl-5 pr-5" onclick="location.href='{{ route($type.'.create') }}'">
                         <span uk-icon="icon: plus; ratio: .7" class="pr-2"></span>
                         {{ __('Ajouter un '.wish_types[$type]) }}
                     </button>
@@ -32,7 +32,7 @@
                 <br>
                 <div id="tmGallery" class="tm-gallery">
                     @foreach($wishes as $wish)
-                        @include('wish.item', compact('$wish'))
+                        @include('wish.item', compact('wish', 'type'))
                     @endforeach
                 </div>
                 <br>

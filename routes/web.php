@@ -34,6 +34,7 @@ Route::get('/user/{id}', 'UserController@show')->name('user.show');
 Route::resource('/giftbox', 'WishBoxController');
 Route::resource('/wishbox', 'WishBoxController');
 Route::resource('/wish', 'WishController');
+Route::resource('/gift', 'WishController');
 Route::resource('/category', 'CategoryController');
 Route::resource('/comment', 'CommentController');
 
