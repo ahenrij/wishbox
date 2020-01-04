@@ -146,7 +146,7 @@
             <img class="file-image img-fluid mb-3" style="width: 150px" id="image-preview" src="#" alt="Aperçu">
             <div id="start" >
                 <i class="fa fa-download" aria-hidden="true"></i>
-                <div>Selectionner un fichier ou glisser déposer</div>
+                <div>Selectionner un fichier</div>
                 <div id="notimage" class="hidden">Choisir photo de profil</div>
                 <span id="file-upload-btn" class="btn btn-primary">Choisir photo de profil</span>
                 <br>
@@ -160,7 +160,7 @@
         </label>
     </div>
 
-    <button class="btn btn-outline-secondary pl-1 pr-3 mt-3" onclick="javascript:history.back()">
+    <button type="button" class="btn btn-outline-secondary pl-1 pr-3 mt-3" onclick="javascript:history.back()">
         <span uk-icon="icon: chevron-left; ratio: .7" class="pr-2"></span>
         Retour
     </button>
