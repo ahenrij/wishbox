@@ -27,6 +27,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/profile', 'UserController@profile')->name('profile');
 
+Route::get('/wishbox/{wishBox}/{pending}', 'WishBoxController@show')->name('wishbox.show.pending');
+Route::get('/giftbox/{wishBox}/{pending}', 'WishBoxController@show')->name('giftbox.show.pending');
+
+Route::get('/wish/received/{wish}', 'WishController@receivedWish')->name('wish.received');
+Route::get('/gift/received/{wish}', 'WishController@receivedGift')->name('gift.received');
+
 Route::get('/giftbox/get/{wish}', 'WishController@obtainGift')->name('gift.get');
 Route::get('/giftbox/offer/{wish}/{user_id}', 'WishController@offerGift')->name('wish.offer.gift');
 

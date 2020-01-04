@@ -1247,11 +1247,24 @@ textarea.form-control {
 .comment-box {
     border: 1px solid var(--primary-color);
     border-radius: 5px;
-    &:nth-of-type(odd) {
-        background-color: grey;
-    }
+    //&:nth-of-type(odd) {
+    //    background-color: grey;
+    //}
+    //
+    //&:nth-of-type(even) {
+    //    background-color: white;
+    //}
+}
 
-    &:nth-of-type(even) {
-        background-color: white;
+.profile-link
+{
+    text-decoration: none;
+}
+
+.hoverShadow
+{
+    transition: 0.3s;
+    &:hover{
+        box-shadow: 3px 3px #888888;
     }
 }

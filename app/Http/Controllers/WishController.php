@@ -75,6 +75,7 @@ class WishController extends Controller
         }
     }
 
+
     /**
      * Display the specified resource.
      *
@@ -87,19 +88,27 @@ class WishController extends Controller
 
         // Si c'est un gift, récupérer les commentaires (les intérêts manifestés)
         $wishBox = WishBox::where('id', $wish->wish_box_id)->first();
+        if($wishBox == null)
+        {
+            return back()->withInput()->with('error', 'Boîte à souhait introuvable.');
+        }
 
+        $type = $wishBox->type;
         $comments = null;
-        if($wishBox != null && $wishBox->type == TYPE_GIFT)
+        if($wishBox->type == TYPE_GIFT)
         {
             $comments = DB::table('comments')
                 ->join('wishes', 'wishes.id', '=', 'comments.wish_id' )
-                ->join('users', 'users.id', '=', 'wishes.user_id')
-                ->select('comments.id', 'comments.message', 'comments.date', 'users.id as user_id', 'users.username', 'users.profile')
+                ->join('users', 'users.id', '=', 'comments.user_id')
+                ->select('comments.id', 'comments.message', 'comments.date as datePublication', 'users.id as user_id', 'users.username', 'users.profile')
                 ->paginate(5, '[*]', 'comments')
+//                ->toSql()
                 ;
+
+//            dd($comments);
         }
 
-        return view('wish.show', compact('wish', 'comments'));
+        return view('wish.show', compact('wish', 'comments', 'type'));
     }
 
     /**
@@ -201,6 +210,7 @@ class WishController extends Controller
      */
     public function offer(Wish $wish, $user_id, $errorIfSame = "Erreur dans le don.", $status = WISH_ON_THE_WAY)
     {
+
         // If current user is the owner or status == 2 || 3, return
         if ($wish->status == WISH_ON_THE_WAY || $wish->status == WISH_RECEIVED) {
             return redirect()->back()->with('error', 'Cadeau déjà offert.');
@@ -223,11 +233,106 @@ class WishController extends Controller
         return $offered ? $wishBox : null;
     }
 
+    public function receivedGift(Wish $wish)
+    {
+        // Controls
+
+        // Déjà validé (reçu) ?
+        if($wish->status == WISH_RECEIVED)
+        {
+            return redirect()->back()->with('error', 'Vous avez déjà marqué ce cadeau comme réceptionné !');
+        }
+
+        // Est ce que l'utilisateur qui souhaite valider est bien celui a qui le cadeau était destiné ?
+        if($wish->user_id != Auth::user()->id)
+        {
+            return redirect()->back()->with('error', 'Opération interdite ! Souhait non exaucé !');
+        }
+
+
+        // Processing
+        $offered = DB::table('wishes')
+            ->where('id', $wish->id)
+            ->update([
+                'status' => WISH_RECEIVED
+            ]);
+
+        // Email notification
+        if ($offered) {
+            // Send mail to both giver and receiver
+            $userGiver = User::where('id', $wish->user_id)->first();
+
+            // to giver
+            $this->sendMail($userGiver, $wish->id, "Votre cadeau a été reçu !", "emails.gift.received.giver");
+
+            // to receiver
+            $subject = "Vous avez reçu votre cadeau. Nous en sommes ravis !";
+            $this->sendMail(Auth::user(), $wish->id, $subject, "emails.gift.received.receiver");
+
+            return redirect()->back()->with('success', 'Opérartion effectuée avec succès.');
+        } else {
+            return redirect()->back()->withError('Une erreur est survenue lors de l\'enregistrement');
+        }
+
+
+    }
+    public function receivedWish(Wish $wish)
+    {
+        // Controls
+
+        // Déjà validé (reçu) ?
+        if($wish->status == WISH_RECEIVED)
+        {
+            return redirect()->back()->with('error', 'Vous avez déjà marqué ce souhait comme réceptionné !');
+        }
+
+        // Est ce que quelqu'un avait prévu de le donner ?
+        if($wish->user_id == null)
+        {
+            return redirect()->back()->with('error', 'Opération interdite ! Souhait non exaucé !');
+        }
+        // Le wish doit appartenir à celui qui marque qu'il l'a reçu
+        $wishBox = WishBox::where('id', $wish->wish_box_id)->first();
+
+        if($wishBox != null && $wishBox->user_id != Auth::user()->id)
+        {
+            return redirect()->back()->with('error', 'Opération interdite !');
+        }
+
+
+        // Processing
+        $offered = DB::table('wishes')
+            ->where('id', $wish->id)
+            ->update([
+                'status' => WISH_RECEIVED
+            ]);
+
+        // Email notification
+        if ($offered) {
+            // Send mail to both giver and receiver
+            $userGiver = User::where('id', $wish->user_id)->first();
+
+            // to giver
+            $this->sendMail($userGiver, $wish->id, "Votre cadeau a été reçu !", "emails.gift.received.giver");
+
+            // to receiver
+            $subject = "Vous avez reçu votre cadeau. Nous en sommes ravis !";
+            $this->sendMail(Auth::user(), $wish->id, $subject, "emails.gift.received.receiver");
+
+            return redirect()->back()->with('success', 'Opérartion effectuée avec succès.');
+        } else {
+            return redirect()->back()->withError('Une erreur est survenue lors de l\'enregistrement');
+        }
+
+
+    }
+
+
     public function offerGift(Wish $wish, $user_id)
     {
 //        dd($user_id);
 
-        $wishBox = $this->offer($wish, $user_id, "Vous ne pouvez pas offrir ce cadeau à vous même.", WISH_RECEIVED);
+        $wishBox = $this->offer($wish, $user_id, "Vous ne pouvez pas offrir ce cadeau à vous même.", WISH_ON_THE_WAY);
 
         if ($wishBox != null) {
             // Send mail to both giver and receiver
@@ -262,6 +367,7 @@ class WishController extends Controller
         $wish = Wish::where('id', $wishId)->first();
 
         // If current user is the owner or status == 2 || 3, return
+
         if ($wish->status == WISH_ON_THE_WAY || $wish->status == WISH_RECEIVED) {
             return redirect()->back()->with('error', 'Cadeau déjà offert.');
         }
@@ -271,6 +377,25 @@ class WishController extends Controller
             return redirect()->back()->with('error', 'Vous ne pouvez pas recevoir un cadeau dont vous êtes le donneur.');
         }
 
+        // A déjà demandé à recevoir ?
+        $user = DB::table('users')
+            ->join('comments', 'comments.user_id', '=', 'users.id' )
+            ->join('wishes', 'wishes.id', '=', 'comments.wish_id')
+            ->select('users.id')
+            ->where('users.id', '=', Auth::user()->id)
+            ->where('wishes.id', '=', $wishId)
+            ->get()
+//            ->toSql()
+        ;
+
+//        dd();
+
+        if(isset($user->id))
+        {
+            return redirect()->back()->with('error', 'Vous avez déjà demandé a recevoir ce cadeau.
+                        Si vous ne l\'avez pas encore reçu, vous
+                        pouvez contacter le donneur via son adresse mail qui vous a été envoyée à ' . Auth::user()->email . '.');
+        }
         // Processing
         // Save comment
         $comment = new Comment();

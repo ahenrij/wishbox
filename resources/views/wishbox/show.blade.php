@@ -9,12 +9,27 @@
                     {{ __('Retour') }}
                 </button>
                 <br><br>
-                @if (Auth::user()->id == $wishbox->user_id)
-                    <button class="btn btn-primary pl-5 pr-5" onclick="location.href='{{ route('wish.create') }}'">
+                @if (Auth::user()->id == $wishbox->user_id && !$pending)
+                    <button class="hoverShadow btn btn-primary pl-5 pr-5" onclick="location.href='{{ route('wish.create') }}'">
                         <span uk-icon="icon: plus; ratio: .7" class="pr-2"></span>
                         {{ __('Ajouter un '.wish_types[$type]) }}
                     </button>
+
                 @endif
+
+{{--                // En attende de réception--}}
+                    {{--  Afficher si ce ne sont pas ses boîtes quand ce sont des gifts ou
+                        ce sont ses boites à souhait qu'on affiche --}}
+                @if ((Auth::user()->id != $wishbox->user_id && $wishbox->type == TYPE_GIFT) ||
+                     Auth::user()->id == $wishbox->user_id && $wishbox->type == TYPE_WISH)
+                    @if(!$pending)
+                        <button class="hoverShadow btn btn-secondary pl-5 pr-3 mt-2" onclick="location.href='{{ route($type.'box.show.pending', [$wishbox->id, "pending"]) }}'">
+                            <span uk-icon="icon: future; ratio: .7" class="pr-2"></span>
+                            {{ __('En attente de réception') }}
+                        </button>
+                    @endif
+                @endif
+
                 <br><br>
                 @include('categories.side', compact('categories'))
             </div>
@@ -23,7 +38,7 @@
                     <h5>@ {{ $wishbox->user->username }}</h5>
                 @endif
 
-                <h3>{{ $wishbox->title }}</h3>
+                <h3>{{ $wishbox->title }}@if($pending) <span class="small font-italic">{{ "(En attente de réception dans cette boîte)" }}</span>@endif</h3>
                 @if (session('error'))
                     <div class="alert alert-danger">
                         {{ session('error') }}

@@ -86,19 +86,45 @@ class WishBoxController extends Controller
         }
     }
 
+
     /**
      * Display the specified resource.
      *
      * @param $id (of the WishBox),
-     *        $forOwner
-     *          Boolean : Is it a show for the owner or for another user ?
+     * @param $showPendings
+     *         show gifts waiting to be received or others
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, $showPendings = 0)
     {
+//        dd($showPendings);
         $type = $this->type();
         $wishbox = WishBox::where('id', $id)->first();
-        $wishes = Wish::where('wish_box_id', $id)->paginate(8);
+        $pending = false;
+        if($showPendings)
+        {
+            $wishes = DB::table('wishes')
+                ->join('wish_boxes', 'wish_boxes.id', '=', 'wishes.wish_box_id' )
+                ->where('wish_boxes.id', '=',  $id)
+                ->where('wishes.wish_box_id', '=',  $id)
+//                ->where('wish_boxes.user_id', '=',  Auth::user()->id)
+                ->where('wishes.status', '=', WISH_ON_THE_WAY)
+                ->select('wishes.id', 'wishes.title', 'wishes.description', 'wishes.link', 'wishes.filename', 'wishes.status', 'wishes.category_id', 'wishes.user_id')
+                ->paginate(8)
+//                ->toSql()
+            ;
+//            dd($wishes);
+            $pending = true;
+        }else
+        {
+            $wishes = DB::table('wishes')
+                ->join('wish_boxes', 'wish_boxes.id', '=', 'wishes.wish_box_id' )
+                ->where('wishes.wish_box_id', '=',  $id)
+                ->where('wishes.status', '!=', WISH_ON_THE_WAY)
+                ->select('wishes.id', 'wishes.title', 'wishes.description', 'wishes.link', 'wishes.filename', 'wishes.status', 'wishes.category_id', 'wishes.user_id')
+                ->paginate(8)
+            ;
+        }
         $categories = array();
 
         foreach ($wishes->unique('category_id') as $wish) {
@@ -107,7 +133,7 @@ class WishBoxController extends Controller
         session([WISH_BOX_ID => $wishbox->id]);
         $isOwner = Auth::user()->id == $wishbox->user_id;
 
-        return view('wishbox.show', compact('wishbox', 'wishes', 'categories', 'type', 'isOwner'));
+        return view('wishbox.show', compact('wishbox', 'wishes', 'categories', 'type', 'isOwner', 'pending'));
     }
 
     /**

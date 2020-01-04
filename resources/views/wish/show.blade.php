@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+@section('additionalPageStylesheets')
+    {{--  Si ce sont des cadeaux et que c'est l'utilisateur courant qui offre, afficher les commentaires--}}
+    @if($wish->wishBox->type == TYPE_GIFT && $wish->wishBox->user_id == \Illuminate\Support\Facades\Auth::user()->id)
+        <link href="{{ URL::to('/'). ('/css/comments.css') }}" rel="stylesheet">
+    @endif
+@endsection
+
 @section('content')
     <div class="container-fluid">
         <div class="row">
@@ -15,12 +22,17 @@
                     <h5>@ {{ $wish->wishBox->user->username }}</h5>
                 @endif
                 <h3 id="create_box_title">{{ $wish->wishBox->title . ' - ' . $wish->title }}</h3>
-                @if($wish->wishBox->type == TYPE_GIFT)
-                    <a href="#comments-area ">Voir les commentaires <i class="fa fa-arrow-alt-circle-down"></i></a>
+                @if($wish->wishBox->type == TYPE_GIFT && $wish->wishBox->user_id == \Illuminate\Support\Facades\Auth::user()->id)
+                    <a href="#comments">Voir les commentaires <i class="fa fa-arrow-alt-circle-down"></i></a>
                 @endif
                 @if (session('error'))
                     <div class="alert alert-danger">
                         {{ session('error') }}
+                    </div>
+                @endif
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
                     </div>
                 @endif
                 <br>
@@ -43,7 +55,12 @@
                             <a class="btn btn-primary pr-5 pl-5" href="{{ $wish->link }}" target="_blank"
                                rel="noopener"><span uk-icon="icon: world; ratio:.7" class="pr-1"
                                                     style="padding-top: -25px !important;"></span>Consulter le lien</a>
-                            @if (Auth::user()->id != $wish->wishBox->user_id)
+
+                            @if($wish->status == WISH_ON_THE_WAY)
+                                <a href="{{ route($type.'.received', [$wish->id]) }}" class="btn btn-outline-success">{{ __('J\'ai reçu !') }}</a>
+                            @endif
+
+                        @if (Auth::user()->id != $wish->wishBox->user_id)
                                 @if($wish->wishBox->type == TYPE_WISH)
                                     @if($wish->user_id == null)
                                         <a href="{{ route('wish.offer.wish', $wish->id) }}" class="btn btn-outline-success pr-5 pl-5"
@@ -85,8 +102,8 @@
                         </div>
                     </div>
 
-                    {{--Comments for obtain gift--}}
-                    @if (Auth::user()->id != $wish->wishBox->user_id && $wish->wishBox->type == TYPE_GIFT)
+                    {{--Comment to obtain gift--}}
+                    @if (Auth::user()->id != $wish->wishBox->user_id && $wish->wishBox->type == TYPE_GIFT && $wish->status == WISH_JUST_CREATED)
                         <form name="obtainGift" action="{{ route('gift.get', $wish->id) }}">
                         <br>
                         <label for="message">Message (max. 2500 caractères)</label>
@@ -101,40 +118,43 @@
                     @endif
                 </div>
 
-                @if($wish->wishBox->type == TYPE_GIFT)
-                    <div class="uk-card uk-card-default uk-card-body mt-4" id="comments-area">
+                {{--  Si ce sont des cadeaux et que c'est l'utilisateur courant qui offre, afficher les commentaires--}}
+                @if($wish->wishBox->type == TYPE_GIFT && $wish->wishBox->user_id == \Illuminate\Support\Facades\Auth::user()->id)
+                    <div class="uk-card uk-card-default uk-card-body mt-4" id="comments">
                         <h4 class="text-center">Les intérêts manifestés</h4>
                         @if ($comments != null && count($comments) > 0)
-                            @foreach($comments as $comment)
-                                <div class="row comment-box mt-1 p-2 mb-1" id="comments-area">
-                                    <div class="" id="comment-{{ $comment->id }}">
-                                        <div class="col-md-4">
+                            <div>
+                                @foreach($comments as $comment)
+
+                                    <div class="media comment-box mb-2" id="comment-{{ $comment->user_id }}">
+                                        <img class="align-self-center rounded-circle mr-3 ml-1 hoverShadow" src="{{ $comment->profile }}" alt="Profil"
+                                             width="150" height="150">
+                                        <div class="media-body">
                                             <div class="row">
-                                                <p>
-                                                    <a href="{{ route('user.show', $comment->user_id) }}">{{ $comment->username }}</a>
-                                                </p>
+                                                <div class="col-md-6">
+                                                    <h5 class="mt-0 text-left"><a class="profile-link" href="{{ route('user.show', $comment->user_id) }}">{{ $comment->username }}</a></h5>
+                                                </div>
+                                                <div class="col-md-6 text-right pr-4">
+                                                    <span class="small font-weight-bold">{{ date('d-m-Y à H:i:s', strtotime($comment->datePublication)) }}</span>
+                                                </div>
                                             </div>
-                                            <div class="row">
-                                                <img src="{{ $comment->profile }}" alt="Profil" class="rounded-circle"
-                                                     width="150" height="150">
-                                            </div>
-                                            <div class="row">
-                                                <a href="{{ route('wish.offer.gift',[$wish->id, $comment->user_id]) }}"
-                                                   onclick="return confirm('Voulez-vous poursuivre et offrir votre cadeau à cet utilisateur ?')"
-                                                   class="col-md-12 mt-1 pr-4">
-                                                    <button class="btn btn-primary"><i class="fa fa-heart"></i> Offrir</button>
-                                                </a>
-                                            </div>
+                                            <p>
+                                                {{ $comment->message }}
+                                            </p>
+
+                                            <a href="{{ route('wish.offer.gift',[$wish->id, $comment->user_id]) }}"
+                                               onclick="return confirm('Voulez-vous poursuivre et offrir votre cadeau à cet utilisateur ?')"
+                                               >
+                                                <button class="btn btn-primary hoverShadow mb-2"><i class="fa fa-heart"></i> Offrir</button>
+                                            </a>
+
                                         </div>
                                     </div>
-                                    <div class="col-md-8">
-                                        {{ $comment->message }}
-                                    </div>
-                                </div>
-                            @endforeach
+                                @endforeach
                                 <span id="paginate-comments">
                                     {{ $comments->links() }}
                                 </span>
+                            </div>
                         @else
                             <p class="text-center">Aucune manifestation d'intérêt pour le moment. Vous pouvez partager le lien vers votre
                                 cadeau sur vos réseaux sociaux pour qu'il ait plus de visibilité.

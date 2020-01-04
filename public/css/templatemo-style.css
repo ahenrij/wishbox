@@ -1097,11 +1097,16 @@ textarea.form-control {
   border: 1px solid var(--primary-color);
   border-radius: 5px;
 }
-.comment-box:nth-of-type(odd) {
-  background-color: grey;
+
+.profile-link {
+  text-decoration: none;
 }
-.comment-box:nth-of-type(even) {
-  background-color: white;
+
+.hoverShadow {
+  transition: 0.3s;
+}
+.hoverShadow:hover {
+  box-shadow: 3px 3px #888888;
 }
 
 /*# sourceMappingURL=templatemo-style.css.map */
