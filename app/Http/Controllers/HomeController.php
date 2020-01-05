@@ -71,7 +71,7 @@ class HomeController extends Controller
 //        Paginator::setPageName('page_a');
 //        $wishes->setPageName('wishes');
 //        $gifts->setPageName('gifts');
-        return view('home', [
+        return view('home.index', [
             'wishes' => $wishes,
             'categories' => $categories, // for gifts and wishes
             'gifts' => $gifts

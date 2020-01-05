@@ -15,7 +15,7 @@
                 <br>
 
                 <div class="uk-card uk-card-default uk-card-body">
-                    <form method="post" action="{{ route('wishbox.store') }}">
+                    <form method="post" action="{{ route($type.'box.store') }}">
                         @csrf
 
                         {{--@if(isset($error))
@@ -49,7 +49,7 @@
                                     <select name="type" id="type" class="form-control">
                                         @foreach(wish_types as $key => $wish_type)
                                             <option value="{{ $key }}"
-                                                    @if($key == TYPE_WISH) selected @endif> {{ $wish_type }}</option>
+                                                    @if($key == $type) selected @endif> {{ $wish_type }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -97,7 +97,7 @@
     </div>
 @endsection
 
-@section('scripts')
+@section('additionalPageScripts')
     <script type="text/javascript">
       function updateTitle() {
         var title = $('#title').val();

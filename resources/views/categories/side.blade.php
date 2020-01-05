@@ -1,15 +1,15 @@
 <ul class="tabs clearfix filters-button-group">
     <li>
-        <a href="#" class="active" data-filter="*">
+        <a href="#" class="active text-secondary" data-filter="*">
             <div class="tm-tab-icon"></div>
             Toutes les catégories
         </a>
     </li>
     @foreach ($categories as $category)
         <li>
-            <a href="#" class="" data-filter="{{ '.category-' . $category->id }}">
+            <a href="#" class="text-secondary" data-filter="{{ '.category-' . $category->id }}">
                 <div class="tm-tab-icon"></div>
-                {{ $category->title }}
+                {{ substr($category->title, 0, 20) }}
             </a>
         </li>
     @endforeach

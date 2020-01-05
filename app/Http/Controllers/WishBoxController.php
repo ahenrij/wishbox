@@ -24,34 +24,31 @@ class WishBoxController extends Controller
      */
     public function index()
     {
-        $wishboxes = DB::table('wish_boxes')
-            ->join('wishes', 'wishes.wish_box_id', '=', 'wish_boxes.id')
-            ->select(DB::raw('count(wishes.id) as total, wish_boxes.*'))
-            ->where('wish_boxes.user_id', '=', Auth::user()->id)
-            ->where('type', '=', TYPE_WISH)
-            ->groupBy('wish_boxes.id')
-            ->paginate(6);
-
+        $type = $this->type();
+        $wishboxes = getWishBoxes(Auth::user()->id, $type, 6);
         $isOwner = true;
-
-        return view('wishbox.index', compact('wishboxes', 'isOwner'));
+        return view('wishbox.index', compact('wishboxes', 'isOwner', 'type'));
     }
 
-    public function usersWishboxes()
+    /**
+     * Others wish or gift boxes
+     */
+    public function others()
     {
+        $type = $this->type();
         $wishboxes = DB::table('wish_boxes')
             ->join('wishes', 'wishes.wish_box_id', '=', 'wish_boxes.id')
             ->join('users', 'wish_boxes.user_id', '=', 'users.id')
-            ->select(DB::raw('count(wishes.id) as total, wish_boxes.*'), 'users.username as user')
+            ->select(DB::raw('count(wishes.id) as total, wish_boxes.*, users.username'), 'users.username as user')
             ->where('wish_boxes.user_id', '!=', Auth::user()->id)
-            ->where('type', '=', TYPE_WISH)
+            ->where('type', '=', $type)
             ->where('wish_boxes.visibility', '=', VISIBILITY_PUBLIC)
             ->groupBy('wish_boxes.id')
             ->paginate(6);
 
         $isOwner = false;
 
-        return view('wishbox.index', compact('wishboxes', 'isOwner'));
+        return view('wishbox.index', compact('wishboxes', 'isOwner', 'type'));
     }
 
     /**
@@ -61,7 +58,8 @@ class WishBoxController extends Controller
      */
     public function create()
     {
-        return view('wishbox.create');
+        $type = $this->type();
+        return view('wishbox.create', compact('type'));
     }
 
     /**
@@ -82,7 +80,7 @@ class WishBoxController extends Controller
         $wishbox->user_id = Auth::user()->id;
 
         if ($wishbox->save()) {
-            return redirect()->route('wishbox.show', $wishbox->id);
+            return redirect()->route($wishbox->type.'box.show', $wishbox->id);
         } else {
             return redirect()->back()->withError('Une erreur est survenue lors de l\'enregistrement');
         }
@@ -96,17 +94,20 @@ class WishBoxController extends Controller
      *          Boolean : Is it a show for the owner or for another user ?
      * @return \Illuminate\Http\Response
      */
-    public function show($id, $forOwner = true)
+    public function show($id)
     {
+        $type = $this->type();
         $wishbox = WishBox::where('id', $id)->first();
-        $wishes = Wish::where('wish_box_id', $id)->paginate(6);
+        $wishes = Wish::where('wish_box_id', $id)->paginate(8);
         $categories = array();
 
         foreach ($wishes->unique('category_id') as $wish) {
             $categories[] = Category::where('id', $wish->category_id)->first();
         }
+        session([WISH_BOX_ID => $wishbox->id]);
+        $isOwner = Auth::user()->id == $wishbox->user_id;
 
-        return view('wishbox.show', compact('wishbox', 'wishes', 'categories', 'forOwner'));
+        return view('wishbox.show', compact('wishbox', 'wishes', 'categories', 'type', 'isOwner'));
     }
 
     /**
@@ -117,8 +118,9 @@ class WishBoxController extends Controller
      */
     public function edit($id)
     {
+        $type = $this->type();
         $wishbox = WishBox::where('id', $id)->first();
-        return view('wishbox.edit', compact('wishbox'));
+        return view('wishbox.edit', compact('wishbox', 'type'));
     }
 
     /**
@@ -139,7 +141,7 @@ class WishBoxController extends Controller
         $wishbox->type = $inputs['type'];
 
         if ($wishbox->save()) {
-            return redirect()->route('wishbox.index');
+            return redirect()->route($wishbox->type.'box.index');
         } else {
             return redirect()->back()->withError('Une erreur est survenue lors de l\'enregistrement');
         }
@@ -157,5 +159,9 @@ class WishBoxController extends Controller
         $wishbox->delete();
 
         return redirect()->back();
+    }
+
+    private function type() {
+        return (routeBaseName() == 'wishbox') ? TYPE_WISH : TYPE_GIFT;
     }
 }

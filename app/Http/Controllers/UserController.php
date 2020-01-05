@@ -2,20 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Http\Requests\UserProfileUpdateRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
     //
 
     function profile() {
+        $categories = Category::all();
         return view('users.profile', [
-            "template" => PROFILE_INFO_TEMPLATE
+            "template" => PROFILE_INFO_TEMPLATE,
+            'categories' => $categories
         ]);
+    }
+
+    function show($id) {
+        $user  = User::where('id', $id)->first();
+        return view('users.show', compact('user'));
     }
 
     function selectTheme(Request $request)
@@ -58,6 +68,12 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
+        // Same user ?
+        if(Auth::user()->id != $user->id)
+        {
+            return redirect()->back()->with('error', 'Vous n\'avez pas le droit de modifier ce profil.');
+        }
+
         return view('users.profile', [
             "template" => PROFILE_EDIT_FORM,
             "user" => Auth::user(),
@@ -75,14 +91,32 @@ class UserController extends Controller
         $user->first_name = $inputs['first_name'];
         $user->address = $inputs['address'];
         $user->phone_number = $inputs['phone_number'];
-        $user->password = bcrypt($inputs['password']); // TODO encryption : which algorithm ? bcrypt ?
+        $user->password = $inputs['password'] != "" ? bcrypt($inputs['password']) : $user->password; // TODO encryption : which algorithm ? bcrypt ?
         $user->username = $inputs['username'];
         $user->email = $inputs['email'];
 
+//        dd($inputs['profile']->getClientOriginalName());
+
+        if(isset($inputs['profile']))
+        {
+            // A file is uploaded
+//            $fileName = Str::random(); // length = 16 by default
+//            $fileExtension = $inputs['profile']->getClientOriginalExtension();
+//            $path = $inputs['profile']->storeAs(PROFILE_UPLOAD_FOLDER, $fileName.'.'.$fileExtension);
+//            $path = $inputs['profile']->store(PROFILE_UPLOAD_FOLDER);
+//            $path = $request->file('profile')->store(PROFILE_UPLOAD_FOLDER);
+
+            $path = Storage::disk('public')->put(PROFILE_UPLOAD_FOLDER, $inputs['profile']);
+//            dd($path);
+
+            $user->profile = $path;
+        }
+
+
         if ($user->save()) {
-            return redirect()->route('profile');
+            return redirect()->route('profile')->with('success', 'Modifications enregistrées avec succès !');
         } else {
-            return redirect()->back()->withError('Une erreur est survenue lors de l\'enregistrement');
+            return redirect()->back()->with('error', 'Une erreur est survenue lors de l\'enregistrement.');
         }
     }
 }

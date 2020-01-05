@@ -9,14 +9,20 @@
                     {{ __('Retour') }}
                 </button>
                 <br><br>
-                <button class="btn btn-primary pl-5 pr-5">
-                    <span uk-icon="icon: plus; ratio: .7" class="pr-2"></span>
-                    {{ __('Ajouter un souhait') }}
-                </button>
+                @if (Auth::user()->id == $wishbox->user_id)
+                    <button class="btn btn-primary pl-5 pr-5" onclick="location.href='{{ route($type.'.create') }}'">
+                        <span uk-icon="icon: plus; ratio: .7" class="pr-2"></span>
+                        {{ __('Ajouter un '.wish_types[$type]) }}
+                    </button>
+                @endif
                 <br><br>
-                @include('displayCategories', compact('categories'))
+                @include('categories.side', compact('categories'))
             </div>
             <div class="col-md-9">
+                @if (!$isOwner)
+                    <h5>@ {{ $wishbox->user->username }}</h5>
+                @endif
+
                 <h3>{{ $wishbox->title }}</h3>
                 @if (session('error'))
                     <div class="alert alert-danger">
@@ -24,22 +30,9 @@
                     </div>
                 @endif
                 <br>
-                <div  id="tmGallery" class="tm-gallery uk-child-width-1-3@s" uk-grid>
+                <div id="tmGallery" class="tm-gallery">
                     @foreach($wishes as $wish)
-                        <div class="tm-gallery-item category-{{ $wish->category_id }} {{ "status".$wish->status }}">
-                            <figure class="effect-bubba" style="width: 100%;">
-
-                                <img src="{{ URL::to('/'). '/img/default_wish_image.png' }}" alt="{{ $wish->link }}"
-                                     class="img-fluid"/>
-
-                                <figcaption>
-                                    <h2>Fresh <span>Bubba</span></h2>
-                                    <p>Bubba likes to appear out of thin air.</p>
-                                    {{--TODO remove link Little "hack for the moment just to have a link for each wish. This link will be on the show page of a wish--}}
-                                    <a href="{{ route('wish.offer', $wish->id) }}">View more</a>
-                                </figcaption>
-                            </figure>
-                        </div>
+                        @include('wish.item', compact('wish', 'type'))
                     @endforeach
                 </div>
                 <br>
@@ -49,4 +42,9 @@
         </div>
 
     </div>
+@endsection
+@section('additionalPageScripts')
+    <script src="{{ asset('js/imagesloaded.pkgd.min.js') }}"></script>
+    <script src="{{ asset('js/isotope.pkgd.min.js') }}"></script>
+    <script src="{{ asset('js/paginate_wish.js') }}"></script>
 @endsection

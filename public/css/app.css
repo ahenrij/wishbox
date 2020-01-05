@@ -121,3 +121,12 @@ body {
   margin-right: -17px;
   background: var(--primary-color) !important;
 }
+
+.btn-outline-success:hover {
+  color: white !important;
+}
+
+.image {
+  border: 1px solid #bdbdbd;
+  border-radius: 5px;
+}
