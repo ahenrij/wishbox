@@ -95,8 +95,6 @@ class UserController extends Controller
         $user->username = $inputs['username'];
         $user->email = $inputs['email'];
 
-//        dd($inputs['profile']->getClientOriginalName());
-
         if(isset($inputs['profile']))
         {
             // A file is uploaded

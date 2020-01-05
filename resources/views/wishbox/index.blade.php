@@ -16,6 +16,7 @@
                             <span uk-icon="icon: chevron-left; ratio: .7" class="pr-2"></span>{{ __('Mes boîtes') }}
                         </a>
                     </div>
+
                 @else
                     <div class="col-md-6 mt-3">
                         <a href="{{ route($type.'box.others') }}" class="btn btn-secondary pl-3 pr-4">
@@ -27,7 +28,24 @@
             </div>
             <br><br>
             <div class="col-md-9">
-                <h3>{{ __((($isOwner) ? 'Mes boîtes à ' : 'Les boîtes à ') . strtolower(wish_types[$type]) . (($type == TYPE_WISH) ? 's' : 'x')) }}</h3>
+                <div class="d-flex flex-row">
+                    <h3>{{ __((($isOwner) ? 'Mes boîtes à ' : 'Les boîtes à ') . strtolower(wish_types[$type]) . (($type == TYPE_WISH) ? 's' : 'x')) }}</h3>
+                    <span class="text-center ml-5" uk-icon="icon: search" style="margin-right: 35px; padding-top: 10px; cursor: pointer"></span>
+
+                    <div style="min-width: 300px" class="uk-navbar-dropdown"
+                         uk-drop="mode: click; pos:bottom-left; cls-drop: uk-navbar-dropdown;">
+                        <div class="uk-grid-small uk-flex-middle" uk-grid>
+                            <div class="uk-width-expand">
+                                    <input class="uk-search-input" id="search" type="text" onchange="filterBox()" placeholder="Recherche..." autofocus>
+                                </form>
+                            </div>
+                            <div class="uk-width-auto">
+                                <a class="uk-navbar-dropdown-close" href="#" uk-close></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 @if (session('success'))
                     <div class="alert alert-success">
                         {{ session('success') }}
@@ -38,7 +56,7 @@
                     <div class="uk-grid-match uk-child-width-1-3@s" uk-grid>
                         @foreach($wishboxes as $wishbox)
                             <div>
-                                <div class="uk-card uk-card-default uk-card-body uk-inline">
+                                <div class="uk-card uk-card-default uk-card-body uk-inline" name="wishbox">
 
                                     <div class="circle  uk-position-top-right uk-text-bold">
                                         {{ $wishbox->total }}
@@ -78,7 +96,7 @@
                                     </div>
 
                                     {{--Card content--}}
-                                    <div class="uk-text">{{ substr($wishbox->title, 0, 25) . ((strlen($wishbox->title) > 25)? '...' : '') }}</div>
+                                    <div class="uk-text wishboxTitle"value="{{ $wishbox->title }}">{{ substr($wishbox->title, 0, 25) . ((strlen($wishbox->title) > 25)? '...' : '') }}</div>
                                     <div>
                                         <span uk-icon="icon: clock; ratio:.6"></span>
                                         <small style="padding-left: 2px; font-size: 13px">{{ date_format(date_create($wishbox->deadline), 'd-m-Y') }}</small>
@@ -95,7 +113,7 @@
                                             <small style="padding-left: 2px; font-size: 13px">{{ visibilities[$wishbox->visibility] }}</small>
                                         @else
                                             <span uk-icon="icon: user; ratio:.6"></span>
-                                            <small style="padding-left: 2px; font-size: 13px">@ {{ $wishbox->username }}</small>
+                                            <small style="padding-left: 2px; font-size: 13px" class="wishboxUsername" value="{{ $wishbox->username }}">@ {{ $wishbox->username }}</small>
                                         @endif
                                     </div>
                                 </div>
@@ -111,4 +129,32 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('additionalPageScripts')
+    <script type="text/javascript">
+        function filterBox() {
+            var wishbox = document.getElementsByName('wishbox');
+            var search = document.getElementById('search').value.toLowerCase();
+
+            // For each wishbox
+            wishbox.forEach(function(item){
+                // Get the title of the wisbox
+                var title = item.querySelector('.wishboxTitle');
+                var titleStr = title.getAttribute('value').toLowerCase();
+                // Get the username of the wishbox
+                var user = item.querySelector('.wishboxUsername');
+                var userStr = user.getAttribute('value').toLowerCase();
+
+                // If the title or the username of the wishbox doesn't matches with the research
+                if (!titleStr.includes(search) && !userStr.includes(search)) {
+                    // Hide the wishbox
+                    item.parentElement.hidden = true;
+                } else {
+                    // Display the wishbox
+                    item.parentElement.removeAttribute('hidden');
+                }
+            });
+        }
+    </script>
 @endsection
