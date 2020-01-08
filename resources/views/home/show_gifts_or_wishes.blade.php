@@ -1,4 +1,4 @@
-<div class="tm-gallery" id="tmGallery">
+<div class="tm-gallery" id="tmGallery" onclick="location.href='{{ route('wish.show', $element->id) }}'">
     @foreach($elements as $element)
         <div class="tm-gallery-item category-1">
             <figure class="effect-bubba">

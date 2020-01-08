@@ -34,7 +34,12 @@
             </div>
             <div class="tm-page-col-right">
                 {{--            @if (count($wishes) > 0)--}}
-                @include('home.show_gifts_or_wishes', ['elements' => $wishes])
+                <div id="tmGallery" class="tm-gallery">
+                    @foreach($wishes as $wish)
+                        @include('wish.item', compact('wishes'))
+                    @endforeach
+                </div>
+{{--                @include('home.show_gifts_or_wishes', ['elements' => $wishes])--}}
                 {{--@else--}}
                 {{--<h4 class="text-center">Aucun souhait pour le moment.</h4>--}}
                 {{--@endif--}}
@@ -56,20 +61,25 @@
         <div class="col-12 tm-page-cols-container">
             <div class="tm-page-col-left">
                 @if (count($categories) > 0 && count($gifts) > 0)
-                    @include('home.display_categories', ['categories' => $categories])
+                    @include('categories.side', compact('categories'))
                 @endif
 
             </div>
             <div class="tm-page-col-right">
+                <div id="tmGallery" class="tm-gallery">
+                    @foreach($wishes as $wish)
+                        @include('wish.item', compact('gifts'))
+                    @endforeach
+                </div>
                 {{--            @if (count($gifts) > 0)--}}
-                @include('home.show_gifts_or_wishes', ['elements' => $gifts])
+{{--                @include('home.show_gifts_or_wishes', ['elements' => $gifts])--}}
                 {{--@else--}}
                 {{--<h4 class="text-center">Aucun don pour le moment.</h4>--}}
                 {{--@endif--}}
 
                 <span id="paginate-gifts">
-                {{ $gifts->links() }}
-            </span>
+                    {{ $gifts->links() }}
+                </span>
             </div>
         </div>
     </section>
@@ -83,22 +93,11 @@
     <script>
       // Edit pagination links to get scroll after page reload by adding an anchor
       // Wishes
-      var $links = $('#paginate-wishes li a');
-
-      var href = '';
-      $links.each(function () {
-        href = $(this).attr('href');
-        $(this).attr('href', href + '#wishes');
-      });
+      appendAnchorLinkData("paginate-wishes", "wishes");
 
       // Gifts
-      $links = $('#paginate-gifts li a');
+      appendAnchorLinkData("paginate-gifts", "gifts");
 
-      href = '';
-      $links.each(function () {
-        href = $(this).attr('href');
-        $(this).attr('href', href + '#gifts');
-      });
       //--
       $(function () {
           /* Isotope Gallery */
