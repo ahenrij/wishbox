@@ -97,7 +97,7 @@
 
             <h5 class="mt-5">Catégories</h5>
             @foreach($categories as $category)
-                <span style="cursor: pointer" class="uk-badge m-2 p-2 pr-4 pt-3 pb-3 pl-4" id="cat-{{ $category->id }}">{{ $category->title }}</span>
+                <span style="cursor: pointer;" class="uk-badge m-2 p-2 pr-4 pt-3 pb-3 pl-4 @if(in_array($category->id, $user_categories)) uk-background-primary @else uk-background-muted text-secondary @endif" id="cat-{{ $category->id }}">{{ $category->title }}</span>
             @endforeach
         </div>
 

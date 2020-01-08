@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Http\Requests\UserProfileUpdateRequest;
 use App\User;
+use App\UserCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
@@ -17,9 +18,13 @@ class UserController extends Controller
 
     function profile() {
         $categories = Category::all();
+        $user_categories = UserCategory::where('user_id', Auth::user()->id)->pluck('category_id')->toArray();
+
+//        var_dump($user_categories); die();
         return view('users.profile', [
             "template" => PROFILE_INFO_TEMPLATE,
-            'categories' => $categories
+            'categories' => $categories,
+            'user_categories' => $user_categories,
         ]);
     }
 
