@@ -27,6 +27,7 @@ class WishBoxController extends Controller
         $type = $this->type();
         $wishboxes = getWishBoxes(Auth::user()->id, $type, 6);
         $isOwner = true;
+
         return view('wishbox.index', compact('wishboxes', 'isOwner', 'type'));
     }
 
