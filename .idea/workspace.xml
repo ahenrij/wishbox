@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b9cf30b-34d3-4bbf-a1d2-ea1fe88ac2f2" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +67,7 @@
       <file leaf-file-name="WishController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/WishController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1716">
+            <state relative-caret-position="1914">
               <caret line="87" column="54" lean-forward="false" selection-start-line="87" selection-start-column="54" selection-end-line="87" selection-end-column="54" />
               <folding>
                 <element signature="e#40#57#0#PHP" expanded="true" />
@@ -105,14 +104,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="330">
               <caret line="23" column="38" lean-forward="false" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
-              <folding>
-                <marker date="1578517492517" expanded="true" signature="355:4004" ph="{...}" />
-                <marker date="1578517492517" expanded="true" signature="2420:4002" ph="{...}" />
-                <marker date="1578517492517" expanded="true" signature="3107:3720" ph="{...}" />
-                <marker date="1578517492517" expanded="true" signature="3130:3554" ph="//..." />
-                <marker date="1578517492517" expanded="true" signature="3751:3870" ph="..." />
-                <marker date="1578517492517" expanded="true" signature="3878:3995" ph="..." />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -131,7 +123,7 @@
         <entry file="file://$PROJECT_DIR$/resources/views/users/profile.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="374">
-              <caret line="115" column="0" lean-forward="true" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
+              <caret line="115" column="0" lean-forward="false" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -179,85 +171,12 @@
       </file>
     </leaf>
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="CSS File" />
-      </list>
-    </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>categories.displayCategories</find>
-      <find>item</find>
-      <find>element</find>
-      <find>title</find>
-      <find>link</find>
-      <find>Nouveau</find>
-      <find>wishBox</find>
-      <find>create</find>
-      <find>tm-gallery-item</find>
-      <find>otherWishboxes</find>
-    </findStrings>
-    <replaceStrings>
-      <replace />
-      <replace>categories.side</replace>
-      <replace>wish</replace>
-      <replace>description</replace>
-      <replace>Modifier</replace>
-      <replace>update</replace>
-      <replace>others</replace>
-    </replaceStrings>
-  </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/resources/views/home.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/categories/side.blade.php" />
-        <option value="$PROJECT_DIR$/public/js/paginate-gift.js" />
-        <option value="$PROJECT_DIR$/public/js/paginate_wish.js" />
-        <option value="$PROJECT_DIR$/resources/views/home/index.blade.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2019_12_23_181021_create_wishes_table.php" />
-        <option value="$PROJECT_DIR$/composer.json" />
-        <option value="$PROJECT_DIR$/config/app.php" />
-        <option value="$PROJECT_DIR$/app/Http/Requests/WishCreateRequest.php" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/30fd6dc6-02bd-44f9-a7fa-656c922895dd/console.sql" />
-        <option value="$PROJECT_DIR$/database/factories/WishFactory.php" />
-        <option value="$PROJECT_DIR$/public/css/app.css" />
-        <option value="$PROJECT_DIR$/app/Http/Requests/WishUpdateRequest.php" />
-        <option value="$PROJECT_DIR$/resources/views/wish/edit.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/GiftBoxController.php" />
-        <option value="$PROJECT_DIR$/resources/views/wishbox/create.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/wishbox/edit.blade.php" />
-        <option value="$PROJECT_DIR$/app/Helper.php" />
-        <option value="$PROJECT_DIR$/public/css/templatemo-style.css" />
-        <option value="$PROJECT_DIR$/app/Wish.php" />
-        <option value="$PROJECT_DIR$/app/WishBox.php" />
-        <option value="$PROJECT_DIR$/app/User.php" />
-        <option value="$PROJECT_DIR$/resources/views/wishbox/index.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/WishBoxController.php" />
-        <option value="$PROJECT_DIR$/routes/web.php" />
-        <option value="$PROJECT_DIR$/resources/views/layouts/nav.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/wish/create.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/wishbox/show.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/wish/item.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/wish/show.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/WishController.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/UserController.php" />
-        <option value="$PROJECT_DIR$/resources/views/users/profile.blade.php" />
-      </list>
-    </option>
-  </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
     <option name="y" value="2" />
     <option name="width" value="1920" />
@@ -567,27 +486,6 @@
       </pane>
     </panes>
   </component>
-  <component name="PropertiesComponent">
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL&#10;DDL Data Source" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/emails" />
-    <property name="list.type.of.created.stylesheet" value="CSS" />
-    <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\wamp64\www\wishbox\resources\views\wish" />
-      <recent name="C:\wamp64\www\wishbox\resources\views\emails" />
-      <recent name="C:\wamp64\www\wishbox\app\Mail" />
-      <recent name="C:\wamp64\www\wishbox\public\img" />
-      <recent name="C:\wamp64\www\wishbox\resources\views\wishboxes" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\wamp64\www\wishbox\resources\views\home" />
-      <recent name="C:\wamp64\www\wishbox\public" />
-      <recent name="C:\wamp64\www\wishbox\resources" />
-    </key>
-  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -600,250 +498,28 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
-    <configuration default="true" type="CodeceptionConfigurationType" factoryName="Codeception">
-      <PhpTestRunnerSettings />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerJest" factoryName="Jest">
-      <node-interpreter value="project" />
-      <working-dir value="" />
-      <envs />
-      <scope-kind value="ALL" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
-      <config-file value="" />
-      <node-interpreter value="project" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
-      <method />
-    </configuration>
-    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" working-dir="">
-      <method />
-    </configuration>
-    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
-      <TestRunner />
-      <method />
-    </configuration>
-    <configuration default="true" type="PhpBehatConfigurationType" factoryName="Behat">
-      <BehatRunner />
-      <method />
-    </configuration>
-    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
-      <method />
-    </configuration>
-    <configuration default="true" type="PhpSpecConfigurationType" factoryName="PHPSpec">
-      <PhpTestRunnerSettings />
-      <method />
-    </configuration>
-    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
-      <node-interpreter>project</node-interpreter>
-      <node-options />
-      <gulpfile />
-      <tasks />
-      <arguments />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
-      <command value="run" />
-      <scripts />
-      <node-interpreter value="project" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="mocha-javascript-test-runner" factoryName="Mocha">
-      <node-interpreter>project</node-interpreter>
-      <node-options />
-      <working-directory />
-      <pass-parent-env>true</pass-parent-env>
-      <envs />
-      <ui />
-      <extra-mocha-options />
-      <test-kind>DIRECTORY</test-kind>
-      <test-directory />
-      <recursive>false</recursive>
-      <method />
-    </configuration>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
-  </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
-  <component name="SvnConfiguration">
-    <configuration />
-  </component>
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="6b9cf30b-34d3-4bbf-a1d2-ea1fe88ac2f2" name="Default" comment="" />
-      <created>1577123103633</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1577123103633</updated>
-      <workItem from="1577123107679" duration="11757000" />
-      <workItem from="1577298983180" duration="3913000" />
-      <workItem from="1577373112697" duration="25125000" />
-      <workItem from="1577571655392" duration="6439000" />
-      <workItem from="1577661765499" duration="10090000" />
-      <workItem from="1577707136435" duration="425000" />
-      <workItem from="1577708145676" duration="201000" />
-      <workItem from="1577712775212" duration="2093000" />
-      <workItem from="1577973151089" duration="20856000" />
-      <workItem from="1578161819300" duration="5518000" />
-      <workItem from="1578511960609" duration="2051000" />
-    </task>
-    <task id="LOCAL-00001" summary="wishbox created">
-      <created>1577665851171</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1577665851171</updated>
-    </task>
-    <task id="LOCAL-00002" summary="app script yield name changed">
-      <created>1577665899012</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1577665899012</updated>
-    </task>
-    <task id="LOCAL-00003" summary="wishbox creation and deletion done">
-      <created>1577669497050</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1577669497050</updated>
-    </task>
-    <task id="LOCAL-00004" summary="readme updated">
-      <created>1577670977238</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1577670977238</updated>
-    </task>
-    <task id="LOCAL-00005" summary="wishboxes updated">
-      <created>1577671894976</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1577671894976</updated>
-    </task>
-    <task id="LOCAL-00006" summary="css &amp; bugs fixed">
-      <created>1577714874808</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1577714874808</updated>
-    </task>
-    <task id="LOCAL-00007" summary="wishes scheme -title added, user_id updated">
-      <created>1577913787011</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1577913787011</updated>
-    </task>
-    <task id="LOCAL-00008" summary="show wishes">
-      <created>1577919017975</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1577919017975</updated>
-    </task>
-    <task id="LOCAL-00009" summary="delete wish">
-      <created>1577919765976</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1577919765976</updated>
-    </task>
-    <task id="LOCAL-00010" summary="wish creation -- image preview">
-      <created>1577925983140</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1577925983140</updated>
-    </task>
-    <task id="LOCAL-00011" summary="create &amp; update wish views init">
-      <created>1577926928161</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1577926928161</updated>
-    </task>
-    <task id="LOCAL-00012" summary="wish created">
-      <created>1577978711797</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1577978711797</updated>
-    </task>
-    <task id="LOCAL-00013" summary="wish updated">
-      <created>1577981013565</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1577981013565</updated>
-    </task>
-    <task id="LOCAL-00014" summary="wishbox &amp;&amp; giftbox done">
-      <created>1578011779899</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1578011779899</updated>
-    </task>
-    <task id="LOCAL-00015" summary="gift link added &amp;&amp; bugs fixed">
-      <created>1578163854757</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1578163854757</updated>
-    </task>
-    <task id="LOCAL-00016" summary="user categories">
-      <created>1578517477761</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1578517477761</updated>
-    </task>
-    <task id="LOCAL-00017" summary="user categories">
-      <created>1578517837724</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1578517837724</updated>
-    </task>
-    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="50579000" />
+    <option name="totallyTimeSpent" value="25000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="2" width="1920" height="1036" extended-state="0" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20553145" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20824295" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29161882" sideWeight="0.51084596" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29161882" sideWeight="0.5130152" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18763557" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3455798" sideWeight="0.49457702" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3455798" sideWeight="0.49457702" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29161882" sideWeight="0.489154" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29161882" sideWeight="0.48698482" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -856,50 +532,6 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295063" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="processedProjectFiles" value="true" />
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="wishbox created" />
-    <MESSAGE value="app script yield name changed" />
-    <MESSAGE value="wishbox creation and deletion done" />
-    <MESSAGE value="readme updated" />
-    <MESSAGE value="wishboxes updated" />
-    <MESSAGE value="css &amp; bugs fixed" />
-    <MESSAGE value="Merge remote-tracking branch 'remotes/origin/charbel'&#10;&#10;# Conflicts:&#10;#&#9;resources/views/categories/side.blade.php&#10;#&#9;resources/views/displayCategories.blade.php&#10;#&#9;resources/views/home/display_categories.blade.php&#10;#&#9;resources/views/home/index.blade.php" />
-    <MESSAGE value="wishes scheme -title added, user_id updated" />
-    <MESSAGE value="show wishes" />
-    <MESSAGE value="delete wish" />
-    <MESSAGE value="wish creation -- image preview" />
-    <MESSAGE value="create &amp; update wish views init" />
-    <MESSAGE value="wish created" />
-    <MESSAGE value="wish updated" />
-    <MESSAGE value="wishbox &amp;&amp; giftbox done" />
-    <MESSAGE value="gift link added &amp;&amp; bugs fixed" />
-    <MESSAGE value="user categories" />
-    <option name="LAST_COMMIT_MESSAGE" value="user categories" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="437" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1577743232585">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="437" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728@0.0.1366.728" timestamp="1577743232585" />
-    <state x="413" y="120" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1577739918410">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="413" y="120" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1577739918410" />
-    <state x="492" y="282" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1577789851398">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="492" y="282" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1577789851398" />
-    <state x="339" y="164" key="run.anything.popup" timestamp="1577788289100">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="339" y="164" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1577788289100" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1210,7 +842,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/WishController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1716">
+        <state relative-caret-position="1914">
           <caret line="87" column="54" lean-forward="false" selection-start-line="87" selection-start-column="54" selection-end-line="87" selection-end-column="54" />
           <folding>
             <element signature="e#40#57#0#PHP" expanded="true" />
@@ -1272,21 +904,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="23" column="38" lean-forward="false" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
-          <folding>
-            <marker date="1578517492517" expanded="true" signature="355:4004" ph="{...}" />
-            <marker date="1578517492517" expanded="true" signature="2420:4002" ph="{...}" />
-            <marker date="1578517492517" expanded="true" signature="3107:3720" ph="{...}" />
-            <marker date="1578517492517" expanded="true" signature="3130:3554" ph="//..." />
-            <marker date="1578517492517" expanded="true" signature="3751:3870" ph="..." />
-            <marker date="1578517492517" expanded="true" signature="3878:3995" ph="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/users/profile.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
-          <caret line="115" column="0" lean-forward="true" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
+          <caret line="115" column="0" lean-forward="false" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
           <folding />
         </state>
       </provider>
