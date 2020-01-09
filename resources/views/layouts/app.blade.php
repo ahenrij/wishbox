@@ -9,8 +9,8 @@
 
     <title>{{ config('app.name', 'WishBox') }}</title>
 
-<!-- Styles -->
-    {{--This is causing problem to display the parallax on the home page--}}
+    <!-- Styles -->
+    <link rel="icon" type="image/png" href="{{ URL::to('/').('/img/favicon.png') }}"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/css/uikit.min.css"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600"/>
     <link rel="stylesheet" href="{{ URL::to('/'). ('/css/all.min.css') }}"/>
@@ -36,14 +36,8 @@
         <div class="col-lg-8 col-2 tm-nav-col">
             <div class="tm-nav">
                 <nav class="navbar navbar-expand-lg navbar-light tm-navbar">
-                    <button
-                            class="navbar-toggler"
-                            type="button"
-                            data-toggle="collapse"
-                            data-target="#navbarNav"
-                            aria-controls="navbarNav"
-                            aria-expanded="false"
-                            aria-label="Toggle navigation">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav" style="min-width: 300px !important;">
@@ -59,29 +53,24 @@
 </div>
 <script src="{{ URL::to('/'). ('/js/jquery.min.js') }}"></script>
 <script src="{{ URL::to('/'). ('/js/parallax.min.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="{{ URL::to('/'). ('/js/bootstrap.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/js/uikit.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/js/uikit-icons.min.js"></script>
 <script src="{{ URL::to('/'). ('/js/app.js') }}"></script>
-
-{{--Charger thème--}}
 <script src="{{ URL::to('/'). ('/js/theme_options.js') }}"></script>
 
-@if (Cookie::get('theme-preference') != null)
+<script type="text/javascript">
+  var html = document.getElementsByTagName('html')[0];
+  @if (Cookie::get('theme-preference') != null)
+  // Get options corresponding to cookie value and pass to function
+  applyTheme(themeOptions["{!! Cookie::get('theme-preference') !!}"], html);
+@else
+applyTheme(themeOptions["Theme1"], html);
+    @endif
+</script>
 
-    <script type="text/javascript">
-        var html = document.getElementsByTagName('html')[0];
-        // Get options corresponding to cookie value and pass to function
-        applyTheme(themeOptions["{!! Cookie::get('theme-preference') !!}"], html);
-    </script>
-
-    {{ Cookie::get('theme-preference')  }}
-@endif
 @yield('additionalPageScripts')
-
 
 </body>
 </html>
