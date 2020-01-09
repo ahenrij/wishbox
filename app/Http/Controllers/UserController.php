@@ -78,6 +78,9 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
+        $categories = Category::all();
+        $user_categories = UserCategory::where('user_id', Auth::user()->id)->pluck('category_id')->toArray();
+
         // Same user ?
         if(Auth::user()->id != $user->id)
         {
@@ -87,6 +90,8 @@ class UserController extends Controller
         return view('users.profile', [
             "template" => PROFILE_EDIT_FORM,
             "user" => Auth::user(),
+            'categories' => $categories,
+            'user_categories' => $user_categories,
         ]);
     }
     public function update(UserProfileUpdateRequest $request, $id)
@@ -128,7 +133,21 @@ class UserController extends Controller
         }
     }
 
-    public function switchCategory($id) {
+    public function switchCategory(Request $request) {
 
+        $id = $request->input('id');
+        //$id is category id
+        $user_category = UserCategory::where('user_id', Auth::user()->id)->where('category_id', $id)->first();
+
+        if($user_category) {
+            $user_category->delete();
+            return response()->json("deleted");
+        } else {
+            $user_category = new UserCategory();
+            $user_category->user_id = Auth::user()->id;
+            $user_category->category_id = $id;
+            $user_category->save();
+            return response()->json("added");
+        }
     }
 }

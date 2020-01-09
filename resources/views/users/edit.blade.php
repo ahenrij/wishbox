@@ -1,4 +1,4 @@
-<h3>Modifier le profil</h3>
+<h5>Modifier le profil</h5>
 @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -164,5 +164,5 @@
         <span uk-icon="icon: chevron-left; ratio: .7" class="pr-2"></span>
         Retour
     </button>
-    <button type="submit" class="btn btn-primary mt-3"><i class="fa fa-save"></i> Enregistrer</button>
+    <button type="submit" class="btn btn-primary mt-3 pl-4 pr-3"> Enregistrer <span uk-icon="icon: check; ratio: .7" class="pl-1"></span></button>
 </form>

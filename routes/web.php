@@ -51,7 +51,9 @@ Route::resource('/gift', 'WishController');
 Route::resource('/category', 'CategoryController');
 Route::resource('/comment', 'CommentController');
 
-Route::post('/selectTheme', 'UserController@selectTheme')->name('selectTheme');
-
 Route::get('profile/{user}/edit',  'UserController@edit')->name('users.edit');
 Route::patch('profile/{user}/update',  'UserController@update')->name('users.update');
+
+//Ajax routes
+Route::post('/selectTheme', 'UserController@selectTheme')->name('selectTheme');
+Route::post('/switchCategory', 'UserController@switchCategory')->name('switchCategory');

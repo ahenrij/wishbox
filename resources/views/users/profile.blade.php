@@ -17,8 +17,7 @@
                     <div>
                         {{--TODO changer les choses pour afficher la bonne image (condition du if et contenu éventuellement)--}}
                         <img class="file-image" id="profile-pic" alt="Photo de profil"
-                             src="@if(Auth::user()->profile != null){{ '/storage/'.Auth::user()->profile }}@else{{  'img/avatar.png' }}@endif">
-                        {{--                        <img class="file-image" id="profile-pic" alt="Photo de profil" src="@if(Auth::user()->profile != null){{ Storage::url(PROFILE_UPLOAD_FOLDER.'/'.Auth::user()->profile) }}@else{{  'img/avatar.png' }}@endif">--}}
+                             src="@if(Auth::user()->profile != null && !empty(Auth::user()->profile)){{ '/storage/'.Auth::user()->profile }}@else{{  'img/avatar.png' }}@endif">
                     </div>
                 </div>
             </div>
@@ -46,58 +45,37 @@
 
         <div class="uk-card uk-card-default uk-card-body mt-4">
             <div class="uk-card-title">Mes préférences</div>
+
+            <br>
             <h5 class="mt-2">Thème général du site</h5>
             <form name="preference-form">
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" value="1" name="theme" id="theme1" checked>
-                            <label class="form-check-label" for="theme1">
-                                Thème 1 (par défaut)
-                            </label>
-                            <div class="row">
-                                <div class="theme-demo theme1-color1"></div>
-                                <div class="theme-demo theme1-color2"></div>
-                                <div class="theme-demo theme1-color3"></div>
-                                <div class="theme-demo theme1-color4"></div>
+                    @for ($i = 1; $i < 4; $i++)
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" value="{{ $i }}" name="theme"
+                                       id="theme{{ $i }}" {{ ($i == 1) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="theme{{ $i }}">
+                                    Thème {{ $i . (($i == 1) ? '  (par défaut)' : '') }}
+                                </label>
+                                <div class="row">
+                                    <div class="theme-demo theme{{ $i }}-color1"></div>
+                                    <div class="theme-demo theme{{ $i }}-color2"></div>
+                                    <div class="theme-demo theme{{ $i }}-color3"></div>
+                                    <div class="theme-demo theme{{ $i }}-color4"></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" value="2" name="theme" id="theme2">
-                            <label class="form-check-label" for="theme2">
-                                Thème 2
-                            </label>
-                            <div class="row">
-                                <div class="theme-demo theme2-color1"></div>
-                                <div class="theme-demo theme2-color2"></div>
-                                <div class="theme-demo theme2-color3"></div>
-                                <div class="theme-demo theme2-color4"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" value="3" name="theme" id="theme3">
-                            <label class="form-check-label" for="theme3">
-                                Thème 3
-                            </label>
-                            <div class="row">
-                                <div class="theme-demo theme3-color1"></div>
-                                <div class="theme-demo theme3-color2"></div>
-                                <div class="theme-demo theme3-color3"></div>
-                                <div class="theme-demo theme3-color4"></div>
-                            </div>
-                        </div>
-                    </div>
+                    @endfor
                 </div>
                 <button class="btn btn-primary btn-submit mt-2"><i class="fa fa-thumbs-up"></i>Appliquer</button>
             </form>
 
             <h5 class="mt-5">Catégories</h5>
             @foreach($categories as $category)
-                <span style="cursor: pointer;" class="uk-badge m-2 p-2 pr-4 pt-3 pb-3 pl-4 @if(in_array($category->id, $user_categories)) uk-background-primary @else uk-background-muted text-secondary @endif" id="cat-{{ $category->id }}">{{ $category->title }}</span>
+                <span style="cursor: pointer;" onclick="switchCategory({{ $category->id }})"
+                      class="uk-badge m-2 p-2 pr-4 pt-3 pb-3 pl-4 @if(in_array($category->id, $user_categories)) uk-background-primary text-white @else uk-background-muted text-secondary @endif"
+                      id="cat-{{ $category->id }}">{{ $category->title }}</span>
             @endforeach
         </div>
 
@@ -168,6 +146,33 @@
           // $('#file-image').removeClass('hidden');
           $('#start').hide();
         }
+      }
+
+
+      function switchCategory(id) {
+
+        $.ajax({
+          type: 'POST',
+          url: "{{ route('switchCategory') }}",
+          data: {id: id},
+          success: function (data) { // TODO handle error case
+
+            var element = $('#cat-' + id);
+
+            if (data === "added") {
+              element.removeClass('uk-background-muted text-secondary');
+              element.addClass('uk-background-primary text-white');
+
+              UIkit.notification("<span uk-icon='icon: check'></span> La catégorie a été ajoutée a vos préférences !");
+
+            } else {
+              element.removeClass('uk-background-primary text-white');
+              element.addClass('uk-background-muted text-secondary')
+
+              UIkit.notification("<span uk-icon='icon: check'></span> La catégorie a été retirée de vos préférences !");
+            }
+          }
+        });
       }
     </script>
 @endsection
