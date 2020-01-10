@@ -110,7 +110,7 @@
                                             @else
                                                 <span uk-icon="icon: users; ratio:.6"></span>
                                             @endif
-                                            <small style="padding-left: 2px; font-size: 13px">{{ visibilities[$wishbox->visibility] }}</small>
+                                                <small style="padding-left: 2px; font-size: 13px">{{ visibilities[$wishbox->visibility] }}</small>
                                         @else
                                             <span uk-icon="icon: user; ratio:.6"></span>
                                             <small style="padding-left: 2px; font-size: 13px" class="wishboxUsername" value="{{ $wishbox->username }}">@ {{ $wishbox->username }}</small>
@@ -144,7 +144,11 @@
                 var titleStr = title.getAttribute('value').toLowerCase();
                 // Get the username of the wishbox
                 var user = item.querySelector('.wishboxUsername');
-                var userStr = user.getAttribute('value').toLowerCase();
+                if (user != null) {
+                    var userStr = user.getAttribute('value').toLowerCase();
+                } else {
+                    var userStr = '';
+                }
 
                 // If the title or the username of the wishbox doesn't matches with the research
                 if (!titleStr.includes(search) && !userStr.includes(search)) {
