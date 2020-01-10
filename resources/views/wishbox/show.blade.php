@@ -23,7 +23,7 @@
                 @if ((Auth::user()->id != $wishbox->user_id && $wishbox->type == TYPE_GIFT) ||
                      Auth::user()->id == $wishbox->user_id && $wishbox->type == TYPE_WISH)
                     @if(!$pending)
-                        <button class="hoverShadow btn btn-secondary pl-5 pr-3 mt-2" onclick="location.href='{{ route($type.'box.show.pending', [$wishbox->id, "pending"]) }}'">
+                        <button class="hoverShadow btn btn-secondary pl-5 pr-3 mt-2" onclick="location.href='{{ route($type.'box.show.pending', [$wishbox->id]) }}'">
                             <span uk-icon="icon: future; ratio: .7" class="pr-2"></span>
                             {{ __('En attente de réception') }}
                         </button>

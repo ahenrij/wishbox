@@ -26,8 +26,6 @@ class HomeController extends Controller
     public function index()
     {
 //        DB::enableQueryLog(); // Enable query log
-
-
         $wishes = DB::table('wishes')
                     ->join('wish_boxes', 'wish_boxes.id', '=', 'wishes.wish_box_id' )
                     ->join('categories', 'categories.id', '=', 'wishes.category_id')
@@ -75,7 +73,8 @@ class HomeController extends Controller
         return view('home.index', [
             'wishes' => $wishes,
             'categories' => $categories, // for gifts and wishes
-            'gifts' => $gifts
+            'gifts' => $gifts,
+            'type' => TYPE_GIFT
         ]);
 
 //        return view('home');

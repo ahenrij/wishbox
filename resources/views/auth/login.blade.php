@@ -3,8 +3,11 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Connexion') }}</div>
+                <div class="uk-card uk-card-default uk-card-body">
+                    <div class="offset-md-2">
+                        <div class="uk-card-title ml-2">{{ __('Connexion') }}</div>
+                        <small class="ml-2">Connectez vous à votre compte WishBox</small>
+                    </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('login') }}" class="form-connect">
                             @csrf
@@ -13,7 +16,7 @@
                                     type="text"
                                     id="email"
                                     name="email"
-                                    class="form-control border-top-0 border-right-0 border-left-0 @error('email') is-invalid @enderror"
+                                    class="form-control offset-md-2 col-md-8 @error('email') is-invalid @enderror"
                                     value="{{ old('email') }}"
                                     placeholder="E-mail"
                                     required autofocus
@@ -29,7 +32,7 @@
                                     type="password"
                                     id="password"
                                     name="password"
-                                    class="form-control border-top-0 border-right-0 border-left-0 @error('password') is-invalid @enderror"
+                                    class="form-control offset-md-2 col-md-8 @error('password') is-invalid @enderror"
                                     value="{{ old('email') }}"
                                     placeholder="mot de passe"
                                     required autofocus
@@ -41,7 +44,7 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group offset-md-2 col-md-8">
                                 <input class="form-check-input ml-1" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                 <label class="form-check-label ml-4" for="remember">
@@ -49,8 +52,8 @@
                                 </label>
                             </div>
 
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">
+                            <div class="form-group offset-md-2 col-md-8">
+                                <button type="submit" class="btn btn-primary pl-4 pr-4">
                                     {{ __('Connexion') }}
                                 </button>
 

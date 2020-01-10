@@ -17,6 +17,13 @@ use Intervention\Image\Facades\Image;
 
 class WishController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('owner', ['only' => ['edit', 'update', 'destroy', 'offerGift']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -24,6 +31,7 @@ class WishController extends Controller
      */
     public function index()
     {
+//      Not used
         return view('wish.index');
     }
 

@@ -17,7 +17,7 @@ class CreateWishesTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->text('description');
-            $table->string('link');
+            $table->string('link')->default('');
             $table->string('filename');
             $table->enum('priority', array_keys(wish_priorities));
             $table->integer('status')->unsigned()->comment('0 : just created ; 1 => Someone proposed to give ; 2 => gift is received');

@@ -14,6 +14,11 @@ use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('ajax', ['only' => ['selectTheme', 'switchCategory']]);
+    }
     //
 
     function profile() {
@@ -121,5 +126,9 @@ class UserController extends Controller
         } else {
             return redirect()->back()->with('error', 'Une erreur est survenue lors de l\'enregistrement.');
         }
+    }
+
+    public function switchCategory($id) {
+
     }
 }

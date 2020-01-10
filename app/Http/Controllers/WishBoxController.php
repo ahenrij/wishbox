@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Http\Requests\WishBoxCreateRequest;
 use App\Http\Requests\WishBoxUpdateRequest;
-use App\Wish;
 use App\WishBox;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -15,6 +14,7 @@ class WishBoxController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('owner', ['only' => ['edit', 'update', 'destroy']]);
     }
 
     /**
@@ -81,10 +81,37 @@ class WishBoxController extends Controller
         $wishbox->user_id = Auth::user()->id;
 
         if ($wishbox->save()) {
-            return redirect()->route($wishbox->type.'box.show', $wishbox->id);
+            return redirect()->route($wishbox->type . 'box.show', $wishbox->id);
         } else {
             return redirect()->back()->withError('Une erreur est survenue lors de l\'enregistrement');
         }
+    }
+
+    public function showPendings($id)
+    {
+
+        $type = $this->type();
+        $wishbox = WishBox::where('id', $id)->first();
+        $wishes = DB::table('wishes')
+            ->join('wish_boxes', 'wish_boxes.id', '=', 'wishes.wish_box_id')
+            ->where('wish_boxes.id', '=', $id)
+            ->where('wishes.wish_box_id', '=', $id)
+//                ->where('wish_boxes.user_id', '=',  Auth::user()->id)
+            ->where('wishes.status', '=', WISH_ON_THE_WAY)
+            ->select('wishes.id', 'wishes.title', 'wishes.description', 'wishes.link', 'wishes.filename', 'wishes.status', 'wishes.category_id', 'wishes.user_id')
+            ->paginate(8)//                ->toSql()
+        ;
+//            dd($wishes);
+        $pending = true;
+        $categories = array();
+        foreach ($wishes->unique('category_id') as $wish) {
+            $categories[] = Category::where('id', $wish->category_id)->first();
+        }
+        session([WISH_BOX_ID => $wishbox->id]);
+        $isOwner = Auth::user()->id == $wishbox->user_id;
+
+        return view('wishbox.show', compact('wishbox', 'wishes', 'categories', 'type', 'isOwner', 'pending'));
+
     }
 
 
@@ -96,36 +123,19 @@ class WishBoxController extends Controller
      *         show gifts waiting to be received or others
      * @return \Illuminate\Http\Response
      */
-    public function show($id, $showPendings = 0)
+    public function show($id)
     {
 //        dd($showPendings);
         $type = $this->type();
         $wishbox = WishBox::where('id', $id)->first();
         $pending = false;
-        if($showPendings)
-        {
-            $wishes = DB::table('wishes')
-                ->join('wish_boxes', 'wish_boxes.id', '=', 'wishes.wish_box_id' )
-                ->where('wish_boxes.id', '=',  $id)
-                ->where('wishes.wish_box_id', '=',  $id)
-//                ->where('wish_boxes.user_id', '=',  Auth::user()->id)
-                ->where('wishes.status', '=', WISH_ON_THE_WAY)
-                ->select('wishes.id', 'wishes.title', 'wishes.description', 'wishes.link', 'wishes.filename', 'wishes.status', 'wishes.category_id', 'wishes.user_id')
-                ->paginate(8)
-//                ->toSql()
-            ;
-//            dd($wishes);
-            $pending = true;
-        }else
-        {
-            $wishes = DB::table('wishes')
-                ->join('wish_boxes', 'wish_boxes.id', '=', 'wishes.wish_box_id' )
-                ->where('wishes.wish_box_id', '=',  $id)
-                ->where('wishes.status', '!=', WISH_ON_THE_WAY)
-                ->select('wishes.id', 'wishes.title', 'wishes.description', 'wishes.link', 'wishes.filename', 'wishes.status', 'wishes.category_id', 'wishes.user_id')
-                ->paginate(8)
-            ;
-        }
+
+        $wishes = DB::table('wishes')
+            ->join('wish_boxes', 'wish_boxes.id', '=', 'wishes.wish_box_id')
+            ->where('wishes.wish_box_id', '=', $id)
+            ->where('wishes.status', '!=', WISH_ON_THE_WAY)
+            ->select('wishes.id', 'wishes.title', 'wishes.description', 'wishes.link', 'wishes.filename', 'wishes.status', 'wishes.category_id', 'wishes.user_id')
+            ->paginate(8);
         $categories = array();
 
         foreach ($wishes->unique('category_id') as $wish) {
@@ -168,7 +178,7 @@ class WishBoxController extends Controller
         $wishbox->type = $inputs['type'];
 
         if ($wishbox->save()) {
-            return redirect()->route($wishbox->type.'box.index');
+            return redirect()->route($wishbox->type . 'box.index');
         } else {
             return redirect()->back()->withError('Une erreur est survenue lors de l\'enregistrement');
         }
@@ -188,7 +198,8 @@ class WishBoxController extends Controller
         return redirect()->back();
     }
 
-    private function type() {
+    private function type()
+    {
         return (routeBaseName() == 'wishbox') ? TYPE_WISH : TYPE_GIFT;
     }
 }

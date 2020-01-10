@@ -6,6 +6,11 @@
  * Time: 19:25
  */
 
+use \Illuminate\Support\Facades\Auth;
+use \Illuminate\Support\Facades\DB;
+use \App\Wish;
+use \App\WishBox;
+
 define('VISIBILITY_PRIVATE', 'private');
 define('VISIBILITY_PUBLIC', 'public');
 define('VISIBILITY_PROTECTED', 'protected');
@@ -56,7 +61,7 @@ function routeBaseName()
 }
 
 function getWishBoxes($user_id, $type, $perPage) {
-    return \Illuminate\Support\Facades\DB::table('wish_boxes')
+    return DB::table('wish_boxes')
         ->join('wishes', 'wishes.wish_box_id', '=', 'wish_boxes.id')
         ->select(DB::raw('count(wishes.id) as total, wish_boxes.*'))
         ->where('wish_boxes.user_id', '=', $user_id)
@@ -66,5 +71,15 @@ function getWishBoxes($user_id, $type, $perPage) {
 }
 
 function typeOfWish($id) {
-    return \App\Wish::where('id', $id)->first()->wishBox->type;
+    return Wish::where('id', $id)->first()->wishBox->type;
+}
+
+function isWishOwner($wish_id) {
+    $wish = Wish::where('id', $wish_id)->first();
+    return $wish && $wish->wishBox->user_id == Auth::user()->id;
+}
+
+function isBoxOwner($box_id) {
+    $box = WishBox::where('id', $box_id)->first();
+    return $box && $box->user_id == Auth::user()->id;
 }
