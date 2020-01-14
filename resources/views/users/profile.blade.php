@@ -14,10 +14,10 @@
                 <div class="uk-card uk-card-default uk-card-body">
                     <div class="uk-card-title text-center" id="usernameBox">{{ Auth::user()->username }}</div>
                     <br>
-                    <div>
+                    <div class="uk-inline">
                         {{--TODO changer les choses pour afficher la bonne image (condition du if et contenu éventuellement)--}}
-                        <img class="file-image" id="profile-pic" alt="Photo de profil"
-                             src="@if(Auth::user()->profile != null && !empty(Auth::user()->profile)){{ '/storage/'.Auth::user()->profile }}@else{{  'img/avatar.png' }}@endif">
+                        <img class="file-image rounded-circle ml-2" id="profile-pic" alt="Photo de profil"
+                             src="@if(Auth::user()->profile != null && !empty(Auth::user()->profile)){{ URL::to('/'). '/storage/'.Auth::user()->profile }}@else{{  'img/avatar.png' }}@endif" style="height: 150px; width: 150px">
                     </div>
                 </div>
             </div>

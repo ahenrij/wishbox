@@ -51,7 +51,7 @@
         </li>
         <li class="nav-item" style="padding-top: 5px; margin-left: 5px; cursor: pointer">
             <div class="text-center">
-                <img src="{{  URL::to('/'). '/img/avatar.png' }}" class="" width="38px" height="38px" alt="">
+                <img class="rounded-circle mr-2" src="@if(Auth::user()->profile != null && !empty(Auth::user()->profile)){{ URL::to('/'). '/storage/'.Auth::user()->profile }}@else{{  'img/avatar.png' }}@endif" style="width: 42px; height: 42px" alt="Photo de profil">
                 <span uk-icon="icon: chevron-down"></span>
             </div>
             <div uk-dropdown>

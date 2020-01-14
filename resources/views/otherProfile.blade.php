@@ -9,7 +9,7 @@
                     <br>
                     <div>
                         {{--TODO changer les choses pour afficher la bonne image (condition du if et contenu éventuellement)--}}
-                        <img alt="Profil" src="@if($user->profile != null){{$user->profile }}@else{{  'img/avatar.png' }}@endif">
+                        <img alt="Profil" src="@if(Auth::user()->profile != null && !empty(Auth::user()->profile)){{ URL::to('/'). '/storage/'.Auth::user()->profile }}@else{{  'img/avatar.png' }}@endif">
                     </div>
                 </div>
             </div>
@@ -57,6 +57,12 @@
 
                 </div>
             </div>
+        </div>
+
+        <br>
+        <div class="uk-card uk-card-default uk-card-body">
+            <a href="#" class="btn btn-primary mr-5">Les boîtes à souhaits de  {{ '@'.$user->username }}</a>
+            <a href="#" class="btn btn-outline-primary">Les boîtes à cadeaux de  {{ '@'.$user->username }}</a>
         </div>
 @endsection
 

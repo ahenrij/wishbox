@@ -33,14 +33,13 @@ Route::get('/giftbox-pending/{wishBox}', 'WishBoxController@showPendings')->name
 Route::get('/wish/received/{wish}', 'WishController@receivedWish')->name('wish.received');
 Route::get('/gift/received/{wish}', 'WishController@receivedGift')->name('gift.received');
 
-Route::get('/giftbox/get/{wish}', 'WishController@obtainGift')->name('gift.get');
-Route::get('/giftbox/offer/{wish}/{user_id}', 'WishController@offerGift')->name('wish.offer.gift');
+Route::get('/get-gift/{wish}', 'WishController@obtainGift')->name('gift.get');
+Route::get('/offer-gift/{wish}/{user_id}', 'WishController@offerGift')->name('wish.offer.gift');
 
 Route::get('/wishbox/published', 'WishBoxController@others')->name('wishbox.others');
 Route::get('/giftbox/published', 'WishBoxController@others')->name('giftbox.others');
 
-Route::get('/wishbox/offer/{wish}', 'WishController@offerWish')->name('wish.offer.wish');
-//Route::get('/wishbox/{user}/email-giver', 'WishController@sendMail')->name('wish.sendMail');
+Route::get('/offer-wish/{wish}', 'WishController@offerWish')->name('wish.offer.wish');
 
 Route::get('/user/{id}', 'UserController@show')->name('user.show');
 

@@ -12,8 +12,8 @@
                     {{--data-image-src="img/blooming-bg.jpg"--}}
             >
                 <div class="tm-bg-black-transparent tm-parallax-overlay">
-                    <h2>WishBox</h2>
-                    <p>Il suffit de demander...</p>
+                    <h1 style="font-family: 'Century Gothic'">WishBox</h1>
+                    <h6 style="font-family: 'Century Gothic'">Tu veux l'avoir ? Il suffit de demander !</h6>
                 </div>
             </div>
         </div>

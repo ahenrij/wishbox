@@ -33,10 +33,8 @@
                                     id="password"
                                     name="password"
                                     class="form-control offset-md-2 col-md-8 @error('password') is-invalid @enderror"
-                                    value="{{ old('email') }}"
-                                    placeholder="mot de passe"
-                                    required autofocus
-                                    autocomplete="password"/>
+                                    placeholder="Mot de passe"
+                                    required/>
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

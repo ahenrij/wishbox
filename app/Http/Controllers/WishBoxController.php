@@ -32,7 +32,7 @@ class WishBoxController extends Controller
     }
 
     /**
-     * Others wish or gift boxes
+     * Others (users) wish or gift boxes
      */
     public function others()
     {
@@ -89,19 +89,19 @@ class WishBoxController extends Controller
 
     public function showPendings($id)
     {
-
-        $type = $this->type();
         $wishbox = WishBox::where('id', $id)->first();
+        $type = $wishbox->type;
+
         $wishes = DB::table('wishes')
             ->join('wish_boxes', 'wish_boxes.id', '=', 'wishes.wish_box_id')
             ->where('wish_boxes.id', '=', $id)
             ->where('wishes.wish_box_id', '=', $id)
-//                ->where('wish_boxes.user_id', '=',  Auth::user()->id)
+            ->where((($type == TYPE_WISH) ? 'wish_boxes' : 'wishes') .'.user_id', '=', Auth::user()->id)
             ->where('wishes.status', '=', WISH_ON_THE_WAY)
             ->select('wishes.id', 'wishes.title', 'wishes.description', 'wishes.link', 'wishes.filename', 'wishes.status', 'wishes.category_id', 'wishes.user_id')
             ->paginate(8)//                ->toSql()
         ;
-//            dd($wishes);
+
         $pending = true;
         $categories = array();
         foreach ($wishes->unique('category_id') as $wish) {
@@ -125,7 +125,6 @@ class WishBoxController extends Controller
      */
     public function show($id)
     {
-//        dd($showPendings);
         $type = $this->type();
         $wishbox = WishBox::where('id', $id)->first();
         $pending = false;
