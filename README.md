@@ -17,7 +17,7 @@ cp .env.example .env
 
 Create a MySQL database and configure access to it in .env file
 
-### Migrate to database then fill tables 
+### Migrate database then fill tables 
 ```shell
 php artisan migrate --seed
 ```
