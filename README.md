@@ -15,7 +15,9 @@ composer install
 cp .env.example .env
 ```
 
-### To create database and seed table with fake data :  
+Create a MySQL database and configure access to it in .env file
+
+### Migrate to database then fill tables 
 ```shell
 php artisan migrate --seed
 ```
