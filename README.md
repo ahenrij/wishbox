@@ -22,6 +22,11 @@ Create a MySQL database and configure access to it in .env file
 php artisan migrate --seed
 ```
 
+### Run application
+```shell
+php artisan serve
+```
+
 
 
 
